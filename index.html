@@ -5,13 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rida's Legacy</title>
   <style>
-    /* ---------- Global Reset ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: "Poppins", sans-serif;
       background: radial-gradient(circle at top, #1b1b2f, #0f0f1a);
@@ -19,7 +13,21 @@
       overflow-x: hidden;
     }
 
-    /* ---------- Cover Page ---------- */
+    /* --- Animations --- */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* --- Cover Page --- */
     #cover {
       position: fixed;
       top: 0; left: 0;
@@ -33,43 +41,35 @@
       z-index: 2000;
       padding: 20px;
     }
-
     #cover-content {
       background: rgba(255, 255, 255, 0.05);
-      padding: 40px;
+      padding: 50px 40px;
       border-radius: 25px;
       border: 1px solid rgba(255,255,255,0.1);
-      animation: fadeUp 1.5s ease;
+      backdrop-filter: blur(6px);
+      animation: float 4s ease-in-out infinite, fadeInUp 1s ease-out;
     }
-
     #cover h1 {
       font-size: 2.8rem;
       margin-bottom: 15px;
       font-weight: 700;
       color: #d7b3ff;
-      animation: glowFade 2.5s ease-in-out infinite alternate;
+      animation: fadeInUp 1.2s ease-out;
     }
-
     #cover p {
       font-size: 1rem;
       margin-bottom: 20px;
       font-weight: 300;
       color: #bbb;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 0.8s;
+      animation: fadeInUp 1.4s ease-out;
     }
-
     #cover .quote {
       font-style: italic;
       font-size: 1rem;
       margin-bottom: 30px;
       color: #b39ddb;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 1.4s;
+      animation: fadeInUp 1.6s ease-out;
     }
-
     #enter-btn {
       padding: 12px 35px;
       font-size: 1rem;
@@ -78,18 +78,15 @@
       background: linear-gradient(135deg, #8e2de2, #4a00e0);
       color: white;
       cursor: pointer;
-      opacity: 0;
-      transform: scale(0.8);
-      animation: popIn 1s ease forwards;
-      animation-delay: 2s;
+      animation: pulse 2s infinite;
+      transition: transform 0.3s ease;
     }
-
     #enter-btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
       background: linear-gradient(135deg, #a55eea, #5f27cd);
     }
 
-    /* ---------- Album Header ---------- */
+    /* --- Album Header --- */
     header {
       background: linear-gradient(135deg, #8e2de2, #4a00e0);
       border-bottom-left-radius: 20px;
@@ -100,11 +97,11 @@
       font-size: 2rem;
       font-weight: bold;
       display: none;
-      animation: fadeInDown 0.8s ease;
       position: relative;
+      animation: fadeInUp 0.8s ease-out;
     }
 
-    /* ---------- Back Arrow ---------- */
+    /* Back Arrow */
     .back-arrow {
       position: absolute;
       top: 15px;
@@ -117,44 +114,40 @@
       padding: 8px 12px;
       transition: 0.3s;
     }
-
     .back-arrow:hover {
       background: rgba(255, 255, 255, 0.3);
       transform: scale(1.1);
     }
 
-    /* ---------- Gallery ---------- */
+    /* --- Gallery --- */
     .gallery {
-      display: grid;
+      display: none;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       padding: 30px;
-      max-width: 1000px;
+      max-width: 800px;
       margin: auto;
-      display: none;
-      animation: fadeIn 1s ease;
+      animation: fadeInUp 1s ease-out;
     }
-
     .item {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(145deg, rgba(142, 45, 226, 0.2), rgba(74, 0, 224, 0.15));
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
-      padding: 25px 20px;
-      transition: transform 0.3s ease;
+      padding: 30px 25px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 12px rgba(142, 45, 226, 0.4), inset 0 0 18px rgba(74, 0, 224, 0.2);
     }
-
     .item:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 0 22px rgba(142, 45, 226, 0.6), 0 0 35px rgba(74, 0, 224, 0.4);
     }
-
     .info h3 {
       font-size: 1.1rem;
       margin-bottom: 15px;
       font-weight: 500;
       color: #d7b3ff;
     }
-
     .btn {
       display: inline-block;
       padding: 10px 20px;
@@ -166,12 +159,11 @@
       background: linear-gradient(135deg, #8e2de2, #4a00e0);
       transition: 0.3s ease;
     }
-
     .btn:hover {
       background: linear-gradient(135deg, #a55eea, #5f27cd);
     }
 
-    /* ---------- Watermark ---------- */
+    /* Watermark */
     .watermark {
       position: fixed;
       bottom: 12px;
@@ -181,35 +173,7 @@
       color: #b39ddb;
       opacity: 0.8;
       pointer-events: none;
-      user-select: none;
       font-style: italic;
-      text-shadow: 0 0 6px rgba(142, 45, 226, 0.6);
-    }
-
-    /* ---------- Animations ---------- */
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    @keyframes fadeUp {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    @keyframes fadeInDown {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    @keyframes popIn {
-      from {opacity: 0; transform: scale(0.8);}
-      to {opacity: 1; transform: scale(1);}
-    }
-
-    @keyframes glowFade {
-      from {text-shadow: 0 0 5px #8e2de2, 0 0 15px #4a00e0;}
-      to {text-shadow: 0 0 15px #a55eea, 0 0 30px #5f27cd;}
     }
   </style>
 </head>
@@ -235,8 +199,8 @@
   <div class="gallery">
     <div class="item">
       <div class="info">
-        <h3>Imaginary Thoughts</h3>
-        <a href="https://photos.app.goo.gl/QFMCSx1UH1FxBHne8" 
+        <h3>Rida</h3>
+        <a href="https://photos.app.goo.gl/QFMCSx1UH1FxBHne8"
            class="btn" target="_blank">⬇ Open & Download</a>
       </div>
     </div>
@@ -246,7 +210,6 @@
   <div class="watermark">@n.snixo</div>
 
   <script>
-    // Handle "Enter Album" button
     const cover = document.getElementById("cover");
     const header = document.querySelector("header");
     const gallery = document.querySelector(".gallery");
