@@ -35,11 +35,11 @@
     }
 
     #cover-content {
-      animation: fadeIn 1.5s ease;
       background: rgba(255, 255, 255, 0.05);
       padding: 40px;
       border-radius: 25px;
       border: 1px solid rgba(255,255,255,0.1);
+      animation: fadeUp 1.5s ease;
     }
 
     #cover h1 {
@@ -47,6 +47,7 @@
       margin-bottom: 15px;
       font-weight: 700;
       color: #d7b3ff;
+      animation: glowFade 2.5s ease-in-out infinite alternate;
     }
 
     #cover p {
@@ -54,6 +55,9 @@
       margin-bottom: 20px;
       font-weight: 300;
       color: #bbb;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 0.8s;
     }
 
     #cover .quote {
@@ -61,6 +65,9 @@
       font-size: 1rem;
       margin-bottom: 30px;
       color: #b39ddb;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 1.4s;
     }
 
     #enter-btn {
@@ -71,7 +78,10 @@
       background: linear-gradient(135deg, #8e2de2, #4a00e0);
       color: white;
       cursor: pointer;
-      transition: all 0.3s ease;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: popIn 1s ease forwards;
+      animation-delay: 2s;
     }
 
     #enter-btn:hover {
@@ -91,6 +101,26 @@
       font-weight: bold;
       display: none;
       animation: fadeInDown 0.8s ease;
+      position: relative;
+    }
+
+    /* ---------- Back Arrow ---------- */
+    .back-arrow {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      padding: 8px 12px;
+      transition: 0.3s;
+    }
+
+    .back-arrow:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
     }
 
     /* ---------- Gallery ---------- */
@@ -162,9 +192,24 @@
       to {opacity: 1;}
     }
 
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
     @keyframes fadeInDown {
       from {opacity: 0; transform: translateY(-20px);}
       to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes popIn {
+      from {opacity: 0; transform: scale(0.8);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    @keyframes glowFade {
+      from {text-shadow: 0 0 5px #8e2de2, 0 0 15px #4a00e0;}
+      to {text-shadow: 0 0 15px #a55eea, 0 0 30px #5f27cd;}
     }
   </style>
 </head>
@@ -181,7 +226,10 @@
   </div>
 
   <!-- Album Header -->
-  <header>Deception</header>
+  <header>
+    <div class="back-arrow" id="back-btn">↩</div>
+    Deception
+  </header>
 
   <!-- Gallery -->
   <div class="gallery">
@@ -199,10 +247,22 @@
 
   <script>
     // Handle "Enter Album" button
-    document.getElementById("enter-btn").addEventListener("click", () => {
-      document.getElementById("cover").style.display = "none";
-      document.querySelector("header").style.display = "block";
-      document.querySelector(".gallery").style.display = "grid";
+    const cover = document.getElementById("cover");
+    const header = document.querySelector("header");
+    const gallery = document.querySelector(".gallery");
+    const enterBtn = document.getElementById("enter-btn");
+    const backBtn = document.getElementById("back-btn");
+
+    enterBtn.addEventListener("click", () => {
+      cover.style.display = "none";
+      header.style.display = "block";
+      gallery.style.display = "grid";
+    });
+
+    backBtn.addEventListener("click", () => {
+      cover.style.display = "flex";
+      header.style.display = "none";
+      gallery.style.display = "none";
     });
   </script>
 </body>
