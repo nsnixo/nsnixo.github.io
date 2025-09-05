@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rida's Legacy</title>
+  <style>
+    /* ---------- Global Reset ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #1b1b2f, #0f0f1a);
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Cover Page ---------- */
+    #cover {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #1b1b2f, #0f0f1a);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    #cover-content {
+      animation: fadeIn 1.5s ease;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 25px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    #cover h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: #d7b3ff;
+    }
+
+    #cover p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      font-weight: 300;
+      color: #bbb;
+    }
+
+    #cover .quote {
+      font-style: italic;
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #b39ddb;
+    }
+
+    #enter-btn {
+      padding: 12px 35px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #enter-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #a55eea, #5f27cd);
+    }
+
+    /* ---------- Album Header ---------- */
+    header {
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+      display: none;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    /* ---------- Gallery ---------- */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+      display: none;
+      animation: fadeIn 1s ease;
+    }
+
+    .item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      padding: 25px 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .item:hover {
+      transform: translateY(-5px);
+    }
+
+    .info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      font-weight: 500;
+      color: #d7b3ff;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #a55eea, #5f27cd);
+    }
+
+    /* ---------- Watermark ---------- */
+    .watermark {
+      position: fixed;
+      bottom: 12px;
+      right: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #b39ddb;
+      opacity: 0.8;
+      pointer-events: none;
+      user-select: none;
+      font-style: italic;
+      text-shadow: 0 0 6px rgba(142, 45, 226, 0.6);
+    }
+
+    /* ---------- Animations ---------- */
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover Page -->
+  <div id="cover">
+    <div id="cover-content">
+      <h1>Rida's Legacy</h1>
+      <p>A timeless collection of memories in photos and videos</p>
+      <div class="quote">“In betrayal, even shadows whisper secrets.”</div>
+      <button id="enter-btn">Enter Album</button>
+    </div>
+  </div>
+
+  <!-- Album Header -->
+  <header>Deception</header>
+
+  <!-- Gallery -->
+  <div class="gallery">
+    <div class="item">
+      <div class="info">
+        <h3>Imaginary Thoughts</h3>
+        <a href="https://photos.app.goo.gl/QFMCSx1UH1FxBHne8" 
+           class="btn" target="_blank">⬇ Open & Download</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Watermark -->
+  <div class="watermark">@n.snixo</div>
+
+  <script>
+    // Handle "Enter Album" button
+    document.getElementById("enter-btn").addEventListener("click", () => {
+      document.getElementById("cover").style.display = "none";
+      document.querySelector("header").style.display = "block";
+      document.querySelector(".gallery").style.display = "grid";
+    });
+  </script>
+</body>
+</html>
