@@ -283,6 +283,72 @@
       box-shadow: 0 8px 20px rgba(142, 45, 226, 0.6);
     }
 
+    .btn:disabled {
+      background: linear-gradient(135deg, #555, #333);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      opacity: 0.7;
+    }
+
+    .btn:disabled:hover {
+      background: linear-gradient(135deg, #555, #333);
+      transform: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Password Input */
+    .password-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .password-input {
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+      width: 200px;
+      text-align: center;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .password-input:focus {
+      border-color: #8e2de2;
+      box-shadow: 0 0 10px rgba(142, 45, 226, 0.5);
+    }
+
+    .password-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .password-btn {
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: none;
+      background: linear-gradient(135deg, #2d7ee2, #004fe0);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .password-btn:hover {
+      background: linear-gradient(135deg, #5e9eea, #275fcd);
+      transform: translateY(-3px);
+    }
+
+    .password-error {
+      color: #ff6b6b;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
     /* New Watermark at Bottom */
     .footer-watermark {
       text-align: center;
@@ -528,6 +594,14 @@
       color: #333;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
+    body.light-theme .password-input {
+      background: rgba(255, 255, 255, 0.7);
+      color: #333;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    body.light-theme .password-input::placeholder {
+      color: rgba(0, 0, 0, 0.5);
+    }
 
     /* Responsive Design */
     @media (max-width: 768px) {
@@ -556,6 +630,14 @@
       .modal-btn {
         width: 100%;
         justify-content: center;
+      }
+      .password-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .password-btn {
+        margin-left: 0;
       }
     }
 
@@ -620,7 +702,15 @@
       <img src="media/rida.jpg" class="preview-img" alt="Rida's Album Preview" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80'">
       <div class="info">
         <h3>Rida</h3>
-        <button class="btn open-album"><i class="fas fa-download"></i> Open & Download</button>
+        
+        <!-- Password Input -->
+        <div class="password-container">
+          <input type="password" class="password-input" id="password-input" placeholder="Enter password">
+          <button class="password-btn" id="password-btn">Submit</button>
+          <div class="password-error" id="password-error">Incorrect password. Try again.</div>
+        </div>
+        
+        <button class="btn open-album" id="open-album-btn" disabled><i class="fas fa-download"></i> Open & Download</button>
       </div>
     </div>
   </div>
@@ -642,7 +732,7 @@
           <a href="#" class="modal-btn modal-btn-primary" id="modal-open-btn" target="_blank">
             <i class="fas fa-external-link-alt"></i> <span>Open Album</span>
           </a>
-          <button class="modal-btn modal-btn-secondary" id="modal-copy-btn">
+          <button class="modal-btn modal-btn-secondary" id="modal-copy-btn" disabled>
             <i class="fas fa-link"></i> <span>Copy Link</span>
           </button>
         </div>
@@ -667,7 +757,7 @@
 
   <!-- Footer -->
   <footer id="footer">
-    <p>Created with <i class="fas fa-heart" style="color: #e91e63;"></i> | Rida's Legacy &copy; 2023</p>
+    <p>Created with <i class="fas fa-heart" style="color: #e91e63;"></i> | Rida's Legacy </p>
   </footer>
 
   <script>
@@ -683,7 +773,7 @@
     const modalOpenBtn = document.getElementById("modal-open-btn");
     const modalCopyBtn = document.getElementById("modal-copy-btn");
     const modalAlbumName = document.getElementById("modal-album-name");
-    const openAlbumBtn = document.querySelector(".open-album");
+    const openAlbumBtn = document.getElementById("open-album-btn");
     const albumItem = document.querySelector(".item");
     const themeToggle = document.getElementById("theme-toggle");
     const scrollTopBtn = document.getElementById("scroll-top");
@@ -691,9 +781,13 @@
     const footerWatermark = document.getElementById("footer-watermark");
     const particlesContainer = document.getElementById("particles");
     const copyToast = document.getElementById("copy-toast");
+    const passwordInput = document.getElementById("password-input");
+    const passwordBtn = document.getElementById("password-btn");
+    const passwordError = document.getElementById("password-error");
 
     // Variables
     let currentAlbumUrl = '';
+    let isPasswordCorrect = false;
 
     // Initialize the page
     function init() {
@@ -757,6 +851,14 @@
         openAlbumModal(albumItem);
       });
       
+      // Password validation
+      passwordBtn.addEventListener("click", validatePassword);
+      passwordInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          validatePassword();
+        }
+      });
+      
       // Modal controls
       modalClose.addEventListener("click", closeModal);
       modal.addEventListener("click", (e) => {
@@ -773,6 +875,27 @@
       // Scroll to top
       scrollTopBtn.addEventListener("click", scrollToTop);
       window.addEventListener("scroll", toggleScrollTopButton);
+    }
+
+    // Validate password
+    function validatePassword() {
+      if (passwordInput.value.toLowerCase() === "rida") {
+        isPasswordCorrect = true;
+        passwordError.style.display = "none";
+        openAlbumBtn.disabled = false;
+        modalCopyBtn.disabled = false;
+        passwordInput.style.borderColor = "#4ecdc4";
+        showToast("Access granted!", false);
+      } else {
+        isPasswordCorrect = false;
+        passwordError.style.display = "block";
+        openAlbumBtn.disabled = true;
+        modalCopyBtn.disabled = true;
+        passwordInput.style.borderColor = "#ff6b6b";
+        setTimeout(() => {
+          passwordError.style.display = "none";
+        }, 3000);
+      }
     }
 
     // Enter gallery function
@@ -801,6 +924,11 @@
 
     // Open album modal
     function openAlbumModal(item) {
+      if (!isPasswordCorrect) {
+        showToast("Please enter the correct password first", true);
+        return;
+      }
+      
       currentAlbumUrl = item.getAttribute("data-album");
       const albumName = item.getAttribute("data-album-name");
       
@@ -818,6 +946,11 @@
 
     // Copy album link
     function copyAlbumLink() {
+      if (!isPasswordCorrect) {
+        showToast("Please enter the correct password first", true);
+        return;
+      }
+      
       // Create a temporary input element
       const tempInput = document.createElement("input");
       tempInput.value = currentAlbumUrl;
