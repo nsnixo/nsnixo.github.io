@@ -301,6 +301,7 @@
     .password-container {
       margin: 20px 0;
       text-align: center;
+      transition: all 0.3s ease;
     }
 
     .password-input {
@@ -704,7 +705,7 @@
         <h3>Rida</h3>
         
         <!-- Password Input -->
-        <div class="password-container">
+        <div class="password-container" id="password-container">
           <input type="password" class="password-input" id="password-input" placeholder="Enter password">
           <button class="password-btn" id="password-btn">Submit</button>
           <div class="password-error" id="password-error">Incorrect password. Try again.</div>
@@ -784,6 +785,7 @@
     const passwordInput = document.getElementById("password-input");
     const passwordBtn = document.getElementById("password-btn");
     const passwordError = document.getElementById("password-error");
+    const passwordContainer = document.getElementById("password-container");
 
     // Variables
     let currentAlbumUrl = '';
@@ -885,6 +887,10 @@
         openAlbumBtn.disabled = false;
         modalCopyBtn.disabled = false;
         passwordInput.style.borderColor = "#4ecdc4";
+        
+        // Hide the password container after successful authentication
+        passwordContainer.style.display = "none";
+        
         showToast("Access granted!", false);
       } else {
         isPasswordCorrect = false;
