@@ -3,536 +3,829 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hooked in Chaos - Rida's Story</title>
+  <title>Hooked in Chaos - Rida's Legacy</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: "Crimson Text", serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      color: #e6e6e6;
-      line-height: 1.6;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #1b1b2f, #0f0f1a);
+      color: #eee;
       overflow-x: hidden;
       min-height: 100vh;
-    }
-    
-    /* Header Styles */
-    header {
-      background: linear-gradient(90deg, #0f3460 0%, #1a1a2e 100%);
-      padding: 1.5rem;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      border-bottom: 1px solid rgba(101, 101, 241, 0.3);
-    }
-    
-    .back-button {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #fff;
-      font-size: 1.5rem;
-      text-decoration: none;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px 15px;
-      border-radius: 50%;
-      transition: all 0.3s ease;
-      z-index: 1001;
-    }
-    
-    .back-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-50%) scale(1.1);
-    }
-    
-    h1 {
-      font-family: "Playfair Display", serif;
-      font-size: 2.8rem;
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      letter-spacing: 1px;
-    }
-    
-    /* Main Content */
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 20px;
-    }
-    
-    .story-container {
-      background: rgba(26, 26, 46, 0.7);
-      border-radius: 15px;
-      padding: 2.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(101, 101, 241, 0.2);
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    /* Decorative Elements */
-    .story-container::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-      transform: rotate(45deg);
-      animation: shine 8s infinite linear;
-      pointer-events: none;
-    }
-    
-    @keyframes shine {
-      0% { left: -50%; }
-      100% { left: 100%; }
-    }
-    
-    /* Story Content */
-    .chapter {
-      margin-bottom: 3rem;
-      position: relative;
-      z-index: 2;
-      scroll-margin-top: 20px;
-    }
-    
-    .chapter-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.8rem;
-      color: #4ecdc4;
-      margin-bottom: 1.2rem;
-      border-bottom: 2px solid rgba(78, 205, 196, 0.3);
-      padding-bottom: 0.5rem;
-      display: inline-block;
-    }
-    
-    p {
-      margin-bottom: 1.5rem;
-      font-size: 1.1rem;
-      text-align: justify;
-    }
-    
-    .highlight {
-      color: #ff6b6b;
-      font-weight: bold;
-    }
-    
-    /* Sticker Styles */
-    .sticker {
-      position: absolute;
-      z-index: 1;
-      opacity: 0.2;
-      transition: all 0.5s ease;
-    }
-    
-    .sticker:hover {
-      opacity: 0.4;
-      transform: scale(1.1) rotate(5deg);
-    }
-    
-    .sticker-1 {
-      top: 10%;
-      right: 5%;
-      font-size: 5rem;
-      color: #ff6b6b;
-    }
-    
-    .sticker-2 {
-      bottom: 15%;
-      left: 5%;
-      font-size: 4rem;
-      color: #4ecdc4;
-      transform: rotate(-15deg);
-    }
-    
-    .sticker-3 {
-      top: 40%;
-      left: 8%;
-      font-size: 3.5rem;
-      color: #ffe66d;
-      transform: rotate(10deg);
-    }
-    
-    .sticker-4 {
-      bottom: 25%;
-      right: 10%;
-      font-size: 4.5rem;
-      color: #ff9f68;
-      transform: rotate(-5deg);
-    }
-    
-    .sticker-5 {
-      top: 60%;
-      right: 15%;
-      font-size: 4rem;
-      color: #ff6b6b;
-      transform: rotate(15deg);
-    }
-    
-    .sticker-6 {
-      top: 20%;
-      left: 10%;
-      font-size: 3.8rem;
-      color: #4ecdc4;
-      transform: rotate(-10deg);
-    }
-    
-    /* Quote Styles */
-    .quote {
-      background: rgba(15, 52, 96, 0.3);
-      border-left: 4px solid #4ecdc4;
-      padding: 1.5rem;
-      margin: 2rem 0;
-      font-style: italic;
-      border-radius: 0 8px 8px 0;
-      position: relative;
-    }
-    
-    .quote::before {
-      content: """;
-      font-family: "Playfair Display", serif;
-      font-size: 4rem;
-      color: rgba(78, 205, 196, 0.3);
-      position: absolute;
-      top: -20px;
-      left: 10px;
-    }
-    
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
-      color: #b8b8b8;
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(101, 101, 241, 0.2);
-    }
-    
-    /* Bookmark Button */
-    .bookmark-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
-      background: rgba(26, 26, 46, 0.9);
-      border-radius: 50%;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffe66d;
-      font-size: 1.8rem;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(101, 101, 241, 0.3);
-      z-index: 1000;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      flex-direction: column;
     }
-    
-    .bookmark-btn:hover {
-      transform: scale(1.1);
-      background: rgba(78, 205, 196, 0.2);
+
+    /* --- Animations --- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    
-    .progress-bar {
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* --- Particles Background --- */
+    .particles {
       position: fixed;
       top: 0;
       left: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
-      width: 0%;
-      z-index: 1001;
-      transition: width 0.3s ease;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      background: rgba(180, 150, 255, 0.5);
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    /* --- Header --- */
+    header {
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      color: #fff;
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 2.2rem;
+      font-weight: 800;
+      position: relative;
+      animation: fadeInUp 0.8s ease-out;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+
+    /* Back Arrow */
+    .back-arrow {
+      position: absolute;
+      top: 50%;
+      left: 25px;
+      transform: translateY(-50%);
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      padding: 10px 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .back-arrow:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Side Bookmark Button */
+    .side-bookmark {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 90;
     }
     
+    .bookmark-btn {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(142, 45, 226, 0.7);
+      border-radius: 50% 0 0 50%;
+      padding: 15px 12px 15px 15px;
+      transition: all 0.3s ease;
+      box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.3);
+      border: none;
+      outline: none;
+      writing-mode: vertical-lr;
+      text-orientation: mixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .bookmark-btn:hover {
+      background: rgba(142, 45, 226, 0.9);
+      padding-right: 15px;
+    }
+    .bookmark-btn.active {
+      background: rgba(255, 215, 0, 0.8);
+      color: #000;
+    }
+
+    /* --- Book Content --- */
+    .book-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .chapter {
+      background: rgba(27, 27, 47, 0.7);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(142, 45, 226, 0.3);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      scroll-margin-top: 100px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .chapter:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(142, 45, 226, 0.2);
+    }
+
+    .chapter-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #d7b3ff;
+      border-bottom: 2px solid #8e2de2;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chapter-number {
+      font-size: 1.2rem;
+      color: #a55eea;
+      background: rgba(142, 45, 226, 0.2);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .chapter-content {
+      line-height: 1.8;
+      font-size: 1.1rem;
+      text-align: justify;
+    }
+
+    .chapter-content p {
+      margin-bottom: 20px;
+    }
+
+    .prologue {
+      background: linear-gradient(145deg, rgba(142, 45, 226, 0.25), rgba(74, 0, 224, 0.2));
+      border: 1px solid rgba(142, 45, 226, 0.4);
+    }
+
+    .prologue .chapter-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #e0c3fc;
+      justify-content: center;
+    }
+
+    .quote {
+      font-style: italic;
+      padding: 20px;
+      border-left: 4px solid #8e2de2;
+      margin: 25px 0;
+      background: rgba(142, 45, 226, 0.1);
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .highlight {
+      background: linear-gradient(120deg, rgba(142, 45, 226, 0.3), rgba(74, 0, 224, 0.2));
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+
+    /* Bookmark List */
+    .bookmark-list-container {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: rgba(27, 27, 47, 0.95);
+      border-radius: 15px;
+      padding: 15px;
+      border: 1px solid rgba(142, 45, 226, 0.4);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      width: 250px;
+      z-index: 100;
+      display: none;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .bookmark-list-container.visible {
+      display: block;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    .bookmark-list-title {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #d7b3ff;
+      border-bottom: 1px solid #8e2de2;
+      padding-bottom: 10px;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .clear-bookmarks {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 5px;
+    }
+
+    .bookmark-item {
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      background: rgba(142, 45, 226, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bookmark-item:hover {
+      background: rgba(142, 45, 226, 0.3);
+      transform: translateX(-5px);
+    }
+    
+    .bookmark-item.active {
+      background: rgba(142, 45, 226, 0.4);
+      border-left: 3px solid #ffdd00;
+    }
+    
+    .remove-bookmark {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: 50%;
+      font-size: 0.8rem;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(27, 27, 47, 0.3);
+      z-index: 1000;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #b39ddb;
+      font-size: 1rem;
+      background: rgba(0, 0, 0, 0.2);
+      margin-top: auto;
+    }
+
+    /* Watermark */
+    .footer-watermark {
+      text-align: center;
+      padding: 15px;
+      color: #b39ddb;
+      font-size: 1.1rem;
+      font-weight: 500;
+      font-style: italic;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-        margin-left: 40px;
-      }
-      
-      .story-container {
+      header {
+        font-size: 1.8rem;
         padding: 1.5rem;
       }
-      
+      .back-arrow {
+        left: 15px;
+        padding: 8px 12px;
+        font-size: 1.5rem;
+      }
+      .side-bookmark {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+        transform: none;
+      }
+      .bookmark-btn {
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+        border-radius: 50%;
+        padding: 15px;
+      }
+      .book-container {
+        padding: 15px;
+        margin: 20px auto;
+      }
+      .chapter {
+        padding: 20px;
+      }
       .chapter-title {
         font-size: 1.5rem;
       }
-      
-      p {
-        font-size: 1rem;
+      .bookmark-list-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        right: auto;
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        max-height: 50vh;
       }
-      
-      .sticker {
-        display: none;
-      }
-      
-      .bookmark-btn {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-      }
-    }
-    
-    /* Animation for text */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .chapter {
-      animation: fadeIn 0.6s ease-out;
-    }
-    
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: #1a1a2e;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
-      border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
     }
   </style>
 </head>
 <body>
-  <!-- Reading Progress Bar -->
-  <div class="progress-bar"></div>
-  
-  <header>
-    <a href="https://nsnixo.github.io" class="back-button">
-      <i class="fas fa-arrow-left"></i>
-    </a>
-    <h1>Hooked in Chaos</h1>
-  </header>
-  
-  <!-- Bookmark Button -->
-  <div class="bookmark-btn" id="bookmarkBtn">
-    <i class="fas fa-bookmark"></i>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progress-bar"></div>
   </div>
-  
-  <div class="container">
-    <div class="story-container">
-      <!-- Decorative Stickers -->
-      <div class="sticker sticker-1">🔥</div>
-      <div class="sticker sticker-2">💔</div>
-      <div class="sticker sticker-3">⚡</div>
-      <div class="sticker sticker-4">🌪️</div>
-      <div class="sticker sticker-5">🎭</div>
-      <div class="sticker sticker-6">🧚</div>
-      
-      <!-- Story Content -->
-      <div class="chapter" id="chapter1">
-        <h2 class="chapter-title">Chapter 1: An Unexpected Invitation</h2>
-        <p>The day began with the monotonous rhythm of routine. I was scrolling through Platform-With, a digital space I preferred for its simplicity, intending only to call my best friend, Mesum. His presence was a constant, a reliable anchor in the daily noise. But that day, the anchor line snapped.</p>
+
+  <!-- Particles Background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="back-arrow" id="back-btn">↩</div>
+    Hooked in Chaos
+  </header>
+
+  <!-- Side Bookmark Button -->
+  <div class="side-bookmark">
+    <button class="bookmark-btn" id="bookmark-toggle">
+      <i class="fas fa-bookmark"></i>
+      <span>Save Position</span>
+    </button>
+  </div>
+
+  <!-- Bookmark List -->
+  <div class="bookmark-list-container" id="bookmark-list">
+    <h3 class="bookmark-list-title">
+      Your Bookmarks
+      <button class="clear-bookmarks" id="clear-bookmarks" title="Clear All">
+        <i class="fas fa-trash"></i>
+      </button>
+    </h3>
+    <div id="bookmark-items">
+      <!-- Bookmarks will be added here dynamically -->
+    </div>
+  </div>
+
+  <!-- Book Content -->
+  <div class="book-container">
+    <div class="chapter prologue" id="prologue">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Prologue</span>
+        The Echo of a Voice
+      </h2>
+      <div class="chapter-content">
+        <p>It began not with a call, but with a shared screen. Mesum and I, our digital worlds bridged by the familiar comfort of a voice call, were idly sharing our screens—a modern-day form of hanging out.</p>
         
-        <p>He wasn't answering. Call after call rang out into a silent void, which was profoundly out of character for him. A low hum of unease began to build in the back of my mind. Finally, on what felt like the twentieth attempt, the line connected. There was no greeting, only his voice, strained and urgent.</p>
+        <p>For me, it was a normal day. For him, it was a day he would carefully lay the first brick of a grand deception.</p>
         
-        <div class="quote">
-          "Did you check the group?"
-        </div>
+        <p>As his cursor flickered across applications, a chat window flashed on the screen. It was a conversation with a girl. This, in itself, was an anomaly. Mesum was profoundly shy, especially around women; his circle was almost exclusively male. My curiosity, playful at first, was piqued.</p>
         
-        <p>I was baffled. "What group?" I had a strict policy of avoiding them, finding the chaotic chatter of multiple conversations overwhelming.</p>
+        <div class="quote">"Who's that?" I asked, a teasing note in my voice.</div>
         
-        <p>"Just wait," he said, and the line went dead.</p>
+        <p>He hesitated, a beat too long. A performer remembering his lines. "Oh, her?" he said, his voice straining for nonchalance. "That's Rida."</p>
         
-        <p>A moment later, a notification flashed on my screen. An invitation to a group. I accepted, my curiosity overriding my aversion. The group was ominously titled: <span class="highlight">Circus Freaks</span>.</p>
+        <p>Then, he played his masterstroke. With a click, an audio file filled our headset. It was a girl's voice, clear and bright, saying just five words: <span class="highlight">"My name is Rida."</span></p>
         
-        <p>The chat window opened to reveal three members: Mesum, a girl I recognized as his close friend Amna, and a complete stranger—another girl whose name I didn know. I was a spectator thrown onto a stage mid-performance, utterly confused by the script.</p>
+        <p>Something about that voice—its tone, its seeming genuineness—struck a chord deep within me. It was an inexplicable, immediate connection, a spark ignited by a mere digital echo. I was completely disarmed. Leaning back in my chair, a smile on my face, I made a declaration that would seal my fate.</p>
         
-        <p>Before I could even form a question, the two girls began to argue. Their messages scrolled up the screen, a rapid-fire exchange of tension. The core of the dispute was our sudden addition to this bizarre digital circus. Amna, as the admin, was defending her action, while the other girl demanded an explanation for the ambush.</p>
+        <div class="quote">"Mark my words," I said to Mesum, the prophecy feeling like a joke between friends. "One day, she will be my friend. Or maybe even my girlfriend."</div>
         
-        <p>Then, the atmosphere shifted. In a move that felt both dramatic and calculated, Amna typed the words that changed everything. She revealed the other girl's secret, laying it bare for all of us to see: <span class="highlight">She likes you.</span></p>
-        
-        <p>The words hung in the digital space between us. Me? I had never been involved in the complexities of romance; I'd always dismissed it as peripheral drama, a distraction I had no time for. Love was a foreign language I had no interest in learning.</p>
-        
-        <p>The group went silent. A private message notification appeared. It was from her.</p>
-        
-        <p>The conversation moved from the public spectacle to a private audience. She was nervous, apologetic for the abrupt revelation, but confirmed it was true. Flattered but adrift, I did the only thing I could think of: I called Mesum.</p>
-        
-        <div class="quote">
-          "Should I accept this?" I asked him, seeking the guidance I always had.
-        </div>
-        
-        <p>His response was a paradox. "Yes," he said, but then his tone darkened, adding a cryptic warning that has echoed in my mind ever since. <span class="highlight">"After all, I denied her. You shouldn't."</span></p>
-        
-        <p>The words were a knot I couldn't untangle. Why shouldn't I, specifically because he had refused her? It was a statement that felt less like advice and more like a command shrouded in mystery. But, trusting my friend, I accepted her proposal—whatever they call such things nowadays.</p>
+        <p>I heard him chuckle on the other end of the line. I thought it was at the absurdity of my claim. I didn't know it was the sound of a trap snapping shut.</p>
       </div>
-      
-      <div class="chapter" id="chapter2">
-        <h2 class="chapter-title">Chapter 2: The Warnings</h2>
-        <p>The following days passed in a strange, new rhythm. Our exchanges were simple, polite—discussions of daily routines and shared hobbies. It was a tentative, getting-to-know-you dance, pleasant yet underscored by a persistent sense of unrealty.</p>
+    </div>
+
+    <div class="chapter" id="chapter1">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 1</span>
+        The Grand Illusion
+      </h2>
+      <div class="chapter-content">
+        <p>Weeks later, the memory of that voice had faded into the background of my mind. The day began with the monotonous rhythm of routine. I was scrolling through Platform-With, intending only to call my best friend, Mesum. But he wasn't answering.</p>
         
-        <p>It was during these days that Mesum's behavior transformed. The cryptic warning he had given me was not a one-time event; it became a ritual. His messages started to arrive daily, each one a variation on a chilling theme.</p>
+        <p>Call after call rang out into a silent void, which was profoundly out of character. A low hum of unease began to build. Finally, on what felt like the twentieth attempt, the line connected. There was no greeting, only his voice, strained and urgent.</p>
         
-        <div class="quote">
-          "Be cautious."<br>
-          "Watch your back."<br>
-          "Something isn't right."
-        </div>
+        <div class="quote">"Did you check the group?"</div>
         
-        <p>They were not the words of a jovial best friend but of a sentry standing guard against an unseen threat. His calls were no longer about casual banter; they were brief, urgent check-ins, his voice laced with a concern that was both palpable and terrifyingly vague. He was warning me, every day, as if I were walking a path lined with invisible traps.</p>
+        <p>I was baffled. "What group?" I had a strict policy of avoiding them.</p>
         
-        <p>I am writing this now to make a record, to piece together the moments that led me here. The normal day that ceased to be normal. The call that wasn't answered. The circus I was drafted into. The secret revealed under the big top. And the constant, chilling warnings from my best friend.</p>
+        <div class="quote">"Just wait," he said, and the line went dead.</div>
         
-        <div class="quote">
-          This is where my story begins. Or perhaps, where the danger began.
-        </div>
+        <p>A moment later, a notification flashed. An invitation to a group ominously titled: <span class="highlight">Circus Freaks</span>.</p>
+        
+        <p>The chat window opened to reveal three members: Mesum, his friend Amna, and a stranger. Before I could question my conscription into this digital circus, the two girls began to argue about our sudden addition.</p>
+        
+        <p>Then, the atmosphere shifted. In a move that felt both dramatic and calculated, Amna revealed the stranger's secret, laying it bare for all to see: <em>She likes you.</em></p>
+        
+        <p>The words hung in the digital space. Me? Romance was a foreign language I had no interest in learning.</p>
+        
+        <p>A private message notification appeared. It was from her. Her name was Rida.</p>
+        
+        <p>The conversation moved from the public spectacle to a private audience. Flattered but adrift, I sought guidance from the only person I trusted. "Should I accept this?" I asked Mesum.</p>
+        
+        <p>His response was a paradox. "Yes," he said, but then his tone darkened, adding a cryptic warning. "After all, <em>I</em> denied her. You shouldn't."</p>
+        
+        <p>The words were a knot I couldn't untangle. But, trusting my friend and remembering the voice from weeks ago, I accepted her proposal.</p>
       </div>
-      
-      <div class="chapter" id="chapter3">
-        <h2 class="chapter-title">Chapter 3: The Reveal</h2>
-        <p>The warnings from Mesum became a splinter in my mind, impossible to ignore. The constant, ominous messages were a discordant note in the simple melody of my new, albeit strange, connection with Rida. I could no longer operate in the fog. I confronted him directly, demanding to know what he meant.</p>
+    </div>
+
+    <div class="chapter" id="chapter2">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 2</span>
+        The Cracks in the Paint
+      </h2>
+      <div class="chapter-content">
+        <p>Mesum's behavior transformed. His messages became daily rituals of warning. "Be cautious." "Watch your back." He was a sentry guarding against an unseen threat. I confronted him.</p>
         
-        <p>His response was not more words, but a silent, damning piece of evidence. A screenshot appeared on my screen. It was a conversation between Rida, Amna, and him. The messages detailed the entire orchestration—the fake confession, the dramatic group addition, the manufactured tension. It was all a performance. In the messages, Rida was praising their acting skills, joking that <span class="highlight">"Oscars should be given to you guys."</span> The date stamp read April 1st. The ultimate April Fool's prank.</p>
+        <p>His response was a silent, damning screenshot. A conversation detailing the entire orchestration—the fake confession, the dramatic group addition. It was an April Fool's prank. Rida praised their acting: "Oscars should be given to you guys." The date stamp read April 1st. I discovered the truth on April 4th.</p>
         
-        <p>A cold clarity washed over me, extinguishing the initial sting of humiliation. The puzzle pieces Mesum had been nervously handing me finally clicked into a complete, infuriating picture. I discovered the truth on April 4th.</p>
+        <p>A cold clarity washed over me. Mesum and I staged our own performance—a vicious, public fight in the group chat, culminating in the end of our childhood friendship. As Amna and Rida panicked, I uploaded the screenshot with the caption: "You guys did this. I did this." The curtain fell.</p>
         
-        <p>But a raw confrontation wasn't my style. Instead, a calmer, more calculated strategy took hold. I would speak their language: performance. I went to Mesum, and a new plan was forged—not of confusion, but of revenge dressed as consequence.</p>
+        <p>Cornered, Rida insisted her feelings were real. But the seed of doubt had been sown, and the fastest breakup in history commenced.</p>
       </div>
-      
-      <div class="chapter" id="chapter4">
-        <h2 class="chapter-title">Chapter 4: The Performance</h2>
-        <p>We entered the <span class="highlight">"Circus Freaks"</span> group not as friends, but as actors taking the stage for the final act. On cue, Mesum and I began to argue. It started as a minor disagreement and quickly escalated into a volcanic eruption of fabricated resentment. We typed furiously, accusing each other of betrayal and dishonesty, painting a picture of a friendship shattering in real-time.</p>
+    </div>
+
+    <div class="chapter" id="chapter3">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 3</span>
+        The Unscripted Sequel
+      </h2>
+      <div class="chapter-content">
+        <p>Days later, she returned. Her proposal was different—solemn, direct. She admired my mind, my hobbies. Cautiously, and on my own terms, I agreed. This connection was ours alone.</p>
         
-        <p>As we had anticipated, Rida and Amna leaped into the fray, their messages panicked, trying desperately to placate us and stop the fight. They were the audience we had manipulated, gasping at the drama we presented. The climax arrived when I publicly declared our childhood friendship over. The digital silence that followed was palpable. I could almost feel their shock through the screen.</p>
+        <p>We started again. We shared our days, our dreams. The connection deepened, evolving into intimate flirtations and private, carnal thoughts. I kept this rekindled alliance from Mesum. To be honest, I liked her profoundly. My day wouldn't begin without her morning text. She wasn't just a digital flirtation; she became like a fairy to me—something magical and unexpected. She trusted me with her past, with stories of boy best friends and experiences that had shaped her.</p>
         
-        <p>Then, I uploaded the screenshot.</p>
+        <p>But paradise was fragile. The first crack appeared as unfounded accusations. She became consumed by jealousy, convinced I was engaging with other girls. In a desperate act to prove my transparency, I did the unthinkable: I threw my username and password at her feet. "See for yourself."</p>
         
-        <p>I let the evidence speak for itself, captioning it with a simple, cold truth: <span class="highlight">"You guys did this. I did this."</span> The curtain fell. The pranksters had become the pranked.</p>
+        <p>She logged in, but not on the original platform I used—on a lite version, a ghost town where no activity existed. "You're playing me," she accused, even as I pointed out her error. The logic evaporated, replaced by a furious, circular argument: "That's why I don't trust you!"</p>
         
-        <p>The aftermath was a flurry of excuses. Rida, cornered, insisted that her feelings were real, that she <span class="highlight">did</span> indeed like me. But I remembered our first private conversation with perfect clarity—her caution that I shouldn't get too attached. She was now playing the victim, but the script had changed. It was the fastest "breakup" in history, a relationship terminated just days after its fraudulent birth.</p>
+        <p>I remembered then I had told Mesum I'd given her my account. Horrified that she might see his messages or face, he frantically messaged her: "u rlly use his acc?". This intrusion was the final straw. She broke up with me in a cataclysm of venom.</p>
+        
+        <p>She eviscerated me. I was unworthy of mankind. My mother was the unluckiest woman on earth to have a son like me. The words were daggers, perfectly timed to shatter my focus as I prepared for crucial exams. The heartbreak was a vacuum, sucking away all motivation. I failed that subject—a tangible casualty of the war she waged.</p>
       </div>
-      
-      <div class="chapter" id="chapter5">
-        <h2 class="chapter-title">Chapter 5: The Unscripted Sequel</h2>
-        <p>I thought that was the end of the circus. But life, it seems, has a more complex plot than I could write.</p>
+    </div>
+
+    <div class="chapter" id="chapter4">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 4</span>
+        The Return and the Revelation
+      </h2>
+      <div class="chapter-content">
+        <p>A month later, she came back, cloaked in embarrassment and regret. She had failed to replace me. She wanted to return. Wiser now, I let her be my friend and told her to prove her love.</p>
         
-        <p>A few days later, Rida contacted me again. This time, there was no group, no audience, no Amna or Mesum pulling strings. Her proposal was different—solemn and direct. She said she admired my hobbies and my way of thinking, my <span class="highlight">"fantasy,"</span> and that her initial interest had been genuine, even if the presentation was a joke.</p>
+        <p>Her first attempt was insufficient. Her second was a wild, unburdening confession. She exposed her past, explaining how boys had "taught her everything," building her confidence, treating her "perfectly." I asked why she had truly returned. She revealed she had immediately entered a new relationship after me. She had described to this new boy the <em>idea</em> of me—the kind of person she wanted—without revealing I was the blueprint. He had failed to replicate my "psychic mind," my essence. I was not replaceable. She promised she would never leave again.</p>
         
-        <p>Cautiously, and entirely on my own terms, I agreed. This connection was ours alone to build or break.</p>
+        <p>I accepted her back.</p>
+      </div>
+    </div>
+
+    <div class="chapter" id="chapter5">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 5</span>
+        The Intimacy and the Inevitable
+      </h2>
+      <div class="chapter-content">
+        <p>We fell into a new, intense rhythm. Sex talks became our language. She revealed more of herself, progressing from showing her face to her chest, a testament to her comfort with me. We started silent video calls—no talking, just admiring each other's faces, typing our conversations in a surreal, intimate dance.</p>
         
-        <p>We started again, from the beginning. We shared more about ourselves—our dreams, our fears, the mundane details of our days. The connection deepened faster than I could have anticipated. Our conversations evolved, becoming more intimate, venturing into flirtatious territories and private, <span class="highlight">"dirty thoughts."</span> I kept this rekindled alliance from Mesum; this was not his story to be part of anymore.</p>
+        <p>But she brought her boy best friend into this new reality, mentioning they still met on the rooftop every night. I saw the ghost of the past circling but said nothing. I liked the way she was; I accepted the paradox.</p>
         
-        <p>To be honest, I liked her. Profoundly. My day wouldn't truly begin without her morning text. She wasn't just a digital flirtation; she became like a fairy to me—something magical and unexpected. Our bond felt stronger and more genuine than anything that had come before.</p>
+        <p>Then, she delivered the killing blow: a paragraph. I had to be "more more like a best friend and less less like a boyfriend." My expectations—mentioning a future, children, marriage—were too much. Her parents would never allow it. The whiplash was stunning. What was this relationship if not built on expectation and hope?</p>
         
-        <p>She began to trust me with her past. While some might desire a <span class="highlight">"clean"</span> history, I listened. She spoke of former boy best friends, of experiences that had shaped her. It didn't frighten me; it made her real.</p>
+        <p>Bitterly, I followed her new rule to the letter. Less less boyfriend. More more best friend. Yet, my compliance seemed to anger her further. She grew distant, mad about something she wouldn't name.</p>
         
-        <p>For a few months, it was effortless. But then, the first crack appeared. Arguments began to spark over trivial, normal things, their frequency and ferocity growing until they culminated in our first real breakup. It was a painful, confusing end to something that had felt so magically unscripted. The fairy tale, it seemed, had a final page after all.</p>
+        <p>We didn't talk. I gave her space to find her happiness. When we spoke again, it was casual. She spoke of school, of a fight with the head boy—her best friend—who had caught her bunking class and protected her. It felt like a performance, a weak attempt to incite jealousy. I refused to play, replying, "Oh, friends with benefits, huh?" My indifference infuriated her.</p>
+        
+        <p>A day of silence passed. Then she claimed it was all a dare. "You won't understand it either way. So let's just not talk."<br>
+        "K," I said.</p>
+        
+        <p>A few days later, a text: "Lets enjoy."<br>
+        "Make your words clear," I replied.<br>
+        "Like fun talk and chill enjoy together."<br>
+        "Nah, I'm good."<br>
+        "Okay so u dont wanna talk thats fine."<br>
+        "K."</p>
+        
+        <p>That was the last word we ever exchanged.</p>
+      </div>
+    </div>
+
+    <div class="chapter" id="epilogue">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Epilogue</span>
+        The Aftermath
+      </h2>
+      <div class="chapter-content">
+        <p>A year of silence has passed. The fallout was total. Mesum and Amna, architects of the original circus, also broke their friendships with me. I was left alone amidst the ruins of the grand illusion, a lone spectator in an empty big top, forever hearing the echo of a voice that started it all. I had loved a fairy, but she was, in the end, just another act in the circus.</p>
       </div>
     </div>
   </div>
-  
+
+  <!-- Watermark -->
+  <div class="footer-watermark">@n.snixo</div>
+
+  <!-- Footer -->
   <footer>
-    <p>Hooked in Chaos - A Rida's Legacy Story</p>
+    <p>Created with <i class="fas fa-heart" style="color: #e91e63;"></i> | Rida's Legacy</p>
   </footer>
 
   <script>
-    // Optimized DOMContentLoaded event
-    document.addEventListener('DOMContentLoaded', function() {
-      // Cache DOM elements
-      const chapters = document.querySelectorAll('.chapter');
-      const stickers = document.querySelectorAll('.sticker');
-      const bookmarkBtn = document.getElementById('bookmarkBtn');
-      const progressBar = document.querySelector('.progress-bar');
+    // DOM Elements
+    const backBtn = document.getElementById("back-btn");
+    const bookmarkToggle = document.getElementById("bookmark-toggle");
+    const bookmarkList = document.getElementById("bookmark-list");
+    const bookmarkItems = document.getElementById("bookmark-items");
+    const clearBookmarksBtn = document.getElementById("clear-bookmarks");
+    const particlesContainer = document.getElementById("particles");
+    const progressBar = document.getElementById("progress-bar");
+    const chapters = document.querySelectorAll('.chapter');
+
+    // Bookmark data
+    let bookmarks = JSON.parse(localStorage.getItem('storyBookmarks')) || [];
+    let currentPosition = JSON.parse(localStorage.getItem('readingPosition')) || { chapter: 'prologue', position: 0 };
+
+    // Create animated particles
+    function createParticles() {
+      const particlesCount = 50;
       
-      // Set initial bookmark position
-      let bookmarkPosition = 0;
-      
-      // Check if there's a saved bookmark
-      if (localStorage.getItem('bookmarkPosition')) {
-        bookmarkPosition = parseInt(localStorage.getItem('bookmarkPosition'));
-        window.scrollTo(0, bookmarkPosition);
-      }
-      
-      // Preload animations
-      function preloadAnimations() {
-        chapters.forEach(chapter => {
-          chapter.style.animation = 'none';
-          setTimeout(() => {
-            chapter.style.animation = '';
-          }, 10);
-        });
-      }
-      
-      // Initialize animations
-      function initAnimations() {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
-            }
-          });
-        }, { threshold: 0.1 });
+      for (let i = 0; i < particlesCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
         
-        chapters.forEach(chapter => {
-          observer.observe(chapter);
-        });
+        // Random properties
+        const size = Math.random() * 5 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 5;
+        
+        // Apply styles
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.animationDuration = `${duration}s`;
+        
+        particlesContainer.appendChild(particle);
       }
+    }
+
+    // Update reading progress
+    function updateProgress() {
+      const totalHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      progressBar.style.width = `${progress}%`;
       
-      // Make stickers interactive
-      function initStickers() {
-        stickers.forEach(sticker => {
-          sticker.addEventListener('click', () => {
-            sticker.style.transform = `rotate(${Math.random() * 360}deg) scale(1.2)`;
-            setTimeout(() => {
-              sticker.style.transform = '';
-            }, 1000);
+      // Auto-save position every 5 seconds
+      if (Date.now() - (lastSaveTime || 0) > 5000) {
+        saveReadingPosition();
+        lastSaveTime = Date.now();
+      }
+    }
+
+    // Save reading position
+    function saveReadingPosition() {
+      let closestChapter = 'prologue';
+      let closestDistance = Infinity;
+      
+      chapters.forEach(chapter => {
+        const rect = chapter.getBoundingClientRect();
+        if (rect.top < 200 && rect.bottom > 0) {
+          const distance = Math.abs(rect.top);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestChapter = chapter.id;
+          }
+        }
+      });
+      
+      currentPosition = {
+        chapter: closestChapter,
+        position: window.scrollY
+      };
+      
+      localStorage.setItem('readingPosition', JSON.stringify(currentPosition));
+    }
+
+    // Restore reading position
+    function restoreReadingPosition() {
+      if (currentPosition) {
+        const element = document.getElementById(currentPosition.chapter);
+        if (element) {
+          window.scrollTo({
+            top: currentPosition.position,
+            behavior: 'smooth'
           });
-        });
+        }
+      }
+    }
+
+    // Update bookmark list
+    function updateBookmarkList() {
+      bookmarkItems.innerHTML = '';
+      
+      if (bookmarks.length === 0) {
+        bookmarkItems.innerHTML = '<p style="text-align: center; color: #b39ddb; padding: 10px;">No bookmarks yet</p>';
+        return;
       }
       
-      // Bookmark functionality
-      function initBookmark() {
-        bookmarkBtn.addEventListener('click', function() {
-          // Save current scroll position
-          bookmarkPosition = window.pageYOffset;
-          localStorage.setItem('bookmarkPosition', bookmarkPosition);
-          
-          // Visual feedback
-          this.style.background = 'rgba(78, 205, 196, 0.3)';
-          this.style.color = '#4ecdc4';
-          
-          // Reset after a short time
-          setTimeout(() => {
-            this.style.background = 'rgba(26, 26, 46, 0.9)';
-            this.style.color = '#ffe66d';
-          }, 1000);
+      bookmarks.forEach((bookmark, index) => {
+        const item = document.createElement('div');
+        item.className = 'bookmark-item';
+        if (bookmark.id === currentPosition.chapter) {
+          item.classList.add('active');
+        }
+        item.innerHTML = `
+          <div>${bookmark.title}</div>
+          <button class="remove-bookmark" data-index="${index}" title="Remove bookmark">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        
+        item.addEventListener('click', () => {
+          const element = document.getElementById(bookmark.id);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            bookmarkList.classList.remove('visible');
+          }
         });
-      }
-      
-      // Reading progress bar
-      function initProgressBar() {
-        window.addEventListener('scroll', () => {
-          const totalHeight = document.body.scrollHeight - window.innerHeight;
-          const progress = (window.pageYOffset / totalHeight) * 100;
-          progressBar.style.width = progress + '%';
+        
+        const removeBtn = item.querySelector('.remove-bookmark');
+        removeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          removeBookmark(index);
         });
-      }
+        
+        bookmarkItems.appendChild(item);
+      });
+    }
+
+    // Add bookmark for current position
+    function addBookmark() {
+      let currentChapter = 'prologue';
+      let currentTitle = 'Prologue: The Echo of a Voice';
       
-      // Initialize everything
-      preloadAnimations();
-      initAnimations();
-      initStickers();
-      initBookmark();
-      initProgressBar();
+      chapters.forEach(chapter => {
+        const rect = chapter.getBoundingClientRect();
+        if (rect.top < 200 && rect.bottom > 0) {
+          currentChapter = chapter.id;
+          currentTitle = chapter.querySelector('.chapter-title').textContent;
+        }
+      });
+      
+      // Check if already bookmarked
+      const existingIndex = bookmarks.findIndex(b => b.id === currentChapter);
+      
+      if (existingIndex === -1) {
+        // Add new bookmark
+        bookmarks.push({
+          id: currentChapter,
+          title: currentTitle,
+          date: new Date().toISOString()
+        });
+        
+        // Save to localStorage
+        localStorage.setItem('storyBookmarks', JSON.stringify(bookmarks));
+        
+        // Update UI
+        updateBookmarkList();
+        
+        // Show feedback
+        showBookmarkFeedback('Bookmark added!');
+      } else {
+        // Remove bookmark
+        bookmarks.splice(existingIndex, 1);
+        
+        // Save to localStorage
+        localStorage.setItem('storyBookmarks', JSON.stringify(bookmarks));
+        
+        // Update UI
+        updateBookmarkList();
+        
+        // Show feedback
+        showBookmarkFeedback('Bookmark removed!');
+      }
+    }
+
+    // Remove specific bookmark
+    function removeBookmark(index) {
+      bookmarks.splice(index, 1);
+      localStorage.setItem('storyBookmarks', JSON.stringify(bookmarks));
+      updateBookmarkList();
+      showBookmarkFeedback('Bookmark removed!');
+    }
+
+    // Clear all bookmarks
+    function clearAllBookmarks() {
+      if (bookmarks.length > 0 && confirm('Are you sure you want to clear all bookmarks?')) {
+        bookmarks = [];
+        localStorage.setItem('storyBookmarks', JSON.stringify(bookmarks));
+        updateBookmarkList();
+        showBookmarkFeedback('All bookmarks cleared!');
+      }
+    }
+
+    // Show bookmark feedback
+    function showBookmarkFeedback(message) {
+      const feedback = document.createElement('div');
+      feedback.style.position = 'fixed';
+      feedback.style.bottom = '20px';
+      feedback.style.left = '50%';
+      feedback.style.transform = 'translateX(-50%)';
+      feedback.style.background = 'rgba(0, 0, 0, 0.8)';
+      feedback.style.color = 'white';
+      feedback.style.padding = '10px 20px';
+      feedback.style.borderRadius = '30px';
+      feedback.style.zIndex = '1000';
+      feedback.style.animation = 'fadeInUp 0.5s ease-out';
+      feedback.textContent = message;
+      
+      document.body.appendChild(feedback);
+      
+      setTimeout(() => {
+        feedback.style.opacity = '0';
+        feedback.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => document.body.removeChild(feedback), 500);
+      }, 2000);
+    }
+
+    // Set up event listeners
+    function setupEventListeners() {
+      // Return to main website
+      backBtn.addEventListener("click", () => {
+        saveReadingPosition();
+        window.location.href = "https://nsnixo.github.io";
+      });
+      
+      // Toggle bookmark list
+      bookmarkToggle.addEventListener("click", addBookmark);
+      
+      // Clear all bookmarks
+      clearBookmarksBtn.addEventListener("click", clearAllBookmarks);
+      
+      // Close bookmark list when clicking outside
+      document.addEventListener('click', (e) => {
+        if (bookmarkList.classList.contains('visible') && 
+            !bookmarkList.contains(e.target) && 
+            e.target !== bookmarkToggle) {
+          bookmarkList.classList.remove('visible');
+        }
+      });
+      
+      // Update progress on scroll
+      window.addEventListener('scroll', updateProgress);
+      
+      // Save position before leaving
+      window.addEventListener('beforeunload', saveReadingPosition);
+    }
+
+    let lastSaveTime = Date.now();
+    
+    // Initialize the page when loaded
+    window.addEventListener('load', () => {
+      createParticles();
+      updateBookmarkList();
+      setupEventListeners();
+      restoreReadingPosition();
+      
+      // Auto-save position every 10 seconds
+      setInterval(saveReadingPosition, 10000);
     });
   </script>
 </body>
