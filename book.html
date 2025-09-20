@@ -30,6 +30,10 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
     /* --- Particles Background --- */
     .particles {
@@ -50,6 +54,30 @@
     @keyframes twinkle {
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
+    }
+
+    /* Decorative Elements */
+    .decoration {
+      position: fixed;
+      z-index: -1;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    
+    .circle {
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    }
+    
+    .squiggle {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4' width='20' height='4'%3E%3Cpath d='M0 3.5c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3' fill='none' stroke='%238e2de2' stroke-width='1'/%3E%3C/svg%3E") repeat-x;
+      height: 20px;
+    }
+    
+    .sticker {
+      font-size: 2rem;
+      opacity: 0.15;
+      animation: float 6s infinite ease-in-out;
     }
 
     /* --- Header --- */
@@ -88,48 +116,13 @@
       transform: translateY(-50%) scale(1.1);
     }
 
-    /* Side Bookmark Button */
-    .side-bookmark {
-      position: fixed;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      z-index: 90;
-    }
-    
-    .bookmark-btn {
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #fff;
-      background: rgba(142, 45, 226, 0.7);
-      border-radius: 50% 0 0 50%;
-      padding: 15px 12px 15px 15px;
-      transition: all 0.3s ease;
-      box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.3);
-      border: none;
-      outline: none;
-      writing-mode: vertical-lr;
-      text-orientation: mixed;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .bookmark-btn:hover {
-      background: rgba(142, 45, 226, 0.9);
-      padding-right: 15px;
-    }
-    .bookmark-btn.active {
-      background: rgba(255, 215, 0, 0.8);
-      color: #000;
-    }
-
     /* --- Book Content --- */
     .book-container {
       max-width: 800px;
       margin: 40px auto;
       padding: 20px;
       animation: fadeInUp 1s ease-out;
+      position: relative;
     }
 
     .chapter {
@@ -142,11 +135,24 @@
       backdrop-filter: blur(5px);
       scroll-margin-top: 100px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     
     .chapter:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 30px rgba(142, 45, 226, 0.2);
+    }
+    
+    .chapter::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #8e2de2, #4a00e0, #8e2de2);
+      opacity: 0.7;
     }
 
     .chapter-title {
@@ -176,6 +182,8 @@
 
     .chapter-content p {
       margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
     }
 
     .prologue {
@@ -197,6 +205,17 @@
       margin: 25px 0;
       background: rgba(142, 45, 226, 0.1);
       border-radius: 0 8px 8px 0;
+      position: relative;
+    }
+    
+    .quote::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      font-size: 4rem;
+      color: rgba(142, 45, 226, 0.2);
+      font-family: Georgia, serif;
     }
     
     .highlight {
@@ -204,81 +223,15 @@
       padding: 2px 5px;
       border-radius: 3px;
     }
-
-    /* Bookmark List */
-    .bookmark-list-container {
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      background: rgba(27, 27, 47, 0.95);
-      border-radius: 15px;
-      padding: 15px;
-      border: 1px solid rgba(142, 45, 226, 0.4);
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      width: 250px;
-      z-index: 100;
-      display: none;
-      max-height: 70vh;
-      overflow-y: auto;
-    }
-
-    .bookmark-list-container.visible {
-      display: block;
-      animation: fadeInUp 0.5s ease-out;
-    }
-
-    .bookmark-list-title {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #d7b3ff;
-      border-bottom: 1px solid #8e2de2;
-      padding-bottom: 10px;
-      text-align: center;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
     
-    .clear-bookmarks {
-      background: none;
-      border: none;
-      color: #ff6b6b;
-      cursor: pointer;
-      font-size: 0.9rem;
-      padding: 5px;
-    }
-
-    .bookmark-item {
-      padding: 10px;
-      margin-bottom: 8px;
-      border-radius: 8px;
-      background: rgba(142, 45, 226, 0.1);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .bookmark-item:hover {
-      background: rgba(142, 45, 226, 0.3);
-      transform: translateX(-5px);
-    }
-    
-    .bookmark-item.active {
-      background: rgba(142, 45, 226, 0.4);
-      border-left: 3px solid #ffdd00;
-    }
-    
-    .remove-bookmark {
-      background: none;
-      border: none;
-      color: #ff6b6b;
-      cursor: pointer;
-      padding: 3px 6px;
-      border-radius: 50%;
-      font-size: 0.8rem;
+    .platform-name {
+      display: inline-block;
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9em;
     }
 
     /* Progress Bar */
@@ -331,18 +284,6 @@
         padding: 8px 12px;
         font-size: 1.5rem;
       }
-      .side-bookmark {
-        top: auto;
-        bottom: 20px;
-        right: 20px;
-        transform: none;
-      }
-      .bookmark-btn {
-        writing-mode: horizontal-tb;
-        text-orientation: mixed;
-        border-radius: 50%;
-        padding: 15px;
-      }
       .book-container {
         padding: 15px;
         margin: 20px auto;
@@ -353,15 +294,9 @@
       .chapter-title {
         font-size: 1.5rem;
       }
-      .bookmark-list-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        top: auto;
-        right: auto;
-        width: 100%;
-        border-radius: 15px 15px 0 0;
-        max-height: 50vh;
+      
+      .decoration {
+        display: none;
       }
     }
   </style>
@@ -375,33 +310,22 @@
 
   <!-- Particles Background -->
   <div class="particles" id="particles"></div>
+  
+  <!-- Decorative Elements -->
+  <div class="decoration circle" style="width: 300px; height: 300px; top: 10%; left: 5%; animation: float 15s infinite ease-in-out;"></div>
+  <div class="decoration circle" style="width: 150px; height: 150px; top: 70%; right: 10%; animation: float 12s infinite ease-in-out reverse;"></div>
+  <div class="decoration squiggle" style="width: 200px; top: 30%; right: 15%; transform: rotate(45deg);"></div>
+  <div class="decoration squiggle" style="width: 250px; bottom: 20%; left: 8%; transform: rotate(-20deg);"></div>
+  <div class="decoration sticker" style="top: 15%; right: 20%;">📱</div>
+  <div class="decoration sticker" style="top: 80%; left: 15%; animation-delay: 2s;">💬</div>
+  <div class="decoration sticker" style="top: 45%; left: 25%; animation-delay: 1s;">🎭</div>
+  <div class="decoration sticker" style="top: 60%; right: 25%; animation-delay: 3s;">🔍</div>
 
   <!-- Header -->
   <header>
     <div class="back-arrow" id="back-btn">↩</div>
     Hooked in Chaos
   </header>
-
-  <!-- Side Bookmark Button -->
-  <div class="side-bookmark">
-    <button class="bookmark-btn" id="bookmark-toggle">
-      <i class="fas fa-bookmark"></i>
-      <span>Save Position</span>
-    </button>
-  </div>
-
-  <!-- Bookmark List -->
-  <div class="bookmark-list-container" id="bookmark-list">
-    <h3 class="bookmark-list-title">
-      Your Bookmarks
-      <button class="clear-bookmarks" id="clear-bookmarks" title="Clear All">
-        <i class="fas fa-trash"></i>
-      </button>
-    </h3>
-    <div id="bookmark-items">
-      <!-- Bookmarks will be added here dynamically -->
-    </div>
-  </div>
 
   <!-- Book Content -->
   <div class="book-container">
@@ -437,31 +361,35 @@
         The Grand Illusion
       </h2>
       <div class="chapter-content">
-        <p>Weeks later, the memory of that voice had faded into the background of my mind. The day began with the monotonous rhythm of routine. I was scrolling through Platform-With, intending only to call my best friend, Mesum. But he wasn't answering.</p>
+        <p>The day began with the monotonous rhythm of routine. I was scrolling through <span class="platform-name">Platform-With</span>, a digital space I preferred for its simplicity, intending only to call my best friend, Mesum. His presence was a constant, a reliable anchor in the daily noise. But that day, the anchor line snapped.</p>
         
-        <p>Call after call rang out into a silent void, which was profoundly out of character. A low hum of unease began to build. Finally, on what felt like the twentieth attempt, the line connected. There was no greeting, only his voice, strained and urgent.</p>
+        <p>He wasn't answering. Call after call rang out into a silent void, which was profoundly out of character for him. A low hum of unease began to build in the back of my mind. Finally, on what felt like the twentieth attempt, the line connected. There was no greeting, only his voice, strained and urgent.</p>
         
         <div class="quote">"Did you check the group?"</div>
         
-        <p>I was baffled. "What group?" I had a strict policy of avoiding them.</p>
+        <p>I was baffled. "What group?" I had a strict policy of avoiding them, finding the chaotic chatter of multiple conversations overwhelming.</p>
         
         <div class="quote">"Just wait," he said, and the line went dead.</div>
         
-        <p>A moment later, a notification flashed. An invitation to a group ominously titled: <span class="highlight">Circus Freaks</span>.</p>
+        <p>A moment later, a notification flashed on my screen. An invitation to a group. I accepted, my curiosity overriding my aversion. The group was ominously titled: <span class="highlight">Circus Freaks</span>.</p>
         
-        <p>The chat window opened to reveal three members: Mesum, his friend Amna, and a stranger. Before I could question my conscription into this digital circus, the two girls began to argue about our sudden addition.</p>
+        <p>The chat window opened to reveal three members: Mesum, a girl I recognized as his close friend Amna, and a complete stranger—another girl whose name I didn't know. I was a spectator thrown onto a stage mid-performance, utterly confused by the script.</p>
         
-        <p>Then, the atmosphere shifted. In a move that felt both dramatic and calculated, Amna revealed the stranger's secret, laying it bare for all to see: <em>She likes you.</em></p>
+        <p>Before I could even form a question, the two girls began to argue. Their messages scrolled up the screen, a rapid-fire exchange of tension. The core of the dispute was our sudden addition to this bizarre digital circus. Amna, as the admin, was defending her action, while the other girl demanded an explanation for the ambush.</p>
         
-        <p>The words hung in the digital space. Me? Romance was a foreign language I had no interest in learning.</p>
+        <p>Then, the atmosphere shifted. In a move that felt both dramatic and calculated, Amna typed the words that changed everything. She revealed the other girl's secret, laying it bare for all of us to see: <span class="highlight">She likes you.</span></p>
         
-        <p>A private message notification appeared. It was from her. Her name was Rida.</p>
+        <p>The words hung in the digital space between us. Me? I had never been involved in the complexities of romance; I'd always dismissed it as peripheral drama, a distraction I had no time for. Love was a foreign language I had no interest in learning.</p>
         
-        <p>The conversation moved from the public spectacle to a private audience. Flattered but adrift, I sought guidance from the only person I trusted. "Should I accept this?" I asked Mesum.</p>
+        <p>The group went silent. A private message notification appeared. It was from her.</p>
         
-        <p>His response was a paradox. "Yes," he said, but then his tone darkened, adding a cryptic warning. "After all, <em>I</em> denied her. You shouldn't."</p>
+        <p>The conversation moved from the public spectacle to a private audience. She was nervous, apologetic for the abrupt revelation, but confirmed it was true. Flattered but adrift, I did the only thing I could think of: I called Mesum.</p>
         
-        <p>The words were a knot I couldn't untangle. But, trusting my friend and remembering the voice from weeks ago, I accepted her proposal.</p>
+        <div class="quote">"Should I accept this?" I asked him, seeking the guidance I always had.</div>
+        
+        <p>His response was a paradox. "Yes," he said, but then his tone darkened, adding a cryptic warning that has echoed in my mind ever since. "After all, I denied her. You shouldn't."</p>
+        
+        <p>The words were a knot I couldn't untangle. Why shouldn't I, specifically because he had refused her? It was a statement that felt less like advice and more like a command shrouded in mystery. But, trusting my friend, I accepted her proposal—whatever they call such things nowadays.</p>
       </div>
     </div>
 
@@ -563,23 +491,15 @@ My mistake was never in trusting her. It was in believing the fairy tale I had w
 
   <!-- Footer -->
   <footer>
-    <p>Rida's Legacy</p>
+    <p> Rida's Legacy</p>
   </footer>
 
   <script>
     // DOM Elements
     const backBtn = document.getElementById("back-btn");
-    const bookmarkToggle = document.getElementById("bookmark-toggle");
-    const bookmarkList = document.getElementById("bookmark-list");
-    const bookmarkItems = document.getElementById("bookmark-items");
-    const clearBookmarksBtn = document.getElementById("clear-bookmarks");
     const particlesContainer = document.getElementById("particles");
     const progressBar = document.getElementById("progress-bar");
     const chapters = document.querySelectorAll('.chapter');
-
-    // Bookmark data
-    let bookmarks = JSON.parse(localStorage.getItem('storyBookmarks')) || [];
-    let currentPosition = JSON.parse(localStorage.getItem('readingPosition')) || { chapter: 'prologue', position: 0 };
 
     // Create animated particles
     function createParticles() {
@@ -613,221 +533,23 @@ My mistake was never in trusting her. It was in believing the fairy tale I had w
       const totalHeight = document.body.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       progressBar.style.width = `${progress}%`;
-      
-      // Auto-save position every 5 seconds
-      if (Date.now() - (lastSaveTime || 0) > 5000) {
-        saveReadingPosition();
-        lastSaveTime = Date.now();
-      }
-    }
-
-    // Save reading position
-    function saveReadingPosition() {
-      let closestChapter = 'prologue';
-      let closestDistance = Infinity;
-      
-      chapters.forEach(chapter => {
-        const rect = chapter.getBoundingClientRect();
-        if (rect.top < 200 && rect.bottom > 0) {
-          const distance = Math.abs(rect.top);
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestChapter = chapter.id;
-          }
-        }
-      });
-      
-      currentPosition = {
-        chapter: closestChapter,
-        position: window.scrollY
-      };
-      
-      localStorage.setItem('readingPosition', JSON.stringify(currentPosition));
-    }
-
-    // Restore reading position
-    function restoreReadingPosition() {
-      if (currentPosition) {
-        const element = document.getElementById(currentPosition.chapter);
-        if (element) {
-          window.scrollTo({
-            top: currentPosition.position,
-            behavior: 'smooth'
-          });
-        }
-      }
-    }
-
-    // Update bookmark list
-    function updateBookmarkList() {
-      bookmarkItems.innerHTML = '';
-      
-      if (bookmarks.length === 0) {
-        bookmarkItems.innerHTML = '<p style="text-align: center; color: #b39ddb; padding: 10px;">No bookmarks yet</p>';
-        return;
-      }
-      
-      bookmarks.forEach((bookmark, index) => {
-        const item = document.createElement('div');
-        item.className = 'bookmark-item';
-        if (bookmark.id === currentPosition.chapter) {
-          item.classList.add('active');
-        }
-        item.innerHTML = `
-          <div>${bookmark.title}</div>
-          <button class="remove-bookmark" data-index="${index}" title="Remove bookmark">
-            <i class="fas fa-times"></i>
-          </button>
-        `;
-        
-        item.addEventListener('click', () => {
-          const element = document.getElementById(bookmark.id);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-            bookmarkList.classList.remove('visible');
-          }
-        });
-        
-        const removeBtn = item.querySelector('.remove-bookmark');
-        removeBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          removeBookmark(index);
-        });
-        
-        bookmarkItems.appendChild(item);
-      });
-    }
-
-    // Add bookmark for current position
-    function addBookmark() {
-      let currentChapter = 'prologue';
-      let currentTitle = 'Prologue: The Echo of a Voice';
-      
-      chapters.forEach(chapter => {
-        const rect = chapter.getBoundingClientRect();
-        if (rect.top < 200 && rect.bottom > 0) {
-          currentChapter = chapter.id;
-          currentTitle = chapter.querySelector('.chapter-title').textContent;
-        }
-      });
-      
-      // Check if already bookmarked
-      const existingIndex = bookmarks.findIndex(b => b.id === currentChapter);
-      
-      if (existingIndex === -1) {
-        // Add new bookmark
-        bookmarks.push({
-          id: currentChapter,
-          title: currentTitle,
-          date: new Date().toISOString()
-        });
-        
-        // Save to localStorage
-        localStorage.setItem('storyBookmarks', JSON.stringify(bookmarks));
-        
-        // Update UI
-        updateBookmarkList();
-        
-        // Show feedback
-        showBookmarkFeedback('Bookmark added!');
-      } else {
-        // Remove bookmark
-        bookmarks.splice(existingIndex, 1);
-        
-        // Save to localStorage
-        localStorage.setItem('storyBookmarks', JSON.stringify(bookmarks));
-        
-        // Update UI
-        updateBookmarkList();
-        
-        // Show feedback
-        showBookmarkFeedback('Bookmark removed!');
-      }
-    }
-
-    // Remove specific bookmark
-    function removeBookmark(index) {
-      bookmarks.splice(index, 1);
-      localStorage.setItem('storyBookmarks', JSON.stringify(bookmarks));
-      updateBookmarkList();
-      showBookmarkFeedback('Bookmark removed!');
-    }
-
-    // Clear all bookmarks
-    function clearAllBookmarks() {
-      if (bookmarks.length > 0 && confirm('Are you sure you want to clear all bookmarks?')) {
-        bookmarks = [];
-        localStorage.setItem('storyBookmarks', JSON.stringify(bookmarks));
-        updateBookmarkList();
-        showBookmarkFeedback('All bookmarks cleared!');
-      }
-    }
-
-    // Show bookmark feedback
-    function showBookmarkFeedback(message) {
-      const feedback = document.createElement('div');
-      feedback.style.position = 'fixed';
-      feedback.style.bottom = '20px';
-      feedback.style.left = '50%';
-      feedback.style.transform = 'translateX(-50%)';
-      feedback.style.background = 'rgba(0, 0, 0, 0.8)';
-      feedback.style.color = 'white';
-      feedback.style.padding = '10px 20px';
-      feedback.style.borderRadius = '30px';
-      feedback.style.zIndex = '1000';
-      feedback.style.animation = 'fadeInUp 0.5s ease-out';
-      feedback.textContent = message;
-      
-      document.body.appendChild(feedback);
-      
-      setTimeout(() => {
-        feedback.style.opacity = '0';
-        feedback.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => document.body.removeChild(feedback), 500);
-      }, 2000);
     }
 
     // Set up event listeners
     function setupEventListeners() {
       // Return to main website
       backBtn.addEventListener("click", () => {
-        saveReadingPosition();
         window.location.href = "https://nsnixo.github.io";
-      });
-      
-      // Toggle bookmark list
-      bookmarkToggle.addEventListener("click", addBookmark);
-      
-      // Clear all bookmarks
-      clearBookmarksBtn.addEventListener("click", clearAllBookmarks);
-      
-      // Close bookmark list when clicking outside
-      document.addEventListener('click', (e) => {
-        if (bookmarkList.classList.contains('visible') && 
-            !bookmarkList.contains(e.target) && 
-            e.target !== bookmarkToggle) {
-          bookmarkList.classList.remove('visible');
-        }
       });
       
       // Update progress on scroll
       window.addEventListener('scroll', updateProgress);
-      
-      // Save position before leaving
-      window.addEventListener('beforeunload', saveReadingPosition);
     }
-
-    let lastSaveTime = Date.now();
     
     // Initialize the page when loaded
     window.addEventListener('load', () => {
       createParticles();
-      updateBookmarkList();
       setupEventListeners();
-      restoreReadingPosition();
-      
-      // Auto-save position every 10 seconds
-      setInterval(saveReadingPosition, 10000);
     });
   </script>
 </body>
