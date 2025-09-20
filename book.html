@@ -39,6 +39,7 @@
       padding: 10px 15px;
       border-radius: 50%;
       transition: all 0.3s ease;
+      z-index: 1001;
     }
     
     .back-button:hover {
@@ -98,6 +99,7 @@
       margin-bottom: 3rem;
       position: relative;
       z-index: 2;
+      scroll-margin-top: 20px;
     }
     
     .chapter-title {
@@ -212,6 +214,43 @@
       border-top: 1px solid rgba(101, 101, 241, 0.2);
     }
     
+    /* Bookmark Button */
+    .bookmark-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: rgba(26, 26, 46, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffe66d;
+      font-size: 1.8rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(101, 101, 241, 0.3);
+      z-index: 1000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .bookmark-btn:hover {
+      transform: scale(1.1);
+      background: rgba(78, 205, 196, 0.2);
+    }
+    
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+      width: 0%;
+      z-index: 1001;
+      transition: width 0.3s ease;
+    }
+    
     /* Responsive Design */
     @media (max-width: 768px) {
       h1 {
@@ -234,16 +273,24 @@
       .sticker {
         display: none;
       }
+      
+      .bookmark-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
     }
     
     /* Animation for text */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
     
     .chapter {
-      animation: fadeIn 1s ease-out;
+      animation: fadeIn 0.6s ease-out;
     }
     
     /* Scrollbar Styling */
@@ -266,12 +313,20 @@
   </style>
 </head>
 <body>
+  <!-- Reading Progress Bar -->
+  <div class="progress-bar"></div>
+  
   <header>
     <a href="https://nsnixo.github.io" class="back-button">
       <i class="fas fa-arrow-left"></i>
     </a>
     <h1>Hooked in Chaos</h1>
   </header>
+  
+  <!-- Bookmark Button -->
+  <div class="bookmark-btn" id="bookmarkBtn">
+    <i class="fas fa-bookmark"></i>
+  </div>
   
   <div class="container">
     <div class="story-container">
@@ -284,7 +339,7 @@
       <div class="sticker sticker-6">🧚</div>
       
       <!-- Story Content -->
-      <div class="chapter">
+      <div class="chapter" id="chapter1">
         <h2 class="chapter-title">Chapter 1: An Unexpected Invitation</h2>
         <p>The day began with the monotonous rhythm of routine. I was scrolling through Platform-With, a digital space I preferred for its simplicity, intending only to call my best friend, Mesum. His presence was a constant, a reliable anchor in the daily noise. But that day, the anchor line snapped.</p>
         
@@ -321,9 +376,9 @@
         <p>The words were a knot I couldn't untangle. Why shouldn't I, specifically because he had refused her? It was a statement that felt less like advice and more like a command shrouded in mystery. But, trusting my friend, I accepted her proposal—whatever they call such things nowadays.</p>
       </div>
       
-      <div class="chapter">
+      <div class="chapter" id="chapter2">
         <h2 class="chapter-title">Chapter 2: The Warnings</h2>
-        <p>The following days passed in a strange, new rhythm. Our exchanges were simple, polite—discussions of daily routines and shared hobbies. It was a tentative, getting-to-know-you dance, pleasant yet underscored by a persistent sense of unreality.</p>
+        <p>The following days passed in a strange, new rhythm. Our exchanges were simple, polite—discussions of daily routines and shared hobbies. It was a tentative, getting-to-know-you dance, pleasant yet underscored by a persistent sense of unrealty.</p>
         
         <p>It was during these days that Mesum's behavior transformed. The cryptic warning he had given me was not a one-time event; it became a ritual. His messages started to arrive daily, each one a variation on a chilling theme.</p>
         
@@ -342,7 +397,7 @@
         </div>
       </div>
       
-      <div class="chapter">
+      <div class="chapter" id="chapter3">
         <h2 class="chapter-title">Chapter 3: The Reveal</h2>
         <p>The warnings from Mesum became a splinter in my mind, impossible to ignore. The constant, ominous messages were a discordant note in the simple melody of my new, albeit strange, connection with Rida. I could no longer operate in the fog. I confronted him directly, demanding to know what he meant.</p>
         
@@ -353,7 +408,7 @@
         <p>But a raw confrontation wasn't my style. Instead, a calmer, more calculated strategy took hold. I would speak their language: performance. I went to Mesum, and a new plan was forged—not of confusion, but of revenge dressed as consequence.</p>
       </div>
       
-      <div class="chapter">
+      <div class="chapter" id="chapter4">
         <h2 class="chapter-title">Chapter 4: The Performance</h2>
         <p>We entered the <span class="highlight">"Circus Freaks"</span> group not as friends, but as actors taking the stage for the final act. On cue, Mesum and I began to argue. It started as a minor disagreement and quickly escalated into a volcanic eruption of fabricated resentment. We typed furiously, accusing each other of betrayal and dishonesty, painting a picture of a friendship shattering in real-time.</p>
         
@@ -366,7 +421,7 @@
         <p>The aftermath was a flurry of excuses. Rida, cornered, insisted that her feelings were real, that she <span class="highlight">did</span> indeed like me. But I remembered our first private conversation with perfect clarity—her caution that I shouldn't get too attached. She was now playing the victim, but the script had changed. It was the fastest "breakup" in history, a relationship terminated just days after its fraudulent birth.</p>
       </div>
       
-      <div class="chapter">
+      <div class="chapter" id="chapter5">
         <h2 class="chapter-title">Chapter 5: The Unscripted Sequel</h2>
         <p>I thought that was the end of the circus. But life, it seems, has a more complex plot than I could write.</p>
         
@@ -391,33 +446,94 @@
   </footer>
 
   <script>
-    // Add subtle animation to paragraphs as they come into view
+    // Optimized DOMContentLoaded event
     document.addEventListener('DOMContentLoaded', function() {
+      // Cache DOM elements
       const chapters = document.querySelectorAll('.chapter');
+      const stickers = document.querySelectorAll('.sticker');
+      const bookmarkBtn = document.getElementById('bookmarkBtn');
+      const progressBar = document.querySelector('.progress-bar');
       
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeIn 1s ease-out forwards';
-            observer.unobserve(entry.target);
-          }
+      // Set initial bookmark position
+      let bookmarkPosition = 0;
+      
+      // Check if there's a saved bookmark
+      if (localStorage.getItem('bookmarkPosition')) {
+        bookmarkPosition = parseInt(localStorage.getItem('bookmarkPosition'));
+        window.scrollTo(0, bookmarkPosition);
+      }
+      
+      // Preload animations
+      function preloadAnimations() {
+        chapters.forEach(chapter => {
+          chapter.style.animation = 'none';
+          setTimeout(() => {
+            chapter.style.animation = '';
+          }, 10);
         });
-      }, { threshold: 0.1 });
+      }
       
-      chapters.forEach(chapter => {
-        observer.observe(chapter);
-      });
+      // Initialize animations
+      function initAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        chapters.forEach(chapter => {
+          observer.observe(chapter);
+        });
+      }
       
       // Make stickers interactive
-      const stickers = document.querySelectorAll('.sticker');
-      stickers.forEach(sticker => {
-        sticker.addEventListener('click', () => {
-          sticker.style.transform = `rotate(${Math.random() * 360}deg) scale(1.2)`;
+      function initStickers() {
+        stickers.forEach(sticker => {
+          sticker.addEventListener('click', () => {
+            sticker.style.transform = `rotate(${Math.random() * 360}deg) scale(1.2)`;
+            setTimeout(() => {
+              sticker.style.transform = '';
+            }, 1000);
+          });
+        });
+      }
+      
+      // Bookmark functionality
+      function initBookmark() {
+        bookmarkBtn.addEventListener('click', function() {
+          // Save current scroll position
+          bookmarkPosition = window.pageYOffset;
+          localStorage.setItem('bookmarkPosition', bookmarkPosition);
+          
+          // Visual feedback
+          this.style.background = 'rgba(78, 205, 196, 0.3)';
+          this.style.color = '#4ecdc4';
+          
+          // Reset after a short time
           setTimeout(() => {
-            sticker.style.transform = '';
+            this.style.background = 'rgba(26, 26, 46, 0.9)';
+            this.style.color = '#ffe66d';
           }, 1000);
         });
-      });
+      }
+      
+      // Reading progress bar
+      function initProgressBar() {
+        window.addEventListener('scroll', () => {
+          const totalHeight = document.body.scrollHeight - window.innerHeight;
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = progress + '%';
+        });
+      }
+      
+      // Initialize everything
+      preloadAnimations();
+      initAnimations();
+      initStickers();
+      initBookmark();
+      initProgressBar();
     });
   </script>
 </body>
