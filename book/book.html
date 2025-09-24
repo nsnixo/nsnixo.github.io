@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,6 +240,41 @@
       transition: width 0.3s ease;
     }
 
+    /* Scroll to Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+    }
+    
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .scroll-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(142, 45, 226, 0.6);
+    }
+    
+    .scroll-to-top i {
+      color: white;
+      font-size: 1.5rem;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -286,6 +320,13 @@
       
       .decoration {
         display: none;
+      }
+      
+      .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
       }
     }
 
@@ -343,6 +384,11 @@
   <!-- Progress Bar -->
   <div class="progress-container">
     <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <div class="scroll-to-top" id="scroll-to-top">
+    <i class="fas fa-chevron-up"></i>
   </div>
 
   <!-- Particles Background -->
@@ -735,7 +781,44 @@
       </div>
     </div>
 
-    <!-- Chapters 8-14 would continue here with the same structure -->
+    <!-- Chapter 8 -->
+    <div class="chapter" id="chapter8">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 8</span>
+        The Ghost and the Fairy
+      </h2>
+      <div class="chapter-content">
+        <p>The days after the reckoning were a study in silence. The constant ping of messages from the group chat was gone, replaced by a void. I had excommunicated Mesum and Amna from my digital life with the finality of a guillotine. The screenshots were the proof that justified my actions, but they did nothing to soothe the raw, aching loss. I had not just lost a girlfriend; I had obliterated a childhood friendship. The victory felt pyrrhic, the price too high.</p>
+        
+        <p>My phone, once a source of constant connection, was now a brick of quiet anxiety. I found myself jumping at every notification, only to be met with the bland alert of a news update or a school announcement. The world had become grayscale.</p>
+        
+        <p>And then, a few days later, a message appeared. It was from Rida.</p>
+        
+        <p>My first instinct was a cold fury. What could she possibly want? To gloat? To explain? To pull me back into another act of their endless play? I was ready to block her, to sever this last, toxic tie.</p>
+        
+        <p>But her message was not what I expected.</p>
+        
+        <div class="quote">Rida: I know you probably never want to talk to me again. And I don't blame you. What they did… what I did… was horrible. But talking to you those few days wasn't a joke for me. It started as one, but it stopped. I'm so sorry.</div>
+        
+        <p>The words were different. There were no laughing emojis, no dramatic flair. They were simple, stark, and heavy with what sounded like genuine regret. The anger I was clutching onto softened, just a fraction. She was the only other person who knew the full, humiliating scope of what had happened. In that, we were bound together.</p>
+        
+        <p>Tentatively, cautiously, a new conversation began. This time, there was no audience. No Mesum, no Amna, no "Circus Freaks" group. It was just two people in the smoking aftermath of an explosion, checking to see if the other was still breathing.</p>
+        
+        <p>We talked about the prank. She confessed everything—the planning, the laughter, the moment she realized the charade had become uncomfortably real. She admitted her embarrassment, her shame. She wasn't making excuses; she was stating facts. There was a rawness to it that felt authentic.</p>
+        
+        <p>Slowly, the conversation shifted from the wreckage of the past to the possibility of a future. We started talking about the things we had before: books, music, the small frustrations of our days. But the texture was different. The performative layer was gone. It was messier, more hesitant, but it felt real.</p>
+        
+        <p>She became like a ghost from a life I'd almost had, now returned in a more substantial form. And then, she became the fairy again. The one who made my phone light up with a morning message that actually made me smile. The one whose thoughts seemed to genuinely intertwine with mine.</p>
+        
+        <p>Weeks passed. The connection deepened, accelerating without the anchors of Mesum's warnings or Amna's watchful eye. We ventured into territories we hadn't before—flirtations that were charged with a new, knowing tension. We spoke of private, "dirty thoughts," a language of intimacy that felt dangerous and thrilling. I kept this rekindled alliance a secret from everyone. This was ours alone, a fragile sapling I was determined to protect from any outside storm.</p>
+        
+        <p>I was falling for her. Not for the idea of her, or the voice note, but for the complicated, regretful, and fiercely intelligent girl who was emerging from the ashes of the joke. She trusted me with stories of her past, of boy best friends who had shaped her in ways both good and bad. It didn't scare me; it made her real. She was no longer a fairy-tale construct, but a person.</p>
+        
+        <p>We had survived the circus. What was growing between us felt unscripted, wild, and true. It was a second chance, and I was willing to risk the heartbreak all over again to see where it led.</p>
+      </div>
+    </div>
+
+    <!-- Chapters 9-14 would continue here with the same structure -->
     <!-- For brevity, I'm showing the pattern but you would add all remaining chapters -->
 
   </div>
@@ -753,6 +836,7 @@
     const backBtn = document.getElementById("back-btn");
     const particlesContainer = document.getElementById("particles");
     const progressBar = document.getElementById("progress-bar");
+    const scrollToTopBtn = document.getElementById("scroll-to-top");
     const chapters = document.querySelectorAll('.chapter');
     const tocList = document.getElementById('toc-list');
 
@@ -825,6 +909,23 @@
       progressBar.style.width = `${progress}%`;
     }
 
+    // Show/hide scroll to top button
+    function toggleScrollToTop() {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    }
+
+    // Scroll to top function
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
     // Set up event listeners
     function setupEventListeners() {
       // Return to main website
@@ -833,7 +934,13 @@
       });
       
       // Update progress on scroll
-      window.addEventListener('scroll', updateProgress);
+      window.addEventListener('scroll', () => {
+        updateProgress();
+        toggleScrollToTop();
+      });
+      
+      // Scroll to top button
+      scrollToTopBtn.addEventListener('click', scrollToTop);
     }
     
     // Initialize the page when loaded
