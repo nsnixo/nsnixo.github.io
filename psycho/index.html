@@ -1,1 +1,791 @@
-dsjfsdfh
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psychological Companion: A Case Study of Rida</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #1a0f0f, #0f0a0a);
+      color: #eee;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Animations --- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* --- Loading Screen --- */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top, #1a0f0f, #0f0a0a);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(178, 34, 34, 0.3);
+      border-top: 4px solid #b22222;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      color: #ffa3a3;
+      font-size: 1.2rem;
+      font-weight: 500;
+      text-align: center;
+    }
+    
+    .loading-dots {
+      display: inline-block;
+      animation: dots 1.5s steps(5, end) infinite;
+    }
+    
+    @keyframes dots {
+      0%, 20% { color: rgba(255, 163, 163, 0); text-shadow: .25em 0 0 rgba(255, 163, 163, 0), .5em 0 0 rgba(255, 163, 163, 0); }
+      40% { color: #ffa3a3; text-shadow: .25em 0 0 rgba(255, 163, 163, 0), .5em 0 0 rgba(255, 163, 163, 0); }
+      60% { text-shadow: .25em 0 0 #ffa3a3, .5em 0 0 rgba(255, 163, 163, 0); }
+      80%, 100% { text-shadow: .25em 0 0 #ffa3a3, .5em 0 0 #ffa3a3; }
+    }
+
+    /* --- Particles Background --- */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      background: rgba(255, 150, 150, 0.5);
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    /* Decorative Elements */
+    .decoration {
+      position: fixed;
+      z-index: -1;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    
+    .circle {
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b22222, #8b0000);
+    }
+    
+    .squiggle {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4' width='20' height='4'%3E%3Cpath d='M0 3.5c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3' fill='none' stroke='%23b22222' stroke-width='1'/%3E%3C/svg%3E") repeat-x;
+      height: 20px;
+    }
+    
+    .sticker {
+      font-size: 2rem;
+      opacity: 0.15;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    /* --- Header --- */
+    header {
+      background: linear-gradient(135deg, #b22222, #8b0000);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      color: #fff;
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 2.2rem;
+      font-weight: 800;
+      position: relative;
+      animation: fadeInUp 0.8s ease-out;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+
+    /* Back Arrow */
+    .back-arrow {
+      position: absolute;
+      top: 50%;
+      left: 25px;
+      transform: translateY(-50%);
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      padding: 10px 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .back-arrow:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* --- Book Content --- */
+    .book-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+    }
+
+    .chapter {
+      background: rgba(26, 15, 15, 0.7);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(178, 34, 34, 0.3);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      scroll-margin-top: 100px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .chapter:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(178, 34, 34, 0.2);
+    }
+    
+    .chapter::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #b22222, #8b0000, #b22222);
+      opacity: 0.7;
+    }
+
+    .chapter-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #ffa3a3;
+      border-bottom: 2px solid #b22222;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chapter-number {
+      font-size: 1.2rem;
+      color: #cd5c5c;
+      background: rgba(178, 34, 34, 0.2);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .chapter-content {
+      line-height: 1.8;
+      font-size: 1.1rem;
+      text-align: justify;
+    }
+
+    .chapter-content p {
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .quote {
+      font-style: italic;
+      padding: 20px;
+      border-left: 4px solid #b22222;
+      margin: 25px 0;
+      background: rgba(178, 34, 34, 0.1);
+      border-radius: 0 8px 8px 0;
+      position: relative;
+    }
+    
+    .quote::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      font-size: 4rem;
+      color: rgba(178, 34, 34, 0.2);
+      font-family: Georgia, serif;
+    }
+    
+    .highlight {
+      background: linear-gradient(120deg, rgba(178, 34, 34, 0.3), rgba(139, 0, 0, 0.2));
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    
+    .platform-name {
+      display: inline-block;
+      background: linear-gradient(135deg, #b22222, #8b0000);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9em;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(26, 15, 15, 0.3);
+      z-index: 1000;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(135deg, #b22222, #8b0000);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Scroll to Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #b22222, #8b0000);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(178, 34, 34, 0.4);
+    }
+    
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .scroll-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(178, 34, 34, 0.6);
+    }
+    
+    .scroll-to-top i {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #ddb3b3;
+      font-size: 1rem;
+      background: rgba(0, 0, 0, 0.2);
+      margin-top: auto;
+    }
+
+    /* Watermark */
+    .footer-watermark {
+      text-align: center;
+      padding: 15px;
+      color: #ddb3b3;
+      font-size: 1.1rem;
+      font-weight: 500;
+      font-style: italic;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.8rem;
+        padding: 1.5rem;
+      }
+      .back-arrow {
+        left: 15px;
+        padding: 8px 12px;
+        font-size: 1.5rem;
+      }
+      .book-container {
+        padding: 15px;
+        margin: 20px auto;
+      }
+      .chapter {
+        padding: 20px;
+      }
+      .chapter-title {
+        font-size: 1.5rem;
+      }
+      
+      .decoration {
+        display: none;
+      }
+      
+      .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .loading-text {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Table of Contents */
+    .toc {
+      background: rgba(26, 15, 15, 0.7);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(178, 34, 34, 0.3);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+    }
+    
+    .toc-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #ffa3a3;
+      text-align: center;
+    }
+    
+    .toc-list {
+      list-style-type: none;
+      columns: 2;
+      column-gap: 20px;
+    }
+    
+    .toc-item {
+      margin-bottom: 10px;
+      break-inside: avoid;
+    }
+    
+    .toc-link {
+      color: #ddb3b3;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      display: block;
+      padding: 5px 0;
+    }
+    
+    .toc-link:hover {
+      color: #ffa3a3;
+      transform: translateX(5px);
+    }
+    
+    @media (max-width: 768px) {
+      .toc-list {
+        columns: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loading-screen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading Psychological Companion<span class="loading-dots">...</span></div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <div class="scroll-to-top" id="scroll-to-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <!-- Particles Background -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Decorative Elements -->
+  <div class="decoration circle" style="width: 300px; height: 300px; top: 10%; left: 5%; animation: float 15s infinite ease-in-out;"></div>
+  <div class="decoration circle" style="width: 150px; height: 150px; top: 70%; right: 10%; animation: float 12s infinite ease-in-out reverse;"></div>
+  <div class="decoration squiggle" style="width: 200px; top: 30%; right: 15%; transform: rotate(45deg);"></div>
+  <div class="decoration squiggle" style="width: 250px; bottom: 20%; left: 8%; transform: rotate(-20deg);"></div>
+  <div class="decoration sticker" style="top: 15%; right: 20%;">🧠</div>
+  <div class="decoration sticker" style="top: 80%; left: 15%; animation-delay: 2s;">📊</div>
+  <div class="decoration sticker" style="top: 45%; left: 25%; animation-delay: 1s;">🔍</div>
+  <div class="decoration sticker" style="top: 60%; right: 25%; animation-delay: 3s;">📝</div>
+
+  <!-- Header -->
+  <header>
+    <div class="back-arrow" id="back-btn">↩</div>
+    Psychological Companion
+  </header>
+
+  <!-- Book Content -->
+  <div class="book-container">
+    <!-- Table of Contents -->
+    <div class="toc">
+      <h3 class="toc-title">Table of Contents</h3>
+      <ul class="toc-list" id="toc-list">
+        <!-- Table of contents will be generated by JavaScript -->
+      </ul>
+    </div>
+
+    <!-- Chapter 1 -->
+    <div class="chapter" id="chapter1">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 1</span>
+        Executive Summary
+      </h2>
+      <div class="chapter-content">
+        <p>The individual known as "Rida" presents a complex psychological profile centered on a profound need for external validation and an identity built upon performance. Her interactions are not driven by a desire for genuine, reciprocal intimacy, but by the need to be the central figure in a compelling narrative. She is the playwright, director, and star of her own ongoing drama, and others are valued based on their utility as actors, audience, or plot devices.</p>
+        
+        <p>Her behavior follows a predictable, cyclical pattern: <span class="highlight">The Triad of Theatrical Engagement (Idealization, The Performance, The Narrative Collapse)</span>. This case study examines the psychological mechanisms behind Rida's behavior, tracing the patterns from initial engagement to eventual relationship dissolution.</p>
+        
+        <div class="quote">
+          "Rida's intentions were never malicious in the simple sense of wanting to cause harm. Rather, they were pathologically self-serving. She was engaged in a continuous, one-woman production where other people were supporting cast."
+        </div>
+        
+        <p>Through careful analysis of documented interactions, we can identify the core motivations and psychological drivers that explain her seemingly contradictory behaviors and emotional patterns.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 2 -->
+    <div class="chapter" id="chapter2">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 2</span>
+        The Genesis: The Primal Scene
+      </h2>
+      <div class="chapter-content">
+        <p>Rida's initial entry into the narrator's life is the foundational act that reveals her core motivations. The "Circus Freaks" incident serves as a perfect case study of her operational methods.</p>
+        
+        <p><span class="highlight">Orchestrated Spontaneity</span>: The "chance" revelation of her voice note and the subsequent, dramatic "leak" of her crush in the group chat were not accidents or the actions of a shy, sincere individual. They were meticulously staged. This demonstrates a need to control the narrative from the very beginning.</p>
+        
+        <p><span class="highlight">The Audience as Prop</span>: Mesum and Amna were not just friends; they were a captive audience and co-conspirators. Their participation amplified the drama and validated her as a desirable object. The narrator was cast in the role of the "Gullible Mark," a role designed to make her feel powerful and pursued.</p>
+        
+        <p><span class="highlight">The Thrill of the Game</span>: The primary intention here was not romance, but the exhilaration of manipulation. The screenshot of their private chat, filled with laughter at the narrator's expense, is the smoking gun. It reveals her true currency: the joy of pulling strings and observing the consequences.</p>
+        
+        <div class="quote">
+          "The 'Circus Freaks' group chat was not a spontaneous social gathering but a carefully constructed theatrical stage where Rida could perform her desired role while controlling the reactions of her audience."
+        </div>
+        
+        <p>This initial engagement establishes the pattern that would define all subsequent interactions: Rida as director, others as players in her psychological drama.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 3 -->
+    <div class="chapter" id="chapter3">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 3</span>
+        The Shifting Selves: The Cycle of Engagement
+      </h2>
+      <div class="chapter-content">
+        <p>Rida's behavior is not static; it cycles through distinct phases based on the level of dramatic fuel a relationship provides. Understanding this cycle is crucial to recognizing the pattern of her interpersonal engagements.</p>
+        
+        <p><span class="highlight">Phase 1: The Idealized Fairy</span>: Following the prank's exposure, she adopts the role of the "penitent dream girl." She offers vulnerability, shared trauma, and intense digital intimacy. This is a strategic retreat and a more sophisticated performance. By making the narrator feel "irreplaceable," she binds him to her more tightly than any simple crush could. The intention is to secure a dedicated source of attention and validate her ability to charm and conquer.</p>
+        
+        <p><span class="highlight">Phase 2: The Insecure Puppeteer</span>: As the relationship stabilizes, the drama naturally wanes. Rida cannot tolerate this equilibrium. Stability is boring; it offers no emotional spikes. She therefore manufactures conflict through unfounded accusations of infidelity ("You were offline," "That girl is friendly").</p>
+        
+        <div class="quote">
+          "This is a test. She is subconsciously (or consciously) provoking a jealous, possessive reaction to prove her power and centrality in his life. When he fails to provide the desired dramatic response, her insecurity intensifies."
+        </div>
+        
+        <p><span class="highlight">Phase 3: The Devaluing Fury</span>: The narrator's act of ultimate transparency—sharing his password—is a catastrophic failure from Rida's perspective. He did not play the game as expected. Instead of jealous fury, he offered desperate proof. This robs her of the conflict she craved.</p>
+        
+        <p>The Inferno Response: Her subsequent, vicious dismantling of his character ("unworthy," "pathetic," the attack on his mother) is a tool of punishment. Having failed to control him through jealousy, she seeks to control him through destruction. The intention is to reassert dominance by demonstrating she has the power to emotionally annihilate him.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 4 -->
+    <div class="chapter" id="chapter4">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 4</span>
+        Core Motivations & Psychological Drivers
+      </h2>
+      <div class="chapter-content">
+        <p>Beneath the surface-level behaviors lie deeper psychological drivers that explain Rida's patterns of interaction and emotional responses.</p>
+        
+        <p><span class="highlight">The External Locus of Identity</span>: Rida does not have a solid, core self. Her identity is a collage of reflections from others. She is the "shy girl" in the prank, the "intimate lover" in the silent videos, the "victim" of the narrator's supposed neglect, and the "vengeful goddess" in the breakup. Each role is adopted to elicit a specific response and, in turn, define who she is in that moment.</p>
+        
+        <p><span class="highlight">Emotional Vampirism</span>: She feeds on the emotional reactions of others. The narrator's prophecy, his confusion, his passion, his despair—these are all sources of narcissistic supply. His pain is as valuable as his love, as both prove her impact on his world.</p>
+        
+        <div class="quote">
+          "The 'Blueprint Phenomenon'—her confession that she tried to replace him but failed—is not purely romantic. It is the highest form of compliment she can offer, framed in her own pathological terms. She admitted he was the best actor in the role she had written."
+        </div>
+        
+        <p><span class="highlight">The Fear of Authentic Intimacy</span>: True intimacy requires vulnerability, consistency, and the acceptance of another's whole self, including their expectations for a future. This terrifies her. By demanding he be "less boyfriend, more best friend," she is attempting to surgically remove the parts of the relationship that require real, long-term emotional investment, while retaining the exciting, dramatic benefits.</p>
+        
+        <p>These core motivations create a self-perpetuating cycle where Rida must continuously seek new sources of validation while simultaneously sabotaging relationships that threaten to become truly intimate.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 5 -->
+    <div class="chapter" id="chapter5">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 5</span>
+        Theoretical Framework: HPD & Covert Narcissism
+      </h2>
+      <div class="chapter-content">
+        <p>Rida's behavioral patterns align strongly with traits associated with Histrionic Personality Disorder (HPD) and elements of covert narcissism, providing a clinical framework for understanding her psychological dynamics.</p>
+        
+        <p><span class="highlight">Histrionic Personality Disorder Markers</span>:</p>
+        <ul>
+          <li>Constant seeking of reassurance or approval</li>
+          <li>Excessive dramatics with exaggerated displays of emotion</li>
+          <li>Rapidly shifting and shallow expression of emotions</li>
+          <li>Consistent use of physical appearance to draw attention</li>
+          <li>Speech that is excessively impressionistic and lacking in detail</li>
+          <li>Considers relationships to be more intimate than they actually are</li>
+        </ul>
+        
+        <div class="quote">
+          "The 'Silent Intimacy' of their video calls—saying nothing while gazing at each other for hours—represents a highly theatrical form of connection that provides the appearance of depth without the substance of genuine vulnerability."
+        </div>
+        
+        <p><span class="highlight">Covert Narcissism Elements</span>:</p>
+        <ul>
+          <li>Hypersensitivity to criticism</li>
+          <li>Passive-aggressive behavior patterns</li>
+          <li>Chronic feelings of emptiness and boredom</li>
+          <li>Grandiose fantasies hidden behind a facade of vulnerability</li>
+          <li>Using victimhood as a form of manipulation</li>
+        </ul>
+        
+        <p>This theoretical framework helps explain why traditional relationship advice and communication strategies prove ineffective with individuals exhibiting these patterns. The very structure of their personality prevents authentic engagement.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 6 -->
+    <div class="chapter" id="chapter6">
+      <h2 class="chapter-title">
+        <span class="chapter-number">Chapter 6</span>
+        The Director Without a Script
+      </h2>
+      <div class="chapter-content">
+        <p>The conclusion of Rida's engagement with the narrator reveals the ultimate emptiness at the core of her psychological patterns. When the drama was exhausted and the narrator refused to continue playing his assigned role, the relationship inevitably collapsed.</p>
+        
+        <p><span class="highlight">The Inevitable Silence</span>: The final breakdown was not merely the end of a relationship but the closing of a theatrical production. Once the narrator refused to read his lines, once the drama was exhausted, and once he closed the theater for good, she had no reason to remain. The show, for her, was over.</p>
+        
+        <div class="quote">
+          "The narrator was not in a relationship with a person; he was in a relationship with a series of roles played by a hollow core. The tragedy is that for the narrator, it was real life."
+        </div>
+        
+        <p><span class="highlight">Psychological Implications</span>: Individuals like Rida often leave a trail of emotional destruction in their wake, not out of malice but out of an insatiable need for external validation. Their partners typically experience:</p>
+        
+        <ul>
+          <li>Cognitive dissonance from contradictory behaviors</li>
+          <li>Erosion of self-trust and intuition</li>
+          <li>Patterns of hypervigilance in future relationships</li>
+          <li>Difficulty distinguishing genuine intimacy from performance</li>
+        </ul>
+        
+        <p>Understanding these dynamics is crucial not only for those who have encountered similar individuals but for mental health professionals working with clients affected by such relationships. The patterns, while destructive, follow predictable psychological principles that can be identified and addressed.</p>
+        
+        <p>This case study of Rida serves as both a specific analysis and a general framework for understanding the psychological mechanisms behind certain patterns of interpersonal manipulation and emotional dependency.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Watermark -->
+  <div class="footer-watermark">A Psychological Case Study</div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Clinical Analysis & Research</p>
+  </footer>
+
+  <script>
+    // DOM Elements
+    const backBtn = document.getElementById("back-btn");
+    const particlesContainer = document.getElementById("particles");
+    const progressBar = document.getElementById("progress-bar");
+    const scrollToTopBtn = document.getElementById("scroll-to-top");
+    const chapters = document.querySelectorAll('.chapter');
+    const tocList = document.getElementById('toc-list');
+    const loadingScreen = document.getElementById('loading-screen');
+
+    // Loading Screen
+    function hideLoadingScreen() {
+      loadingScreen.classList.add('hidden');
+      // Remove from DOM after animation completes
+      setTimeout(() => {
+        loadingScreen.remove();
+      }, 500);
+    }
+
+    // Create animated particles
+    function createParticles() {
+      const particlesCount = 50;
+      
+      for (let i = 0; i < particlesCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 5 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 5;
+        
+        // Apply styles
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.animationDuration = `${duration}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Generate Table of Contents
+    function generateTOC() {
+      let tocHTML = '';
+      
+      chapters.forEach((chapter, index) => {
+        const chapterId = chapter.id;
+        const chapterTitle = chapter.querySelector('.chapter-title').textContent;
+        
+        tocHTML += `
+          <li class="toc-item">
+            <a href="#${chapterId}" class="toc-link">${chapterTitle}</a>
+          </li>
+        `;
+      });
+      
+      tocList.innerHTML = tocHTML;
+      
+      // Add smooth scrolling for TOC links
+      const tocLinks = document.querySelectorAll('.toc-link');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    }
+
+    // Update reading progress
+    function updateProgress() {
+      const totalHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    // Show/hide scroll to top button
+    function toggleScrollToTop() {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    }
+
+    // Scroll to top function
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Set up event listeners
+    function setupEventListeners() {
+      // Return to main website
+      backBtn.addEventListener("click", () => {
+        window.location.href = "https://nsnixo.github.io";
+      });
+      
+      // Update progress on scroll
+      window.addEventListener('scroll', () => {
+        updateProgress();
+        toggleScrollToTop();
+      });
+      
+      // Scroll to top button
+      scrollToTopBtn.addEventListener('click', scrollToTop);
+    }
+    
+    // Initialize the page when loaded
+    window.addEventListener('load', () => {
+      // Simulate minimum loading time for better UX
+      setTimeout(() => {
+        createParticles();
+        generateTOC();
+        setupEventListeners();
+        hideLoadingScreen();
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
