@@ -180,7 +180,7 @@
       max-width: 300px;
       margin: 0 auto;
     }
-    #enter-btn, #book-btn {
+    #enter-btn, #book-btn, #psych-btn {
       padding: 15px 40px;
       font-size: 1.1rem;
       border: none;
@@ -209,6 +209,15 @@
       transform: scale(1.1);
       background: linear-gradient(135deg, #5e9eea, #275fcd);
       box-shadow: 0 8px 20px rgba(45, 126, 226, 0.6);
+    }
+    #psych-btn {
+      background: linear-gradient(135deg, #a83232, #6b1c1c);
+      box-shadow: 0 5px 15px rgba(168, 50, 50, 0.4);
+    }
+    #psych-btn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, #c44d4d, #8a2a2a);
+      box-shadow: 0 8px 20px rgba(168, 50, 50, 0.6);
     }
 
     /* --- Album Header --- */
@@ -702,6 +711,7 @@
       <div class="cover-buttons">
         <button id="enter-btn">Enter Album</button>
         <button id="book-btn">Book -novel</button>
+        <button id="psych-btn">Psychological View</button>
       </div>
     </div>
   </div>
@@ -779,6 +789,7 @@
     const gallery = document.querySelector(".gallery");
     const enterBtn = document.getElementById("enter-btn");
     const bookBtn = document.getElementById("book-btn");
+    const psychBtn = document.getElementById("psych-btn");
     const backBtn = document.getElementById("back-btn");
     const modal = document.getElementById("album-modal");
     const modalClose = document.getElementById("modal-close");
@@ -862,6 +873,11 @@
       // Open book page
       bookBtn.addEventListener("click", () => {
         window.location.href = "/book";
+      });
+      
+      // Psychological view button
+      psychBtn.addEventListener("click", () => {
+        showToast("Psychological View feature coming soon!");
       });
       
       // Return to cover
