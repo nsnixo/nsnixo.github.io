@@ -105,13 +105,16 @@
             margin: 0 auto;
         }
 
-        /* NEW & IMPROVED - Secret Button - Different Look! */
-        .secret-button-section {
+        /* Button Section - Two buttons side by side */
+        .buttons-container {
             display: flex;
             justify-content: center;
+            gap: 30px;
             margin: 40px 0;
+            flex-wrap: wrap;
         }
 
+        /* Secret Button - Dark themed */
         .secret-btn {
             background: #1a1a2e;
             color: white;
@@ -151,61 +154,62 @@
             color: #ffeb3b;
         }
 
-        .secret-btn::before {
-            content: "⚡";
-            position: absolute;
-            left: -30px;
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .secret-btn:hover::before {
-            left: 15px;
-            opacity: 1;
-        }
-
-        .secret-btn:hover::after {
-            content: "⚡";
-            position: absolute;
-            right: 15px;
-            opacity: 1;
-        }
-
-        .secret-btn::after {
-            content: "⚡";
-            position: absolute;
-            right: -30px;
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        /* Alternative style - uncomment below and comment above for a different look */
-        /*
-        .secret-btn {
-            background: linear-gradient(145deg, #2b2b4f, #1a1a35);
-            color: #fff;
+        /* ADULT HIDDEN BUTTON - Super secret, barely visible */
+        .adult-hidden-btn {
+            background: rgba(20, 20, 30, 0.3);
+            color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
-            padding: 18px 45px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            border-radius: 30px 10px 30px 10px;
-            border: 3px dashed #ffaa00;
-            box-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
+            padding: 12px 35px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            border-radius: 30px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
-            gap: 15px;
-            transition: 0.4s;
-            backdrop-filter: blur(5px);
+            gap: 8px;
+            transition: 0.5s ease;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            opacity: 0.6;
         }
-        
-        .secret-btn:hover {
-            border-radius: 10px 30px 10px 30px;
-            border: 3px solid #ffaa00;
-            background: linear-gradient(145deg, #1a1a35, #2b2b4f);
+
+        .adult-hidden-btn i {
+            font-size: 0.9rem;
+            color: rgba(255, 75, 75, 0.4);
+            transition: 0.3s;
+        }
+
+        .adult-hidden-btn:hover {
+            background: rgba(40, 20, 30, 0.9);
+            color: rgba(255, 200, 200, 0.9);
+            border-color: rgba(255, 100, 100, 0.5);
+            opacity: 1;
             transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255, 170, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 50, 50, 0.3);
         }
-        */
+
+        .adult-hidden-btn:hover i {
+            color: #ff6b6b;
+            transform: scale(1.2);
+        }
+
+        /* Secret hint - tiny text */
+        .secret-hint {
+            text-align: center;
+            margin-top: 10px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .secret-hint i {
+            margin: 0 5px;
+            color: rgba(255,255,255,0.2);
+        }
 
         /* Section Titles */
         .section-title {
@@ -401,6 +405,11 @@
                 padding: 14px 30px;
                 font-size: 1rem;
             }
+            
+            .adult-hidden-btn {
+                padding: 10px 25px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -428,13 +437,26 @@
             <p>I'm currently learning Python and building small projects. This is where I share my code, practice tasks, and track my progress. I'm still a beginner, but I'm learning something new every day!</p>
         </div>
 
-        <!-- SECRET BUTTON - Redirects to /secret with NEW LOOK -->
-        <div class="secret-button-section">
+        <!-- BUTTONS CONTAINER - Two buttons side by side -->
+        <div class="buttons-container">
+            <!-- SECRET BUTTON - Redirects to /secret -->
             <a href="/secret" class="secret-btn">
                 <i class="fas fa-lock"></i>
                 Secret Page
                 <i class="fas fa-key"></i>
             </a>
+
+            <!-- ADULT HIDDEN BUTTON - Barely visible, redirects to /hidden -->
+            <a href="/hidden" class="adult-hidden-btn">
+                <i class="fas fa-ban"></i>
+                18+ ONLY
+                <i class="fas fa-mask"></i>
+            </a>
+        </div>
+        
+        <!-- Tiny secret hint - only visible if you look closely -->
+        <div class="secret-hint">
+            <i class="fas fa-arrow-up"></i> FIND THE HIDDEN BUTTON <i class="fas fa-arrow-up"></i>
         </div>
     </div>
 
