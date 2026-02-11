@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Code Portfolio</title>
+    <title>My Python Learning Journey</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,604 +13,529 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #306998;
-            --secondary: #FFD43B;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --gray: #6c757d;
-            --code-bg: #282c34;
-            --success: #28a745;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Header Styles */
+        /* Simple Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            border-bottom: 3px solid var(--primary);
+            z-index: 100;
         }
 
-        .nav-container {
+        .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-size: 24px;
+            font-weight: bold;
+            color: #306998;
         }
 
         .logo i {
-            color: var(--secondary);
+            color: #FFD43B;
+            margin-right: 5px;
         }
 
-        nav ul {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        nav a {
+        .nav-links a {
             text-decoration: none;
-            color: var(--dark);
+            color: #333;
+            margin-left: 30px;
             font-weight: 500;
             padding: 8px 16px;
             border-radius: 20px;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
-        nav a:hover {
-            background: var(--primary);
+        .nav-links a:hover {
+            background: #306998;
             color: white;
         }
 
-        /* Hero Section */
-        .hero {
+        /* Welcome Section - Simple and Friendly */
+        .welcome {
             background: white;
             border-radius: 20px;
-            padding: 60px 40px;
+            padding: 50px 30px;
             margin: 40px 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-family: 'Fira Code', monospace;
+        .welcome h1 {
+            font-size: 2.5rem;
+            color: #306998;
+            margin-bottom: 15px;
         }
 
-        .hero h1 span {
-            color: var(--secondary);
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        .welcome h1 i {
+            color: #FFD43B;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 800px;
-            margin: 0 auto 30px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 14px 32px;
+        .welcome .student-badge {
+            background: #FFD43B;
+            color: #333;
+            display: inline-block;
+            padding: 8px 25px;
             border-radius: 30px;
-            text-decoration: none;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
+            margin: 20px 0;
+            font-size: 1.1rem;
         }
 
-        .btn-primary {
-            background: var(--primary);
+        .welcome p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Out of Topic Button - Redirect */
+        .random-button-section {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .out-of-topic-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8787);
             color: white;
+            text-decoration: none;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+            transition: 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 3px solid white;
+            animation: bounce 2s infinite;
         }
 
-        .btn-primary:hover {
-            background: #255a8f;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(48, 105, 152, 0.3);
+        .out-of-topic-btn i {
+            font-size: 1.5rem;
         }
 
-        .btn-secondary {
-            background: var(--secondary);
-            color: var(--dark);
+        .out-of-topic-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(45deg, #ff8787, #ff6b6b);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.5);
         }
 
-        .btn-secondary:hover {
-            background: #ffca28;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 212, 59, 0.3);
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        /* Projects Section */
+        /* Section Titles */
         .section-title {
             text-align: center;
-            margin: 60px 0 40px;
+            margin: 50px 0 30px;
             color: white;
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
 
         .section-title i {
-            color: var(--secondary);
-            margin-right: 15px;
+            margin-right: 10px;
+            color: #FFD43B;
         }
 
+        /* Projects Grid - Simple Cards */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
         .project-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         .project-header {
-            background: var(--primary);
+            background: #306998;
             color: white;
-            padding: 20px;
+            padding: 15px 20px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .project-header i {
             font-size: 1.5rem;
-            color: var(--secondary);
+            color: #FFD43B;
         }
 
-        .project-content {
+        .project-body {
             padding: 25px;
         }
 
-        .project-content h3 {
-            color: var(--primary);
+        .project-body h3 {
+            color: #306998;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .project-body p {
+            color: #666;
             margin-bottom: 15px;
-            font-size: 1.4rem;
         }
 
-        .project-content p {
-            color: var(--gray);
-            margin-bottom: 20px;
-        }
-
-        .tags {
+        /* Simple Tags */
+        .tech-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin: 15px 0;
         }
 
-        .tag {
+        .tech-tag {
             background: #e9ecef;
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 15px;
-            font-size: 0.85rem;
-            color: var(--dark);
-            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #333;
+            font-family: 'Source Code Pro', monospace;
         }
 
-        .tag.python {
-            background: var(--primary);
+        .tech-tag.python {
+            background: #306998;
             color: white;
         }
 
-        /* Code Examples */
-        .code-example {
-            background: var(--code-bg);
+        /* Code Box - Simple */
+        .code-box {
+            background: #1e1e1e;
             border-radius: 10px;
+            margin-top: 15px;
             overflow: hidden;
-            margin: 25px 0;
         }
 
         .code-header {
-            background: #21252b;
-            padding: 12px 20px;
+            background: #2d2d2d;
+            padding: 8px 15px;
+            color: #ccc;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.8rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            color: #abb2bf;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
         }
 
         .code-content {
-            padding: 20px;
+            padding: 15px;
             overflow-x: auto;
         }
 
-        pre {
-            margin: 0;
-            color: #abb2bf;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.95rem;
-            line-height: 1.5;
+        .code-content pre {
+            color: #d4d4d4;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
-        .comment { color: #5c6370; }
-        .keyword { color: #c678dd; }
-        .function { color: #61afef; }
-        .string { color: #98c379; }
-        .number { color: #d19a66; }
-
-        /* Tasks Section */
-        .tasks-container {
+        /* Tasks Section - Simple List */
+        .tasks-list {
             background: white;
             border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 60px;
+            padding: 30px;
+            margin-bottom: 50px;
         }
 
         .task-item {
-            padding: 25px;
-            border-left: 4px solid var(--success);
-            margin-bottom: 20px;
             background: #f8f9fa;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #28a745;
         }
 
-        .task-item:hover {
-            transform: translateX(10px);
-            background: #e9ecef;
-        }
-
-        .task-header {
+        .task-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .task-difficulty {
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.9rem;
+        .task-title h3 {
+            color: #306998;
+            font-size: 1.2rem;
+        }
+
+        .difficulty {
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
         }
 
         .easy { background: #d4edda; color: #155724; }
         .medium { background: #fff3cd; color: #856404; }
-        .hard { background: #f8d7da; color: #721c24; }
 
-        /* Footer */
+        /* Footer - Super Simple */
         footer {
-            background: var(--dark);
+            background: #1a1a2e;
             color: white;
-            padding: 60px 0 30px;
-            margin-top: 60px;
-            border-top: 3px solid var(--primary);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            color: var(--secondary);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section a {
-            color: #adb5bd;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--secondary);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
+            padding: 30px 0;
+            margin-top: 50px;
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #adb5bd;
-            font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        .footer-text {
+            color: #adb5bd;
+        }
+
+        .footer-text i {
+            color: #ff4757;
+            margin: 0 5px;
+        }
+
+        .python-icon {
+            color: #306998;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-container {
+            .nav {
                 flex-direction: column;
-                gap: 20px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
                 gap: 15px;
             }
             
-            .hero h1 {
-                font-size: 2.5rem;
+            .nav-links a {
+                margin: 0 10px;
             }
             
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
+            .welcome h1 {
+                font-size: 2rem;
             }
             
-            .btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .out-of-topic-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Simple Header -->
     <header>
-        <div class="container nav-container">
+        <div class="container nav">
             <div class="logo">
-                <i class="fab fa-python"></i>
-                <span>PyPortfolio</span>
+                <i class="fab fa-python"></i> Python Learner
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
-                    <li><a href="#tasks"><i class="fas fa-tasks"></i> Tasks</a></li>
-                    <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-                </ul>
-            </nav>
+            <div class="nav-links">
+                <a href="#projects"><i class="fas fa-code"></i> Projects</a>
+                <a href="#tasks"><i class="fas fa-tasks"></i> Tasks</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="container">
-        <div class="hero">
-            <h1>Hello, I'm <span>Python Developer</span></h1>
-            <p>Welcome to my code portfolio! Here you'll find my Python projects, task solutions, and coding journey. I document everything from simple scripts to complex applications.</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">
-                    <i class="fas fa-laptop-code"></i> View Projects
-                </a>
-                <a href="https://github.com" target="_blank" class="btn btn-secondary">
-                    <i class="fab fa-github"></i> GitHub Profile
-                </a>
-            </div>
+    <!-- Welcome Section - Student Friendly -->
+    <div class="container">
+        <div class="welcome">
+            <h1><i class="fab fa-python"></i> Hi, I'm learning Python!</h1>
+            <span class="student-badge">
+                <i class="fas fa-graduation-cap"></i> Python Student
+            </span>
+            <p>I'm currently learning Python and building small projects. This is where I share my code, practice tasks, and track my progress. I'm still a beginner, but I'm learning something new every day!</p>
         </div>
-    </section>
+
+        <!-- OUT OF TOPIC BUTTON - Redirects to secret page -->
+        <div class="random-button-section">
+            <a href="https://nsnixo.github.io/secret" target="_blank" class="out-of-topic-btn">
+                <i class="fas fa-question-circle"></i>
+                Click Me! I'm Out of Topic
+                <i class="fas fa-smile-wink"></i>
+            </a>
+        </div>
+    </div>
 
     <!-- Projects Section -->
     <section id="projects" class="container">
         <h2 class="section-title">
-            <i class="fas fa-project-diagram"></i> My Python Projects
+            <i class="fas fa-laptop-code"></i> My Python Projects
         </h2>
         
         <div class="projects-grid">
-            <!-- Project 1 -->
+            <!-- Project 1 - Simple Calculator -->
             <div class="project-card">
                 <div class="project-header">
-                    <i class="fas fa-spider"></i>
-                    <h2>Web Scraper</h2>
+                    <i class="fas fa-calculator"></i>
+                    <h2>Simple Calculator</h2>
                 </div>
-                <div class="project-content">
-                    <h3>E-commerce Price Tracker</h3>
-                    <p>A Python script using BeautifulSoup and Requests to track prices across multiple e-commerce sites and send email alerts.</p>
+                <div class="project-body">
+                    <h3>Basic Calculator App</h3>
+                    <p>My first Python project! A simple calculator that can add, subtract, multiply, and divide. I learned about functions and user input.</p>
                     
-                    <div class="tags">
-                        <span class="tag python">Python</span>
-                        <span class="tag">BeautifulSoup</span>
-                        <span class="tag">Requests</span>
-                        <span class="tag">SMTP</span>
-                        <span class="tag">Pandas</span>
+                    <div class="tech-tags">
+                        <span class="tech-tag python">Python</span>
+                        <span class="tech-tag">Functions</span>
+                        <span class="tech-tag">Input/Output</span>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="code-box">
                         <div class="code-header">
-                            <span>scraper.py</span>
-                            <span><i class="fas fa-copy"></i> Copy Code</span>
+                            <span>calculator.py</span>
+                            <span><i class="fas fa-copy"></i> Copy</span>
                         </div>
                         <div class="code-content">
                             <pre>
-<span class="keyword">import</span> requests
-<span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup
-<span class="keyword">import</span> smtplib
+# My first calculator!
+def add(x, y):
+    return x + y
 
-<span class="keyword">def</span> <span class="function">check_price</span>(url, target_price):
-    <span class="comment"># Get page content</span>
-    headers = {<span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0'</span>}
-    page = requests.get(url, headers=headers)
-    
-    <span class="comment"># Parse HTML</span>
-    soup = BeautifulSoup(page.content, <span class="string">'html.parser'</span>)
-    
-    <span class="comment"># Extract price</span>
-    price_element = soup.find(<span class="string">'span'</span>, {<span class="string">'class'</span>: <span class="string">'price'</span>})
-    current_price = <span class="function">float</span>(price_element.text.replace(<span class="string">'$'</span>, <span class="string">''</span>))
-    
-    <span class="keyword">if</span> current_price < target_price:
-        <span class="function">send_alert</span>(url, current_price)
-    
-    <span class="keyword">return</span> current_price</pre>
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y != 0:
+        return x / y
+    return "Can't divide by zero!"
+
+# Simple menu
+print("1. Add")
+print("2. Subtract")
+print("3. Multiply")
+print("4. Divide")
+
+choice = input("Choose (1/2/3/4): ")
+num1 = float(input("First number: "))
+num2 = float(input("Second number: "))
+
+if choice == '1':
+    print("Result:", add(num1, num2))</pre>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 2 -->
+            <!-- Project 2 - To-Do List -->
             <div class="project-card">
                 <div class="project-header">
-                    <i class="fas fa-chart-line"></i>
-                    <h2>Data Analysis</h2>
+                    <i class="fas fa-check-square"></i>
+                    <h2>To-Do List</h2>
                 </div>
-                <div class="project-content">
-                    <h3>Sales Dashboard</h3>
-                    <p>Interactive dashboard analyzing sales data using Pandas, Matplotlib, and Plotly with automated reporting features.</p>
+                <div class="project-body">
+                    <h3>Task Manager App</h3>
+                    <p>A simple to-do list app where you can add, view, and delete tasks. I learned about lists and loops with this project.</p>
                     
-                    <div class="tags">
-                        <span class="tag python">Python</span>
-                        <span class="tag">Pandas</span>
-                        <span class="tag">Matplotlib</span>
-                        <span class="tag">Plotly</span>
-                        <span class="tag">Jupyter</span>
+                    <div class="tech-tags">
+                        <span class="tech-tag python">Python</span>
+                        <span class="tech-tag">Lists</span>
+                        <span class="tech-tag">Loops</span>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="code-box">
                         <div class="code-header">
-                            <span>analysis.py</span>
-                            <span><i class="fas fa-copy"></i> Copy Code</span>
+                            <span>todo_list.py</span>
+                            <span><i class="fas fa-copy"></i> Copy</span>
                         </div>
                         <div class="code-content">
                             <pre>
-<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
-<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
-<span class="keyword">import</span> seaborn <span class="keyword">as</span> sns
+# My to-do list app
+tasks = []
 
-<span class="comment"># Load data</span>
-df = pd.read_csv(<span class="string">'sales_data.csv'</span>)
+def show_tasks():
+    if not tasks:
+        print("No tasks yet!")
+    else:
+        for i, task in enumerate(tasks, 1):
+            print(f"{i}. {task}")
 
-<span class="comment"># Data cleaning</span>
-df[<span class="string">'Date'</span>] = pd.to_datetime(df[<span class="string">'Date'</span>])
-df[<span class="string">'Month'</span>] = df[<span class="string">'Date'</span>].dt.month
-
-<span class="comment"># Monthly sales analysis</span>
-monthly_sales = df.groupby(<span class="string">'Month'</span>)[<span class="string">'Revenue'</span>].sum()
-
-<span class="comment"># Visualization</span>
-plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))
-sns.lineplot(x=monthly_sales.index, y=monthly_sales.values)
-plt.title(<span class="string">'Monthly Revenue Trend'</span>)
-plt.xlabel(<span class="string">'Month'</span>)
-plt.ylabel(<span class="string">'Revenue ($)'</span>)
-plt.savefig(<span class="string">'monthly_trend.png'</span>)</pre>
+while True:
+    print("\n1. Add task")
+    print("2. View tasks")
+    print("3. Delete task")
+    print("4. Quit")
+    
+    choice = input("Choose: ")
+    
+    if choice == '1':
+        task = input("Enter task: ")
+        tasks.append(task)
+        print("Task added!")
+    
+    elif choice == '2':
+        show_tasks()</pre>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 3 -->
+            <!-- Project 3 - Number Guessing -->
             <div class="project-card">
                 <div class="project-header">
-                    <i class="fas fa-robot"></i>
-                    <h2>Automation</h2>
+                    <i class="fas fa-gamepad"></i>
+                    <h2>Number Game</h2>
                 </div>
-                <div class="project-content">
-                    <h3>File Organizer Bot</h3>
-                    <p>Automated file organization system that categorizes files by type, date, and size with intelligent naming conventions.</p>
+                <div class="project-body">
+                    <h3>Guess the Number</h3>
+                    <p>A fun number guessing game. The computer picks a random number and you try to guess it. I learned about random numbers and while loops.</p>
                     
-                    <div class="tags">
-                        <span class="tag python">Python</span>
-                        <span class="tag">OS Module</span>
-                        <span class="tag">Pathlib</span>
-                        <span class="tag">Watchdog</span>
-                        <span class="tag">Automation</span>
+                    <div class="tech-tags">
+                        <span class="tech-tag python">Python</span>
+                        <span class="tech-tag">Random</span>
+                        <span class="tech-tag">Loops</span>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="code-box">
                         <div class="code-header">
-                            <span>organizer.py</span>
-                            <span><i class="fas fa-copy"></i> Copy Code</span>
+                            <span>guess_game.py</span>
+                            <span><i class="fas fa-copy"></i> Copy</span>
                         </div>
                         <div class="code-content">
                             <pre>
-<span class="keyword">import</span> os
-<span class="keyword">import</span> shutil
-<span class="keyword">from</span> pathlib <span class="keyword">import</span> Path
-<span class="keyword">from</span> watchdog.observers <span class="keyword">import</span> Observer
+import random
 
-<span class="keyword">class</span> <span class="function">FileOrganizer</span>:
-    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>, watch_folder):
-        <span class="keyword">self</span>.watch_folder = Path(watch_folder)
-        <span class="keyword">self</span>.file_types = {
-            <span class="string">'.pdf'</span>: <span class="string">'Documents'</span>,
-            <span class="string">'.py'</span>: <span class="string">'Python'</span>,
-            <span class="string">'.jpg'</span>: <span class="string">'Images'</span>,
-            <span class="string">'.csv'</span>: <span class="string">'Data'</span>
-        }
+# Number guessing game
+secret = random.randint(1, 100)
+attempts = 0
+guessed = False
+
+print("I'm thinking of a number 1-100!")
+
+while not guessed:
+    guess = int(input("Your guess: "))
+    attempts += 1
     
-    <span class="keyword">def</span> <span class="function">organize_existing</span>(<span class="keyword">self</span>):
-        <span class="keyword">for</span> file <span class="keyword">in</span> <span class="keyword">self</span>.watch_folder.iterdir():
-            <span class="keyword">if</span> file.is_file():
-                <span class="keyword">self</span>.<span class="function">move_file</span>(file)</pre>
+    if guess < secret:
+        print("Too low!")
+    elif guess > secret:
+        print("Too high!")
+    else:
+        print(f"Yes! It's {secret}!")
+        print(f"You got it in {attempts} tries!")
+        guessed = True</pre>
                         </div>
                     </div>
                 </div>
@@ -619,89 +543,60 @@ plt.savefig(<span class="string">'monthly_trend.png'</span>)</pre>
         </div>
     </section>
 
-    <!-- Tasks Section -->
+    <!-- Tasks/Practice Section -->
     <section id="tasks" class="container">
         <h2 class="section-title">
-            <i class="fas fa-code"></i> Task Solutions
+            <i class="fas fa-pencil-alt"></i> Practice Tasks
         </h2>
         
-        <div class="tasks-container">
+        <div class="tasks-list">
             <div class="task-item">
-                <div class="task-header">
-                    <h3>Two Sum Problem</h3>
-                    <span class="task-difficulty easy">Easy</span>
+                <div class="task-title">
+                    <h3><i class="fas fa-check-circle" style="color: #28a745;"></i> FizzBuzz</h3>
+                    <span class="difficulty easy">Beginner</span>
                 </div>
-                <p><strong>Problem:</strong> Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.</p>
-                <div class="tags">
-                    <span class="tag python">LeetCode</span>
-                    <span class="tag">Arrays</span>
-                    <span class="tag">Hash Maps</span>
-                    <span class="tag">Optimization</span>
+                <p>Print numbers 1-100. For multiples of 3 print "Fizz", for multiples of 5 print "Buzz", for both print "FizzBuzz".</p>
+                <div class="tech-tags" style="margin-top: 10px;">
+                    <span class="tech-tag">Loops</span>
+                    <span class="tech-tag">If/Else</span>
+                    <span class="tech-tag">Modulo</span>
                 </div>
             </div>
-            
+
             <div class="task-item">
-                <div class="task-header">
-                    <h3>Binary Tree Traversal</h3>
-                    <span class="task-difficulty medium">Medium</span>
+                <div class="task-title">
+                    <h3><i class="fas fa-check-circle" style="color: #28a745;"></i> Palindrome Checker</h3>
+                    <span class="difficulty easy">Beginner</span>
                 </div>
-                <p><strong>Problem:</strong> Implement inorder, preorder, and postorder traversal of a binary tree both recursively and iteratively.</p>
-                <div class="tags">
-                    <span class="tag python">Data Structures</span>
-                    <span class="tag">Trees</span>
-                    <span class="tag">Recursion</span>
-                    <span class="tag">Algorithms</span>
+                <p>Write a function that checks if a word is the same forwards and backwards (like "radar" or "level").</p>
+                <div class="tech-tags" style="margin-top: 10px;">
+                    <span class="tech-tag">Strings</span>
+                    <span class="tech-tag">Slicing</span>
+                    <span class="tech-tag">Functions</span>
                 </div>
             </div>
-            
+
             <div class="task-item">
-                <div class="task-header">
-                    <h3>Django REST API</h3>
-                    <span class="task-difficulty medium">Medium</span>
+                <div class="task-title">
+                    <h3><i class="fas fa-check-circle" style="color: #28a745;"></i> Student Grades</h3>
+                    <span class="difficulty medium">Getting Better</span>
                 </div>
-                <p><strong>Task:</strong> Create a RESTful API with Django REST Framework for a blog application with user authentication and permissions.</p>
-                <div class="tags">
-                    <span class="tag python">Django</span>
-                    <span class="tag">REST API</span>
-                    <span class="tag">Authentication</span>
-                    <span class="tag">Database</span>
+                <p>Create a program that takes student names and grades, then calculates average and shows letter grades.</p>
+                <div class="tech-tags" style="margin-top: 10px;">
+                    <span class="tech-tag">Dictionaries</span>
+                    <span class="tech-tag">Lists</span>
+                    <span class="tech-tag">Calculations</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Simple Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>About This Portfolio</h3>
-                    <p>A collection of my Python projects, coding tasks, and learning journey. Everything is documented with code examples and explanations.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#tasks">Task Solutions</a></li>
-                        <li><a href="#about">About Me</a></li>
-                        <li><a href="https://github.com">GitHub</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Connect With Me</h3>
-                    <div class="social-links">
-                        <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>Made with <i class="fas fa-heart" style="color: #ff4757;"></i> and <i class="fab fa-python" style="color: #306998;"></i> • © 2024 Python Portfolio • All code examples are my own work</p>
+            <div class="footer-text">
+                <p><i class="fab fa-python python-icon"></i> Still learning, but loving every line of code! <i class="fas fa-smile"></i></p>
+                <p style="margin-top: 15px; font-size: 0.9rem;">© 2024 - My Python Learning Journey</p>
             </div>
         </div>
     </footer>
@@ -711,56 +606,30 @@ plt.savefig(<span class="string">'monthly_trend.png'</span>)</pre>
         document.querySelectorAll('.code-header').forEach(header => {
             header.addEventListener('click', function() {
                 const code = this.nextElementSibling.querySelector('pre').textContent;
-                navigator.clipboard.writeText(code).then(() => {
-                    const originalText = this.querySelector('span:last-child').textContent;
-                    this.querySelector('span:last-child').innerHTML = '<i class="fas fa-check"></i> Copied!';
-                    
-                    setTimeout(() => {
-                        this.querySelector('span:last-child').innerHTML = '<i class="fas fa-copy"></i> Copy Code';
-                    }, 2000);
-                });
+                navigator.clipboard.writeText(code);
+                
+                const copyText = this.querySelector('span:last-child');
+                const original = copyText.innerHTML;
+                copyText.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                
+                setTimeout(() => {
+                    copyText.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
             });
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(link => {
+        // Smooth scroll
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
-                if(this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if(targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
                 }
             });
-        });
-
-        // Project card animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Add initial styles for animation
-        document.querySelectorAll('.project-card, .task-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(el);
         });
     </script>
 </body>
