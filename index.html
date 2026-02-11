@@ -105,46 +105,107 @@
             margin: 0 auto;
         }
 
-        /* Out of Topic Button - Redirect */
-        .random-button-section {
+        /* NEW & IMPROVED - Secret Button - Different Look! */
+        .secret-button-section {
             display: flex;
             justify-content: center;
-            margin: 30px 0;
+            margin: 40px 0;
         }
 
-        .out-of-topic-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ff8787);
+        .secret-btn {
+            background: #1a1a2e;
             color: white;
             text-decoration: none;
-            border: none;
+            padding: 16px 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #0f0f1a, 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid #4e4e6e;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secret-btn i {
+            font-size: 1.3rem;
+            color: #ffd700;
+            transition: 0.3s;
+        }
+
+        .secret-btn:hover {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #0f0f1a, 0 15px 30px rgba(0,0,0,0.4);
+            background: #23233a;
+            border-color: #ffd700;
+        }
+
+        .secret-btn:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: #ffeb3b;
+        }
+
+        .secret-btn::before {
+            content: "⚡";
+            position: absolute;
+            left: -30px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .secret-btn:hover::before {
+            left: 15px;
+            opacity: 1;
+        }
+
+        .secret-btn:hover::after {
+            content: "⚡";
+            position: absolute;
+            right: 15px;
+            opacity: 1;
+        }
+
+        .secret-btn::after {
+            content: "⚡";
+            position: absolute;
+            right: -30px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        /* Alternative style - uncomment below and comment above for a different look */
+        /*
+        .secret-btn {
+            background: linear-gradient(145deg, #2b2b4f, #1a1a35);
+            color: #fff;
+            text-decoration: none;
             padding: 18px 45px;
             font-size: 1.3rem;
             font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
-            transition: 0.4s;
+            border-radius: 30px 10px 30px 10px;
+            border: 3px dashed #ffaa00;
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
             display: flex;
             align-items: center;
             gap: 15px;
-            border: 3px solid white;
-            animation: bounce 2s infinite;
+            transition: 0.4s;
+            backdrop-filter: blur(5px);
         }
-
-        .out-of-topic-btn i {
-            font-size: 1.5rem;
+        
+        .secret-btn:hover {
+            border-radius: 10px 30px 10px 30px;
+            border: 3px solid #ffaa00;
+            background: linear-gradient(145deg, #1a1a35, #2b2b4f);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 170, 0, 0.6);
         }
-
-        .out-of-topic-btn:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: linear-gradient(45deg, #ff8787, #ff6b6b);
-            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.5);
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        */
 
         /* Section Titles */
         .section-title {
@@ -336,9 +397,9 @@
                 font-size: 2rem;
             }
             
-            .out-of-topic-btn {
-                padding: 15px 30px;
-                font-size: 1.1rem;
+            .secret-btn {
+                padding: 14px 30px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -367,12 +428,12 @@
             <p>I'm currently learning Python and building small projects. This is where I share my code, practice tasks, and track my progress. I'm still a beginner, but I'm learning something new every day!</p>
         </div>
 
-        <!-- OUT OF TOPIC BUTTON - Redirects to secret page -->
-        <div class="random-button-section">
-            <a href="https://nsnixo.github.io/secret" target="_blank" class="out-of-topic-btn">
-                <i class="fas fa-question-circle"></i>
-                Click Me! I'm Out of Topic
-                <i class="fas fa-smile-wink"></i>
+        <!-- SECRET BUTTON - Redirects to /secret with NEW LOOK -->
+        <div class="secret-button-section">
+            <a href="/secret" class="secret-btn">
+                <i class="fas fa-lock"></i>
+                Secret Page
+                <i class="fas fa-key"></i>
             </a>
         </div>
     </div>
