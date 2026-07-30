@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Being Cursed as I Live Long — Chapter One</title>
+    <title>Being Cursed as I Live Long — Chapter One: The Freakshow</title>
     <style>
         :root {
             --bg: #faf8f5;
             --text: #2c2416;
             --accent: #8b4513;
+            --accent-light: #c9956b;
             --divider: #d4c5b2;
             --chapter-bg: #fffefb;
             --shadow: 0 2px 20px rgba(0,0,0,0.06);
+            --highlight: #fdf2e9;
+            --progress-bg: #e8ddd0;
+            --progress-fill: #8b4513;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -27,10 +35,67 @@
             line-height: 1.9;
             display: flex;
             justify-content: center;
-            padding: 2rem 1rem;
+            padding: 2rem 1rem 4rem;
             min-height: 100vh;
+            position: relative;
         }
 
+        /* ── Progress Bar ── */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 3px;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* ── Scroll-to-Top Button ── */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 15px rgba(139,69,19,0.25);
+            z-index: 999;
+        }
+
+        .scroll-top-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .scroll-top-btn:hover {
+            background: #6b3410;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139,69,19,0.4);
+        }
+
+        /* ── Book Container ── */
         .book-container {
             max-width: 680px;
             width: 100%;
@@ -38,52 +103,173 @@
             padding: 3rem 2.5rem;
             border-radius: 4px;
             box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        /* ── Chapter Header ── */
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 0.8s ease-out;
         }
 
         .chapter-label {
-            text-align: center;
             text-transform: uppercase;
             letter-spacing: 0.35em;
             font-size: 0.8rem;
             color: #8b7355;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             font-family: 'Georgia', serif;
         }
 
         .chapter-title {
-            text-align: center;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: normal;
             font-style: italic;
             color: var(--accent);
-            margin-bottom: 2.5rem;
             letter-spacing: 0.03em;
+            margin-bottom: 0.4rem;
         }
 
-        .divider {
-            text-align: center;
+        .chapter-subtitle {
+            font-size: 0.85rem;
+            color: #a89880;
+            font-style: italic;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Estimated Read Time ── */
+        .read-time {
+            display: inline-block;
+            background: var(--highlight);
+            color: #8b7355;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+            margin-top: 0.8rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .read-time .icon {
+            margin-right: 0.3rem;
+        }
+
+        /* ── Pull Quotes ── */
+        .pull-quote {
+            background: var(--highlight);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.5rem;
             margin: 2rem 0;
-            color: var(--divider);
-            font-size: 0.9rem;
-            letter-spacing: 0.4em;
-            user-select: none;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #5a4a3a;
+            border-radius: 0 6px 6px 0;
+            animation: fadeIn 1s ease-out;
+            position: relative;
         }
 
+        .pull-quote::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 12px;
+            font-size: 4rem;
+            color: var(--accent-light);
+            opacity: 0.3;
+            font-family: 'Georgia', serif;
+            line-height: 1;
+        }
+
+        .pull-quote .attribution {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #8b7355;
+            margin-top: 0.5rem;
+            font-style: normal;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Message Bubbles (for texts in story) ── */
+        .message-bubble {
+            display: block;
+            text-align: center;
+            background: #f7f3ed;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            font-size: 1rem;
+            color: #4a3a2a;
+            font-style: italic;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out;
+            border: 1px solid #e8ddd0;
+        }
+
+        .message-bubble.dark {
+            background: #3a3228;
+            color: #e8ddcc;
+            border-color: #5a4a3a;
+        }
+
+        /* ── Content ── */
         .content p {
             margin-bottom: 1.5rem;
             text-indent: 2em;
             font-size: 1.05rem;
             text-align: justify;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
         }
+
+        .content p:nth-child(1) { animation-delay: 0.05s; }
+        .content p:nth-child(2) { animation-delay: 0.1s; }
+        .content p:nth-child(3) { animation-delay: 0.15s; }
+        .content p:nth-child(4) { animation-delay: 0.2s; }
+        .content p:nth-child(5) { animation-delay: 0.25s; }
+        .content p:nth-child(6) { animation-delay: 0.3s; }
+        .content p:nth-child(7) { animation-delay: 0.35s; }
+        .content p:nth-child(8) { animation-delay: 0.4s; }
+        .content p:nth-child(9) { animation-delay: 0.45s; }
+        .content p:nth-child(10) { animation-delay: 0.5s; }
+        .content p:nth-child(11) { animation-delay: 0.55s; }
+        .content p:nth-child(12) { animation-delay: 0.6s; }
+        .content p:nth-child(13) { animation-delay: 0.65s; }
+        .content p:nth-child(14) { animation-delay: 0.7s; }
+        .content p:nth-child(15) { animation-delay: 0.75s; }
 
         .content p.no-indent {
             text-indent: 0;
         }
 
-        /* First paragraph after divider — no indent */
-        .divider + p,
-        .content .section-start {
+        /* First paragraph */
+        .content .first-paragraph {
+            font-size: 1.15rem;
             text-indent: 0;
+            color: #1a1410;
+        }
+
+        /* Drop cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-right: 10px;
+            padding-top: 6px;
+            color: var(--accent);
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 2.5rem 0;
+            color: var(--divider);
+            font-size: 1rem;
+            letter-spacing: 0.5em;
+            user-select: none;
+            opacity: 0.6;
         }
 
         .italic-line {
@@ -91,14 +277,31 @@
             text-align: center;
             color: #5a4a3a;
             margin: 2rem 0;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             text-indent: 0;
         }
 
+        .section-start {
+            text-indent: 0;
+        }
+
+        /* ── Section Breaks with Visual Effect ── */
+        .scene-break {
+            text-align: center;
+            margin: 2.5rem 0;
+            opacity: 0.5;
+        }
+
+        .scene-break svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* ── Navigation ── */
         .nav-links {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
+            justify-content: space-between;
+            align-items: center;
             margin-top: 3rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--divider);
@@ -109,71 +312,209 @@
         .nav-links a {
             color: #8b7355;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
             letter-spacing: 0.04em;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
         }
 
         .nav-links a:hover {
             color: var(--accent);
+            background: var(--highlight);
         }
 
-        .nav-links span {
+        .nav-links .disabled {
             color: #c4b8a8;
+            pointer-events: none;
         }
 
-        /* Author credit */
+        /* ── Chapter List Dropdown ── */
+        .chapter-select {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .chapter-select select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--divider);
+            border-radius: 4px;
+            font-family: 'Georgia', serif;
+            font-size: 0.9rem;
+            background: var(--chapter-bg);
+            color: var(--text);
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .chapter-select select:hover {
+            border-color: var(--accent);
+        }
+
+        /* ── Author Credit ── */
         .author-credit {
             text-align: center;
             margin-top: 2rem;
             font-style: italic;
             color: #a89880;
             font-size: 0.85rem;
+            letter-spacing: 0.04em;
         }
 
-        /* Responsive */
+        /* ── Floating TOC Button (Mobile) ── */
+        .toc-fab {
+            position: fixed;
+            bottom: 5.5rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #fffefb;
+            color: var(--accent);
+            border: 1px solid var(--divider);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            z-index: 999;
+            transition: all 0.3s;
+        }
+
+        .toc-fab:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ── Highlight on hover for key lines ── */
+        .highlight-on-hover {
+            transition: background 0.3s, padding 0.3s;
+            border-radius: 3px;
+        }
+
+        .highlight-on-hover:hover {
+            background: #fef9f3;
+            padding: 0.2rem 0;
+        }
+
+        /* ── Responsive ── */
         @media (max-width: 600px) {
             .book-container {
-                padding: 2rem 1.2rem;
+                padding: 1.8rem 1rem;
             }
             .chapter-title {
                 font-size: 1.5rem;
             }
             .content p {
-                text-indent: 1.5em;
+                text-indent: 1.2em;
+                font-size: 0.98rem;
+            }
+            .drop-cap::first-letter {
+                font-size: 3.5rem;
+            }
+            .pull-quote {
+                padding: 1rem;
                 font-size: 1rem;
+            }
+            .scroll-top-btn, .toc-fab {
+                right: 1rem;
+                bottom: 1.5rem;
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .toc-fab {
+                bottom: 4.5rem;
             }
         }
 
-        /* Dark mode support */
+        /* ── Dark Mode ── */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg: #1a1714;
                 --text: #e8ddcc;
                 --accent: #c9956b;
+                --accent-light: #a07550;
                 --divider: #3a3228;
                 --chapter-bg: #211d18;
                 --shadow: 0 2px 20px rgba(0,0,0,0.3);
+                --highlight: #2a241e;
+                --progress-bg: #3a3228;
+                --progress-fill: #c9956b;
             }
             .chapter-label { color: #a89070; }
             .italic-line { color: #b8a590; }
             .nav-links a { color: #a89070; }
-            .nav-links a:hover { color: var(--accent); }
+            .nav-links a:hover { color: var(--accent); background: #2a241e; }
             .author-credit { color: #7a6b58; }
+            .pull-quote { color: #c4b5a0; }
+            .message-bubble { background: #2a241e; color: #d4c5b2; border-color: #3a3228; }
+            .message-bubble.dark { background: #f7f3ed; color: #4a3a2a; border-color: #e8ddd0; }
+            .chapter-select select { background: #211d18; color: #e8ddcc; }
+            .toc-fab { background: #211d18; color: #c9956b; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top" title="Back to top">↑</button>
+
+    <!-- Book Container -->
     <div class="book-container">
 
         <!-- Chapter Header -->
-        <div class="chapter-label">Chapter One</div>
-        <h1 class="chapter-title">The Freakshow</h1>
+        <header class="chapter-header">
+            <div class="chapter-label">Chapter One</div>
+            <h1 class="chapter-title">The Freakshow</h1>
+            <p class="chapter-subtitle">Where trust begins to unravel</p>
+            <div class="read-time">
+                <span class="icon">⏳</span> 6 min read
+            </div>
+        </header>
 
         <!-- Content -->
         <div class="content">
 
-            <p class="no-indent">
+            <p class="first-paragraph drop-cap">
                 Miro and I played every day at the same hour. It was the one thing I could count on — the one thread that had held seven years together without fraying.
             </p>
 
@@ -189,9 +530,11 @@
                 On the fifth try, he picked up.
             </p>
 
-            <p>
+            <!-- Pull Quote 1 -->
+            <div class="pull-quote">
                 "Did you check the group?" His voice was strange — tight, expectant, like he was holding his breath underwater.
-            </p>
+                <span class="attribution">— Miro, the first crack</span>
+            </div>
 
             <p>
                 "Group? What group?"
@@ -217,17 +560,12 @@
                 Two girls were already talking. I recognized Sera immediately — my best friend, my close friend, the one person I thought would never keep secrets from me. The other girl was a stranger. A complete blank. A name I'd never seen, attached to words I didn't understand.
             </p>
 
-            <p>
-                Sera's message sat there like a dare: <em>Go on. Tell him.</em>
-            </p>
-
-            <p>
-                The stranger typed, hesitated, typed again: <em>Sera, we talked about this.</em>
-            </p>
-
-            <p>
-                <em>I helped you,</em> Sera shot back. <em>And you're saying we talked about this?</em>
-            </p>
+            <!-- Message Bubble -->
+            <div class="message-bubble">
+                <strong>Sera:</strong> <em>Go on. Tell him.</em><br>
+                <strong>Stranger:</strong> <em>Sera, we talked about this.</em><br>
+                <strong>Sera:</strong> <em>I helped you. And you're saying we talked about this?</em>
+            </div>
 
             <p>
                 I stepped in. Not because I wanted to, but because the silence on Miro's end of the call was pressing down on me, and someone had to break it.
@@ -253,9 +591,9 @@
                 Then my phone buzzed privately. A DM from Sera.
             </p>
 
-            <p>
-                <em>I'll explain everything. Just wait.</em>
-            </p>
+            <div class="message-bubble dark">
+                <strong>Sera (DM):</strong> <em>I'll explain everything. Just wait.</em>
+            </div>
 
             <p>
                 <em>K,</em> I typed back.
@@ -269,9 +607,11 @@
                 I returned to the group. The stranger had stopped fighting. Her next message was quiet, defeated, stripped of all the panic from before:
             </p>
 
-            <p class="italic-line">
+            <!-- Pull Quote 2 -->
+            <div class="pull-quote">
                 She's right. I do love you.
-            </p>
+                <span class="attribution">— A stranger's confession</span>
+            </div>
 
             <p>
                 I read it twice. Then a third time. <em>Love.</em> That word. Thrown at me by someone I had never seen, never heard, never known existed until five minutes ago.
@@ -297,13 +637,22 @@
                 <em>I just do,</em> she said. <em>I'm just in love, you know?</em>
             </p>
 
-            <p>
+            <!-- Pull Quote 3 -->
+            <div class="pull-quote">
                 I didn't know. I didn't know anything about love. It was a foreign language, and everyone in that group seemed fluent except me.
-            </p>
+                <span class="attribution">— Kael</span>
+            </div>
 
         </div>
 
-        <div class="divider">• &nbsp; • &nbsp; •</div>
+        <!-- Scene Break -->
+        <div class="scene-break">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4">
+                <circle cx="12" cy="5" r="1.5"/>
+                <circle cx="12" cy="12" r="1.5"/>
+                <circle cx="12" cy="19" r="1.5"/>
+            </svg>
+        </div>
 
         <div class="content">
 
@@ -319,9 +668,10 @@
                 So I sent mine. The fake one. The handsome stranger from a search engine.
             </p>
 
-            <p>
-                Sera's DM came instantly: <em>Bro, when did you get plastic surgery?</em>
-            </p>
+            <!-- Message Bubble -->
+            <div class="message-bubble">
+                <strong>Sera (DM):</strong> <em>Bro, when did you get plastic surgery?</em>
+            </div>
 
             <p>
                 I didn't reply.
@@ -343,21 +693,13 @@
                 And Miro, the friend I'd trusted for seven years, played along: <em>Ohhh, that's you? I didn't recognize you.</em>
             </p>
 
-            <p>
-                I was in the middle of something — some thought trying to form, some warning trying to surface — when Miro's next message landed like a hand on my shoulder.
-            </p>
-
-            <p>
-                <em>Bro, just accept her proposal. She's pretty. Trust me. Do it.</em>
-            </p>
-
-            <p>
-                <em>Why would I?</em>
-            </p>
-
-            <p>
-                <em>Bro, trust me. Just do it.</em>
-            </p>
+            <!-- Pull Quote 4 - Key Moment -->
+            <div class="pull-quote">
+                Bro, just accept her proposal. She's pretty. Trust me. Do it.<br>
+                <em>Why would I?</em><br>
+                Bro, trust me. Just do it.
+                <span class="attribution">— Miro, pushing Kael off the ledge</span>
+            </div>
 
             <p>
                 I was tired. Disoriented. Everyone around me seemed to know the script except me. So I let Miro take the pen.
@@ -387,28 +729,44 @@
                 But then Miro's texts started shifting.
             </p>
 
-            <p>
-                <em>Be careful,</em> he'd say. No context. No explanation.
-            </p>
+            <!-- Message Bubbles - The Warnings -->
+            <div class="message-bubble">
+                <strong>Miro:</strong> <em>Be careful.</em>
+            </div>
 
             <p>
-                Then again, a few days later: <em>Just... be careful, man.</em>
+                No context. No explanation.
             </p>
+
+            <div class="message-bubble">
+                <strong>Miro (days later):</strong> <em>Just... be careful, man.</em>
+            </div>
 
             <p>
                 And again.
             </p>
 
-            <p>
+            <!-- Final Pull Quote -->
+            <div class="pull-quote">
                 Each message was a crack in the foundation I hadn't even known was already broken.
-            </p>
+                <span class="attribution">— End of Chapter One</span>
+            </div>
 
         </div>
 
         <!-- Navigation -->
-        <div class="nav-links">
-            <span>← Previous</span>
+        <nav class="nav-links">
+            <span class="disabled">← Previous</span>
             <a href="chapter-2.html">Next Chapter →</a>
+        </nav>
+
+        <!-- Chapter Selector -->
+        <div class="chapter-select">
+            <select onchange="if(this.value) window.location.href=this.value;" aria-label="Chapter navigation">
+                <option value="">— Jump to Chapter —</option>
+                <option value="index.html" selected>Chapter 1: The Freakshow</option>
+                <option value="chapter-2.html">Chapter 2: Coming Soon</option>
+            </select>
         </div>
 
         <!-- Author Credit -->
@@ -417,6 +775,65 @@
         </div>
 
     </div>
+
+    <!-- Scripts -->
+    <script>
+        // ── Progress Bar ──
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+
+        // ── Scroll to Top Button ──
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // ── Keyboard Navigation ──
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                // Navigate to next chapter
+                const nextLink = document.querySelector('.nav-links a[href="chapter-2.html"]');
+                if (nextLink) window.location.href = nextLink.href;
+            }
+        });
+
+        // ── Subtle parallax-like effect on pull quotes ──
+        const pullQuotes = document.querySelectorAll('.pull-quote');
+        
+        window.addEventListener('scroll', () => {
+            pullQuotes.forEach(quote => {
+                const rect = quote.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const offset = (rect.top - windowHeight) * 0.03;
+                    quote.style.transform = `translateY(${offset}px)`;
+                    quote.style.transition = 'transform 0.1s linear';
+                }
+            });
+        });
+
+        console.log('%c📖 Being Cursed as I Live Long %c— Chapter One',
+            'font-size: 1.2em; font-style: italic; color: #8b4513;',
+            'color: #a89880;');
+        console.log('%cThank you for reading. Press → arrow key for next chapter.',
+            'color: #8b7355; font-style: italic;');
+    </script>
 
 </body>
 </html>
