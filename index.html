@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Python Learning Journey</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+    <title>Being Cursed as I Live Long — Chapter One</title>
     <style>
+        :root {
+            --bg: #faf8f5;
+            --text: #2c2416;
+            --accent: #8b4513;
+            --divider: #d4c5b2;
+            --chapter-bg: #fffefb;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,706 +21,402 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Simple Header */
-        header {
-            background: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.9;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            min-height: 100vh;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #306998;
+        .book-container {
+            max-width: 680px;
+            width: 100%;
+            background: var(--chapter-bg);
+            padding: 3rem 2.5rem;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
         }
 
-        .logo i {
-            color: #FFD43B;
-            margin-right: 5px;
+        .chapter-label {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            font-size: 0.8rem;
+            color: #8b7355;
+            margin-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .chapter-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: normal;
+            font-style: italic;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.03em;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--divider);
+            font-size: 0.9rem;
+            letter-spacing: 0.4em;
+            user-select: none;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+            text-indent: 2em;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .content p.no-indent {
+            text-indent: 0;
+        }
+
+        /* First paragraph after divider — no indent */
+        .divider + p,
+        .content .section-start {
+            text-indent: 0;
+        }
+
+        .italic-line {
+            font-style: italic;
+            text-align: center;
+            color: #5a4a3a;
+            margin: 2rem 0;
+            font-size: 1.05rem;
+            text-indent: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--divider);
+            font-family: 'Georgia', serif;
+            font-size: 0.9rem;
         }
 
         .nav-links a {
+            color: #8b7355;
             text-decoration: none;
-            color: #333;
-            margin-left: 30px;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: 0.3s;
+            transition: color 0.3s;
+            letter-spacing: 0.04em;
         }
 
         .nav-links a:hover {
-            background: #306998;
-            color: white;
+            color: var(--accent);
         }
 
-        /* Welcome Section - Simple and Friendly */
-        .welcome {
-            background: white;
-            border-radius: 20px;
-            padding: 50px 30px;
-            margin: 40px 0;
+        .nav-links span {
+            color: #c4b8a8;
+        }
+
+        /* Author credit */
+        .author-credit {
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .welcome h1 {
-            font-size: 2.5rem;
-            color: #306998;
-            margin-bottom: 15px;
-        }
-
-        .welcome h1 i {
-            color: #FFD43B;
-        }
-
-        .welcome .student-badge {
-            background: #FFD43B;
-            color: #333;
-            display: inline-block;
-            padding: 8px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            margin: 20px 0;
-            font-size: 1.1rem;
-        }
-
-        .welcome p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Button Section - Two buttons side by side */
-        .buttons-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-
-        /* Secret Button - Dark themed */
-        .secret-btn {
-            background: #1a1a2e;
-            color: white;
-            text-decoration: none;
-            padding: 16px 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 8px 0 #0f0f1a, 0 10px 30px rgba(0,0,0,0.3);
-            transition: all 0.1s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border: 2px solid #4e4e6e;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .secret-btn i {
-            font-size: 1.3rem;
-            color: #ffd700;
-            transition: 0.3s;
-        }
-
-        .secret-btn:hover {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0 #0f0f1a, 0 15px 30px rgba(0,0,0,0.4);
-            background: #23233a;
-            border-color: #ffd700;
-        }
-
-        .secret-btn:hover i {
-            transform: scale(1.2) rotate(10deg);
-            color: #ffeb3b;
-        }
-
-        /* ADULT HIDDEN BUTTON - Super secret, barely visible */
-        .adult-hidden-btn {
-            background: rgba(20, 20, 30, 0.3);
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            padding: 12px 35px;
-            font-size: 0.9rem;
-            font-weight: 400;
-            border-radius: 30px;
-            backdrop-filter: blur(2px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.5s ease;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: relative;
-            opacity: 0.6;
-        }
-
-        .adult-hidden-btn i {
-            font-size: 0.9rem;
-            color: rgba(255, 75, 75, 0.4);
-            transition: 0.3s;
-        }
-
-        .adult-hidden-btn:hover {
-            background: rgba(40, 20, 30, 0.9);
-            color: rgba(255, 200, 200, 0.9);
-            border-color: rgba(255, 100, 100, 0.5);
-            opacity: 1;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 50, 50, 0.3);
-        }
-
-        .adult-hidden-btn:hover i {
-            color: #ff6b6b;
-            transform: scale(1.2);
-        }
-
-        /* Secret hint - tiny text */
-        .secret-hint {
-            text-align: center;
-            margin-top: 10px;
-            color: rgba(255,255,255,0.3);
-            font-size: 0.7rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
-
-        .secret-hint i {
-            margin: 0 5px;
-            color: rgba(255,255,255,0.2);
-        }
-
-        /* Section Titles */
-        .section-title {
-            text-align: center;
-            margin: 50px 0 30px;
-            color: white;
-            font-size: 2rem;
-        }
-
-        .section-title i {
-            margin-right: 10px;
-            color: #FFD43B;
-        }
-
-        /* Projects Grid - Simple Cards */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .project-header {
-            background: #306998;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .project-header i {
-            font-size: 1.5rem;
-            color: #FFD43B;
-        }
-
-        .project-body {
-            padding: 25px;
-        }
-
-        .project-body h3 {
-            color: #306998;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-
-        .project-body p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        /* Simple Tags */
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 15px 0;
-        }
-
-        .tech-tag {
-            background: #e9ecef;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: #333;
-            font-family: 'Source Code Pro', monospace;
-        }
-
-        .tech-tag.python {
-            background: #306998;
-            color: white;
-        }
-
-        /* Code Box - Simple */
-        .code-box {
-            background: #1e1e1e;
-            border-radius: 10px;
-            margin-top: 15px;
-            overflow: hidden;
-        }
-
-        .code-header {
-            background: #2d2d2d;
-            padding: 8px 15px;
-            color: #ccc;
-            font-family: 'Source Code Pro', monospace;
-            font-size: 0.8rem;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .code-content {
-            padding: 15px;
-            overflow-x: auto;
-        }
-
-        .code-content pre {
-            color: #d4d4d4;
-            font-family: 'Source Code Pro', monospace;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        /* Tasks Section - Simple List */
-        .tasks-list {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 50px;
-        }
-
-        .task-item {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            border-left: 4px solid #28a745;
-        }
-
-        .task-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .task-title h3 {
-            color: #306998;
-            font-size: 1.2rem;
-        }
-
-        .difficulty {
-            padding: 4px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .easy { background: #d4edda; color: #155724; }
-        .medium { background: #fff3cd; color: #856404; }
-
-        /* Footer - Super Simple */
-        footer {
-            background: #1a1a2e;
-            color: white;
-            padding: 30px 0;
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        .footer-text {
-            color: #adb5bd;
-        }
-
-        .footer-text i {
-            color: #ff4757;
-            margin: 0 5px;
-        }
-
-        .python-icon {
-            color: #306998;
+            margin-top: 2rem;
+            font-style: italic;
+            color: #a89880;
+            font-size: 0.85rem;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav {
-                flex-direction: column;
-                gap: 15px;
+        @media (max-width: 600px) {
+            .book-container {
+                padding: 2rem 1.2rem;
             }
-            
-            .nav-links a {
-                margin: 0 10px;
+            .chapter-title {
+                font-size: 1.5rem;
             }
-            
-            .welcome h1 {
-                font-size: 2rem;
-            }
-            
-            .secret-btn {
-                padding: 14px 30px;
+            .content p {
+                text-indent: 1.5em;
                 font-size: 1rem;
             }
-            
-            .adult-hidden-btn {
-                padding: 10px 25px;
-                font-size: 0.8rem;
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1714;
+                --text: #e8ddcc;
+                --accent: #c9956b;
+                --divider: #3a3228;
+                --chapter-bg: #211d18;
+                --shadow: 0 2px 20px rgba(0,0,0,0.3);
             }
+            .chapter-label { color: #a89070; }
+            .italic-line { color: #b8a590; }
+            .nav-links a { color: #a89070; }
+            .nav-links a:hover { color: var(--accent); }
+            .author-credit { color: #7a6b58; }
         }
     </style>
 </head>
 <body>
-    <!-- Simple Header -->
-    <header>
-        <div class="container nav">
-            <div class="logo">
-                <i class="fab fa-python"></i> Python Learner
-            </div>
-            <div class="nav-links">
-                <a href="#projects"><i class="fas fa-code"></i> Projects</a>
-                <a href="#tasks"><i class="fas fa-tasks"></i> Tasks</a>
-            </div>
-        </div>
-    </header>
 
-    <!-- Welcome Section - Student Friendly -->
-    <div class="container">
-        <div class="welcome">
-            <h1><i class="fab fa-python"></i> Hi, I'm learning Python!</h1>
-            <span class="student-badge">
-                <i class="fas fa-graduation-cap"></i> Python Student
-            </span>
-            <p>I'm currently learning Python and building small projects. This is where I share my code, practice tasks, and track my progress. I'm still a beginner, but I'm learning something new every day!</p>
+    <div class="book-container">
+
+        <!-- Chapter Header -->
+        <div class="chapter-label">Chapter One</div>
+        <h1 class="chapter-title">The Freakshow</h1>
+
+        <!-- Content -->
+        <div class="content">
+
+            <p class="no-indent">
+                Miro and I played every day at the same hour. It was the one thing I could count on — the one thread that had held seven years together without fraying.
+            </p>
+
+            <p>
+                That day, the thread snapped.
+            </p>
+
+            <p>
+                No reply. No ring. Just silence where his voice should have been. I called again. And again. Each attempt felt more desperate than the last, but I didn't care. Miro was my only friend. When you only have one, you hold on tighter than you should.
+            </p>
+
+            <p>
+                On the fifth try, he picked up.
+            </p>
+
+            <p>
+                "Did you check the group?" His voice was strange — tight, expectant, like he was holding his breath underwater.
+            </p>
+
+            <p>
+                "Group? What group?"
+            </p>
+
+            <p>
+                "Check the group, man."
+            </p>
+
+            <p>
+                A notification buzzed against my ear. <em>Miro added you to The Freakshow.</em>
+            </p>
+
+            <p>
+                I stared at the name. The Freakshow. Who names a group that? And why was I only being added now, like an afterthought, like someone who had to be let in through the back door?
+            </p>
+
+            <p>
+                I stayed on the call, phone pressed hot against my cheek, and opened the chat.
+            </p>
+
+            <p>
+                Two girls were already talking. I recognized Sera immediately — my best friend, my close friend, the one person I thought would never keep secrets from me. The other girl was a stranger. A complete blank. A name I'd never seen, attached to words I didn't understand.
+            </p>
+
+            <p>
+                Sera's message sat there like a dare: <em>Go on. Tell him.</em>
+            </p>
+
+            <p>
+                The stranger typed, hesitated, typed again: <em>Sera, we talked about this.</em>
+            </p>
+
+            <p>
+                <em>I helped you,</em> Sera shot back. <em>And you're saying we talked about this?</em>
+            </p>
+
+            <p>
+                I stepped in. Not because I wanted to, but because the silence on Miro's end of the call was pressing down on me, and someone had to break it.
+            </p>
+
+            <p>
+                <em>Wait,</em> I typed. <em>Let me just check what's going on.</em>
+            </p>
+
+            <p>
+                The stranger's response came fast: <em>See? I told you he won't like it.</em>
+            </p>
+
+            <p>
+                And then Sera, my Sera, said the words that tilted the room: <em>She likes you.</em>
+            </p>
+
+            <p>
+                The stranger — the blank name, the unfamiliar profile picture — started to unravel in real time. <em>No, no, I didn't say that! Why are you doing this? I never told you that!</em> She was fighting, panicking, and Sera just let her drown in it.
+            </p>
+
+            <p>
+                Then my phone buzzed privately. A DM from Sera.
+            </p>
+
+            <p>
+                <em>I'll explain everything. Just wait.</em>
+            </p>
+
+            <p>
+                <em>K,</em> I typed back.
+            </p>
+
+            <p>
+                She didn't reply.
+            </p>
+
+            <p>
+                I returned to the group. The stranger had stopped fighting. Her next message was quiet, defeated, stripped of all the panic from before:
+            </p>
+
+            <p class="italic-line">
+                She's right. I do love you.
+            </p>
+
+            <p>
+                I read it twice. Then a third time. <em>Love.</em> That word. Thrown at me by someone I had never seen, never heard, never known existed until five minutes ago.
+            </p>
+
+            <p>
+                <em>How long has this been going on?</em> I asked.
+            </p>
+
+            <p>
+                <em>A month,</em> she said. <em>Sera's been telling me everything about you. We planned this. It was supposed to be a surprise.</em>
+            </p>
+
+            <p>
+                A surprise. A month of my best friend feeding pieces of me to a stranger like breadcrumbs, and I hadn't felt a single tug on the line.
+            </p>
+
+            <p>
+                <em>How can you love me?</em> I typed. <em>You've never seen me. Never met me.</em>
+            </p>
+
+            <p>
+                <em>I just do,</em> she said. <em>I'm just in love, you know?</em>
+            </p>
+
+            <p>
+                I didn't know. I didn't know anything about love. It was a foreign language, and everyone in that group seemed fluent except me.
+            </p>
+
         </div>
 
-        <!-- BUTTONS CONTAINER - Two buttons side by side -->
-        <div class="buttons-container">
-            <!-- SECRET BUTTON - Redirects to /secret -->
-            <a href="/secret" class="secret-btn">
-                <i class="fas fa-lock"></i>
-                Secret Page
-                <i class="fas fa-key"></i>
-            </a>
+        <div class="divider">• &nbsp; • &nbsp; •</div>
 
-            <!-- ADULT HIDDEN BUTTON - Barely visible, redirects to /hidden -->
-            <a href="/hidden" class="adult-hidden-btn">
-                <i class="fas fa-ban"></i>
-                Hidden
-                <i class="fas fa-mask"></i>
-            </a>
+        <div class="content">
+
+            <p class="section-start">
+                But Miro was already scheming. He messaged me separately, buzzing with an idea: we should prank her. Send a fake photo — some handsome stranger from Google — and say it was me. A test. A joke. I didn't think much of it. None of this felt real anyway, so what was one more lie stacked on top?
+            </p>
+
+            <p>
+                She sent her photo first. Not privately, like she'd promised — but in the group, where everyone could see.
+            </p>
+
+            <p>
+                So I sent mine. The fake one. The handsome stranger from a search engine.
+            </p>
+
+            <p>
+                Sera's DM came instantly: <em>Bro, when did you get plastic surgery?</em>
+            </p>
+
+            <p>
+                I didn't reply.
+            </p>
+
+            <p>
+                I looked at the girl's photo. She was beautiful. Objectively, undeniably beautiful. But I felt nothing. Just a hollow click of recognition — <em>oh, that's what she looks like</em> — and then emptiness.
+            </p>
+
+            <p>
+                <em>That's not you,</em> I said in the group.
+            </p>
+
+            <p>
+                She panicked again. Texted Miro separately. <em>That IS me! What did you tell him?</em>
+            </p>
+
+            <p>
+                And Miro, the friend I'd trusted for seven years, played along: <em>Ohhh, that's you? I didn't recognize you.</em>
+            </p>
+
+            <p>
+                I was in the middle of something — some thought trying to form, some warning trying to surface — when Miro's next message landed like a hand on my shoulder.
+            </p>
+
+            <p>
+                <em>Bro, just accept her proposal. She's pretty. Trust me. Do it.</em>
+            </p>
+
+            <p>
+                <em>Why would I?</em>
+            </p>
+
+            <p>
+                <em>Bro, trust me. Just do it.</em>
+            </p>
+
+            <p>
+                I was tired. Disoriented. Everyone around me seemed to know the script except me. So I let Miro take the pen.
+            </p>
+
+            <p>
+                <em>Fine. How?</em>
+            </p>
+
+            <p>
+                <em>Send me a text saying she's pretty. With emojis.</em>
+            </p>
+
+            <p>
+                I typed it out — hollow words, borrowed enthusiasm, emojis like little masks — and sent it to him. He forwarded it to her. She accepted.
+            </p>
+
+            <p>
+                Just like that, I was in love. My first relationship. A door I never chose to walk through, pushed open by hands that weren't my own.
+            </p>
+
+            <p>
+                The first few days were what I imagined relationships were supposed to be. Talking. Sharing hobbies. Fumbling through conversations I wasn't sure I was allowed to have. I didn't know how any of it worked. There was no manual. No guide. Just me, improvising.
+            </p>
+
+            <p>
+                But then Miro's texts started shifting.
+            </p>
+
+            <p>
+                <em>Be careful,</em> he'd say. No context. No explanation.
+            </p>
+
+            <p>
+                Then again, a few days later: <em>Just... be careful, man.</em>
+            </p>
+
+            <p>
+                And again.
+            </p>
+
+            <p>
+                Each message was a crack in the foundation I hadn't even known was already broken.
+            </p>
+
         </div>
-        
-        <!-- Tiny secret hint - only visible if you look closely -->
-        <div class="secret-hint">
-            <i class="fas fa-arrow-up"></i> FIND THE HIDDEN BUTTON <i class="fas fa-arrow-up"></i>
+
+        <!-- Navigation -->
+        <div class="nav-links">
+            <span>← Previous</span>
+            <a href="chapter-2.html">Next Chapter →</a>
         </div>
+
+        <!-- Author Credit -->
+        <div class="author-credit">
+            Being Cursed as I Live Long
+        </div>
+
     </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="container">
-        <h2 class="section-title">
-            <i class="fas fa-laptop-code"></i> My Python Projects
-        </h2>
-        
-        <div class="projects-grid">
-            <!-- Project 1 - Simple Calculator -->
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-calculator"></i>
-                    <h2>Simple Calculator</h2>
-                </div>
-                <div class="project-body">
-                    <h3>Basic Calculator App</h3>
-                    <p>My first Python project! A simple calculator that can add, subtract, multiply, and divide. I learned about functions and user input.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag python">Python</span>
-                        <span class="tech-tag">Functions</span>
-                        <span class="tech-tag">Input/Output</span>
-                    </div>
-                    
-                    <div class="code-box">
-                        <div class="code-header">
-                            <span>calculator.py</span>
-                            <span><i class="fas fa-copy"></i> Copy</span>
-                        </div>
-                        <div class="code-content">
-                            <pre>
-# My first calculator!
-def add(x, y):
-    return x + y
-
-def subtract(x, y):
-    return x - y
-
-def multiply(x, y):
-    return x * y
-
-def divide(x, y):
-    if y != 0:
-        return x / y
-    return "Can't divide by zero!"
-
-# Simple menu
-print("1. Add")
-print("2. Subtract")
-print("3. Multiply")
-print("4. Divide")
-
-choice = input("Choose (1/2/3/4): ")
-num1 = float(input("First number: "))
-num2 = float(input("Second number: "))
-
-if choice == '1':
-    print("Result:", add(num1, num2))</pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 2 - To-Do List -->
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-check-square"></i>
-                    <h2>To-Do List</h2>
-                </div>
-                <div class="project-body">
-                    <h3>Task Manager App</h3>
-                    <p>A simple to-do list app where you can add, view, and delete tasks. I learned about lists and loops with this project.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag python">Python</span>
-                        <span class="tech-tag">Lists</span>
-                        <span class="tech-tag">Loops</span>
-                    </div>
-                    
-                    <div class="code-box">
-                        <div class="code-header">
-                            <span>todo_list.py</span>
-                            <span><i class="fas fa-copy"></i> Copy</span>
-                        </div>
-                        <div class="code-content">
-                            <pre>
-# My to-do list app
-tasks = []
-
-def show_tasks():
-    if not tasks:
-        print("No tasks yet!")
-    else:
-        for i, task in enumerate(tasks, 1):
-            print(f"{i}. {task}")
-
-while True:
-    print("\n1. Add task")
-    print("2. View tasks")
-    print("3. Delete task")
-    print("4. Quit")
-    
-    choice = input("Choose: ")
-    
-    if choice == '1':
-        task = input("Enter task: ")
-        tasks.append(task)
-        print("Task added!")
-    
-    elif choice == '2':
-        show_tasks()</pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 3 - Number Guessing -->
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-gamepad"></i>
-                    <h2>Number Game</h2>
-                </div>
-                <div class="project-body">
-                    <h3>Guess the Number</h3>
-                    <p>A fun number guessing game. The computer picks a random number and you try to guess it. I learned about random numbers and while loops.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag python">Python</span>
-                        <span class="tech-tag">Random</span>
-                        <span class="tech-tag">Loops</span>
-                    </div>
-                    
-                    <div class="code-box">
-                        <div class="code-header">
-                            <span>guess_game.py</span>
-                            <span><i class="fas fa-copy"></i> Copy</span>
-                        </div>
-                        <div class="code-content">
-                            <pre>
-import random
-
-# Number guessing game
-secret = random.randint(1, 100)
-attempts = 0
-guessed = False
-
-print("I'm thinking of a number 1-100!")
-
-while not guessed:
-    guess = int(input("Your guess: "))
-    attempts += 1
-    
-    if guess < secret:
-        print("Too low!")
-    elif guess > secret:
-        print("Too high!")
-    else:
-        print(f"Yes! It's {secret}!")
-        print(f"You got it in {attempts} tries!")
-        guessed = True</pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tasks/Practice Section -->
-    <section id="tasks" class="container">
-        <h2 class="section-title">
-            <i class="fas fa-pencil-alt"></i> Practice Tasks
-        </h2>
-        
-        <div class="tasks-list">
-            <div class="task-item">
-                <div class="task-title">
-                    <h3><i class="fas fa-check-circle" style="color: #28a745;"></i> FizzBuzz</h3>
-                    <span class="difficulty easy">Beginner</span>
-                </div>
-                <p>Print numbers 1-100. For multiples of 3 print "Fizz", for multiples of 5 print "Buzz", for both print "FizzBuzz".</p>
-                <div class="tech-tags" style="margin-top: 10px;">
-                    <span class="tech-tag">Loops</span>
-                    <span class="tech-tag">If/Else</span>
-                    <span class="tech-tag">Modulo</span>
-                </div>
-            </div>
-
-            <div class="task-item">
-                <div class="task-title">
-                    <h3><i class="fas fa-check-circle" style="color: #28a745;"></i> Palindrome Checker</h3>
-                    <span class="difficulty easy">Beginner</span>
-                </div>
-                <p>Write a function that checks if a word is the same forwards and backwards (like "radar" or "level").</p>
-                <div class="tech-tags" style="margin-top: 10px;">
-                    <span class="tech-tag">Strings</span>
-                    <span class="tech-tag">Slicing</span>
-                    <span class="tech-tag">Functions</span>
-                </div>
-            </div>
-
-            <div class="task-item">
-                <div class="task-title">
-                    <h3><i class="fas fa-check-circle" style="color: #28a745;"></i> Student Grades</h3>
-                    <span class="difficulty medium">Getting Better</span>
-                </div>
-                <p>Create a program that takes student names and grades, then calculates average and shows letter grades.</p>
-                <div class="tech-tags" style="margin-top: 10px;">
-                    <span class="tech-tag">Dictionaries</span>
-                    <span class="tech-tag">Lists</span>
-                    <span class="tech-tag">Calculations</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Simple Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-text">
-                <p><i class="fab fa-python python-icon"></i> Still learning, but loving every line of code! <i class="fas fa-smile"></i></p>
-                <p style="margin-top: 15px; font-size: 0.9rem;">© 2024 - My Python Learning Journey</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Copy code functionality
-        document.querySelectorAll('.code-header').forEach(header => {
-            header.addEventListener('click', function() {
-                const code = this.nextElementSibling.querySelector('pre').textContent;
-                navigator.clipboard.writeText(code);
-                
-                const copyText = this.querySelector('span:last-child');
-                const original = copyText.innerHTML;
-                copyText.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                
-                setTimeout(() => {
-                    copyText.innerHTML = '<i class="fas fa-copy"></i> Copy';
-                }, 2000);
-            });
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
