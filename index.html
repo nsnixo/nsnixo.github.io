@@ -3,837 +3,1112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Being Cursed as I Live Long — Chapter One: The Freakshow</title>
+
+    <title>Grocery List</title>
+
     <style>
-        :root {
-            --bg: #faf8f5;
-            --text: #2c2416;
-            --accent: #8b4513;
-            --accent-light: #c9956b;
-            --divider: #d4c5b2;
-            --chapter-bg: #fffefb;
-            --shadow: 0 2px 20px rgba(0,0,0,0.06);
-            --highlight: #fdf2e9;
-            --progress-bg: #e8ddd0;
-            --progress-fill: #8b4513;
-        }
+        /* ================================
+           GLOBAL
+        ================================= */
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Georgia', 'Times New Roman', serif;
-            line-height: 1.9;
-            display: flex;
-            justify-content: center;
-            padding: 2rem 1rem 4rem;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #222;
             min-height: 100vh;
-            position: relative;
         }
 
-        /* ── Progress Bar ── */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* ================================
+           MAIN APP
+        ================================= */
+
+        .app {
+            width: min(1100px, 94%);
+            margin: 35px auto;
+        }
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        .header {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* ================================
+           PANELS
+        ================================= */
+
+        .panel {
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            margin-bottom: 20px;
+        }
+
+        .panel h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        /* ================================
+           ADD ITEM FORM
+        ================================= */
+
+        .form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 10px;
+        }
+
+        input,
+        select {
             width: 100%;
-            height: 3px;
-            background: transparent;
-            z-index: 1000;
+            padding: 12px 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            background: white;
+            font-size: 15px;
         }
 
-        .progress-bar {
-            height: 3px;
-            background: var(--accent);
-            width: 0%;
-            transition: width 0.1s linear;
-            border-radius: 0 2px 2px 0;
+        input:focus,
+        select:focus {
+            border-color: #555;
         }
 
-        /* ── Scroll-to-Top Button ── */
-        .scroll-top-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: #fff;
+        button {
+            padding: 12px 16px;
+            border-radius: 10px;
             border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            transition: all 0.35s ease;
-            box-shadow: 0 4px 15px rgba(139,69,19,0.25);
-            z-index: 999;
-        }
-
-        .scroll-top-btn.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
-        .scroll-top-btn:hover {
-            background: #6b3410;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(139,69,19,0.4);
-        }
-
-        /* ── Book Container ── */
-        .book-container {
-            max-width: 680px;
-            width: 100%;
-            background: var(--chapter-bg);
-            padding: 3rem 2.5rem;
-            border-radius: 4px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        /* ── Chapter Header ── */
-        .chapter-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        .chapter-label {
-            text-transform: uppercase;
-            letter-spacing: 0.35em;
-            font-size: 0.8rem;
-            color: #8b7355;
-            margin-bottom: 0.3rem;
-            font-family: 'Georgia', serif;
-        }
-
-        .chapter-title {
-            font-size: 2.2rem;
-            font-weight: normal;
-            font-style: italic;
-            color: var(--accent);
-            letter-spacing: 0.03em;
-            margin-bottom: 0.4rem;
-        }
-
-        .chapter-subtitle {
-            font-size: 0.85rem;
-            color: #a89880;
-            font-style: italic;
-            letter-spacing: 0.05em;
-        }
-
-        /* ── Estimated Read Time ── */
-        .read-time {
-            display: inline-block;
-            background: var(--highlight);
-            color: #8b7355;
-            padding: 0.3rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            letter-spacing: 0.04em;
-            margin-top: 0.8rem;
-            font-family: 'Georgia', serif;
-        }
-
-        .read-time .icon {
-            margin-right: 0.3rem;
-        }
-
-        /* ── Pull Quotes ── */
-        .pull-quote {
-            background: var(--highlight);
-            border-left: 3px solid var(--accent);
-            padding: 1.2rem 1.5rem;
-            margin: 2rem 0;
-            font-style: italic;
-            font-size: 1.15rem;
-            color: #5a4a3a;
-            border-radius: 0 6px 6px 0;
-            animation: fadeIn 1s ease-out;
-            position: relative;
-        }
-
-        .pull-quote::before {
-            content: '"';
-            position: absolute;
-            top: -15px;
-            left: 12px;
-            font-size: 4rem;
-            color: var(--accent-light);
-            opacity: 0.3;
-            font-family: 'Georgia', serif;
-            line-height: 1;
-        }
-
-        .pull-quote .attribution {
-            display: block;
-            text-align: right;
-            font-size: 0.8rem;
-            color: #8b7355;
-            margin-top: 0.5rem;
-            font-style: normal;
-            letter-spacing: 0.04em;
-        }
-
-        /* ── Message Bubbles (for texts in story) ── */
-        .message-bubble {
-            display: block;
-            text-align: center;
-            background: #f7f3ed;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 12px;
-            font-size: 1rem;
-            color: #4a3a2a;
-            font-style: italic;
-            position: relative;
-            animation: fadeInUp 0.6s ease-out;
-            border: 1px solid #e8ddd0;
-        }
-
-        .message-bubble.dark {
-            background: #3a3228;
-            color: #e8ddcc;
-            border-color: #5a4a3a;
-        }
-
-        /* ── Content ── */
-        .content p {
-            margin-bottom: 1.5rem;
-            text-indent: 2em;
-            font-size: 1.05rem;
-            text-align: justify;
-            animation: fadeInUp 0.5s ease-out;
-            animation-fill-mode: both;
-        }
-
-        .content p:nth-child(1) { animation-delay: 0.05s; }
-        .content p:nth-child(2) { animation-delay: 0.1s; }
-        .content p:nth-child(3) { animation-delay: 0.15s; }
-        .content p:nth-child(4) { animation-delay: 0.2s; }
-        .content p:nth-child(5) { animation-delay: 0.25s; }
-        .content p:nth-child(6) { animation-delay: 0.3s; }
-        .content p:nth-child(7) { animation-delay: 0.35s; }
-        .content p:nth-child(8) { animation-delay: 0.4s; }
-        .content p:nth-child(9) { animation-delay: 0.45s; }
-        .content p:nth-child(10) { animation-delay: 0.5s; }
-        .content p:nth-child(11) { animation-delay: 0.55s; }
-        .content p:nth-child(12) { animation-delay: 0.6s; }
-        .content p:nth-child(13) { animation-delay: 0.65s; }
-        .content p:nth-child(14) { animation-delay: 0.7s; }
-        .content p:nth-child(15) { animation-delay: 0.75s; }
-
-        .content p.no-indent {
-            text-indent: 0;
-        }
-
-        /* First paragraph */
-        .content .first-paragraph {
-            font-size: 1.15rem;
-            text-indent: 0;
-            color: #1a1410;
-        }
-
-        /* Drop cap */
-        .drop-cap::first-letter {
-            float: left;
-            font-size: 4.5rem;
-            line-height: 0.8;
-            padding-right: 10px;
-            padding-top: 6px;
-            color: var(--accent);
+            font-size: 14px;
             font-weight: bold;
-            font-family: 'Georgia', serif;
         }
 
-        .divider {
-            text-align: center;
-            margin: 2.5rem 0;
-            color: var(--divider);
-            font-size: 1rem;
-            letter-spacing: 0.5em;
-            user-select: none;
-            opacity: 0.6;
+        .add-button {
+            background: #222;
+            color: white;
         }
 
-        .italic-line {
-            font-style: italic;
-            text-align: center;
-            color: #5a4a3a;
-            margin: 2rem 0;
-            font-size: 1.1rem;
-            text-indent: 0;
+        .add-button:hover {
+            background: #000;
         }
 
-        .section-start {
-            text-indent: 0;
+        .secondary-button {
+            background: #eeeeee;
+            color: #222;
         }
 
-        /* ── Section Breaks with Visual Effect ── */
-        .scene-break {
-            text-align: center;
-            margin: 2.5rem 0;
-            opacity: 0.5;
+        .secondary-button:hover {
+            background: #e1e1e1;
         }
 
-        .scene-break svg {
-            width: 30px;
-            height: 30px;
+        .danger-button {
+            background: #ffe5e5;
+            color: #b00020;
         }
 
-        /* ── Navigation ── */
-        .nav-links {
+        .danger-button:hover {
+            background: #ffd3d3;
+        }
+
+        /* ================================
+           TOOLBAR
+        ================================= */
+
+        .toolbar {
             display: flex;
-            justify-content: space-between;
+            gap: 10px;
             align-items: center;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--divider);
-            font-family: 'Georgia', serif;
-            font-size: 0.9rem;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
         }
 
-        .nav-links a {
-            color: #8b7355;
+        .search-box {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .filter-box {
+            width: 180px;
+        }
+
+        /* ================================
+           TABLE
+        ================================= */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 13px 10px;
+            border-bottom: 2px solid #eee;
+            color: #777;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 14px 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+
+        /* ================================
+           CHECKBOX
+        ================================= */
+
+        .check {
+            width: 19px;
+            height: 19px;
+            cursor: pointer;
+        }
+
+        /* ================================
+           PURCHASED
+        ================================= */
+
+        tr.purchased td {
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        tr.purchased .actions button {
             text-decoration: none;
-            transition: all 0.3s;
-            letter-spacing: 0.04em;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
         }
 
-        .nav-links a:hover {
-            color: var(--accent);
-            background: var(--highlight);
-        }
+        /* ================================
+           ACTIONS
+        ================================= */
 
-        .nav-links .disabled {
-            color: #c4b8a8;
-            pointer-events: none;
-        }
-
-        /* ── Chapter List Dropdown ── */
-        .chapter-select {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-
-        .chapter-select select {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--divider);
-            border-radius: 4px;
-            font-family: 'Georgia', serif;
-            font-size: 0.9rem;
-            background: var(--chapter-bg);
-            color: var(--text);
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-
-        .chapter-select select:hover {
-            border-color: var(--accent);
-        }
-
-        /* ── Author Credit ── */
-        .author-credit {
-            text-align: center;
-            margin-top: 2rem;
-            font-style: italic;
-            color: #a89880;
-            font-size: 0.85rem;
-            letter-spacing: 0.04em;
-        }
-
-        /* ── Floating TOC Button (Mobile) ── */
-        .toc-fab {
-            position: fixed;
-            bottom: 5.5rem;
-            right: 2rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: #fffefb;
-            color: var(--accent);
-            border: 1px solid var(--divider);
-            cursor: pointer;
-            font-size: 1.2rem;
+        .actions {
             display: flex;
+            gap: 6px;
+        }
+
+        .delete-button {
+            padding: 8px 11px;
+            font-size: 12px;
+        }
+
+        /* ================================
+           EMPTY MESSAGE
+        ================================= */
+
+        .empty {
+            text-align: center;
+            color: #888;
+            padding: 40px 20px;
+            font-size: 15px;
+        }
+
+        /* ================================
+           SUMMARY
+        ================================= */
+
+        .summary {
+            display: flex;
+            justify-content: flex-end;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            z-index: 999;
-            transition: all 0.3s;
+            gap: 35px;
+            padding-top: 20px;
         }
 
-        .toc-fab:hover {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            transform: translateY(-2px);
+        .summary-item {
+            font-size: 16px;
         }
 
-        /* ── Animations ── */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .total {
+            font-size: 20px;
+            font-weight: bold;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* ================================
+           MOBILE
+        ================================= */
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @media (max-width: 800px) {
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+            .form {
+                grid-template-columns: 1fr 1fr;
+            }
 
-        /* ── Highlight on hover for key lines ── */
-        .highlight-on-hover {
-            transition: background 0.3s, padding 0.3s;
-            border-radius: 3px;
-        }
+            .form .item-name {
+                grid-column: 1 / -1;
+            }
 
-        .highlight-on-hover:hover {
-            background: #fef9f3;
-            padding: 0.2rem 0;
-        }
+            .form .add-button {
+                grid-column: 1 / -1;
+            }
 
-        /* ── Responsive ── */
-        @media (max-width: 600px) {
-            .book-container {
-                padding: 1.8rem 1rem;
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
             }
-            .chapter-title {
-                font-size: 1.5rem;
+
+            .search-box,
+            .filter-box {
+                width: 100%;
             }
-            .content p {
-                text-indent: 1.2em;
-                font-size: 0.98rem;
-            }
-            .drop-cap::first-letter {
-                font-size: 3.5rem;
-            }
-            .pull-quote {
-                padding: 1rem;
-                font-size: 1rem;
-            }
-            .scroll-top-btn, .toc-fab {
-                right: 1rem;
-                bottom: 1.5rem;
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
-            .toc-fab {
-                bottom: 4.5rem;
+
+            .summary {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
         }
 
-        /* ── Dark Mode ── */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #1a1714;
-                --text: #e8ddcc;
-                --accent: #c9956b;
-                --accent-light: #a07550;
-                --divider: #3a3228;
-                --chapter-bg: #211d18;
-                --shadow: 0 2px 20px rgba(0,0,0,0.3);
-                --highlight: #2a241e;
-                --progress-bg: #3a3228;
-                --progress-fill: #c9956b;
+        @media (max-width: 500px) {
+
+            .app {
+                width: 96%;
+                margin: 15px auto;
             }
-            .chapter-label { color: #a89070; }
-            .italic-line { color: #b8a590; }
-            .nav-links a { color: #a89070; }
-            .nav-links a:hover { color: var(--accent); background: #2a241e; }
-            .author-credit { color: #7a6b58; }
-            .pull-quote { color: #c4b5a0; }
-            .message-bubble { background: #2a241e; color: #d4c5b2; border-color: #3a3228; }
-            .message-bubble.dark { background: #f7f3ed; color: #4a3a2a; border-color: #e8ddd0; }
-            .chapter-select select { background: #211d18; color: #e8ddcc; }
-            .toc-fab { background: #211d18; color: #c9956b; }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .panel {
+                padding: 16px;
+            }
+
+            .form {
+                grid-template-columns: 1fr;
+            }
+
+            .form .item-name,
+            .form .add-button {
+                grid-column: auto;
+            }
+
+            th,
+            td {
+                padding: 10px 7px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
+<div class="app">
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top" title="Back to top">↑</button>
+    <!-- ================================
+         HEADER
+    ================================= -->
 
-    <!-- Book Container -->
-    <div class="book-container">
+    <header class="header">
+        <h1>🛒 Grocery List</h1>
 
-        <!-- Chapter Header -->
-        <header class="chapter-header">
-            <div class="chapter-label">Chapter One</div>
-            <h1 class="chapter-title">The Freakshow</h1>
-            <p class="chapter-subtitle">Where trust begins to unravel</p>
-            <div class="read-time">
-                <span class="icon">⏳</span> 6 min read
-            </div>
-        </header>
+        <p>
+            Add the things you need to buy and keep track of your shopping.
+        </p>
+    </header>
 
-        <!-- Content -->
-        <div class="content">
 
-            <p class="first-paragraph drop-cap">
-                Miro and I played every day at the same hour. It was the one thing I could count on — the one thread that had held seven years together without fraying.
-            </p>
+    <!-- ================================
+         ADD ITEM
+    ================================= -->
 
-            <p>
-                That day, the thread snapped.
-            </p>
+    <section class="panel">
 
-            <p>
-                No reply. No ring. Just silence where his voice should have been. I called again. And again. Each attempt felt more desperate than the last, but I didn't care. Miro was my only friend. When you only have one, you hold on tighter than you should.
-            </p>
+        <h2>Add Grocery Item</h2>
 
-            <p>
-                On the fifth try, he picked up.
-            </p>
+        <div class="form">
 
-            <!-- Pull Quote 1 -->
-            <div class="pull-quote">
-                "Did you check the group?" His voice was strange — tight, expectant, like he was holding his breath underwater.
-                <span class="attribution">— Miro, the first crack</span>
-            </div>
+            <!-- Item -->
+            <input
+                id="itemName"
+                class="item-name"
+                type="text"
+                placeholder="Item name (e.g. Rice)"
+            >
 
-            <p>
-                "Group? What group?"
-            </p>
+            <!-- Quantity -->
+            <input
+                id="quantity"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Quantity"
+            >
 
-            <p>
-                "Check the group, man."
-            </p>
+            <!-- Unit -->
+            <select id="unit">
 
-            <p>
-                A notification buzzed against my ear. <em>Miro added you to The Freakshow.</em>
-            </p>
+                <option value="pcs">pcs</option>
+                <option value="kg">kg</option>
+                <option value="g">g</option>
+                <option value="litre">litre</option>
+                <option value="ml">ml</option>
+                <option value="dozen">dozen</option>
+                <option value="packet">packet</option>
+                <option value="bottle">bottle</option>
+                <option value="box">box</option>
+                <option value="pack">pack</option>
 
-            <p>
-                I stared at the name. The Freakshow. Who names a group that? And why was I only being added now, like an afterthought, like someone who had to be let in through the back door?
-            </p>
-
-            <p>
-                I stayed on the call, phone pressed hot against my cheek, and opened the chat.
-            </p>
-
-            <p>
-                Two girls were already talking. I recognized Sera immediately — my best friend, my close friend, the one person I thought would never keep secrets from me. The other girl was a stranger. A complete blank. A name I'd never seen, attached to words I didn't understand.
-            </p>
-
-            <!-- Message Bubble -->
-            <div class="message-bubble">
-                <strong>Sera:</strong> <em>Go on. Tell him.</em><br>
-                <strong>Stranger:</strong> <em>Sera, we talked about this.</em><br>
-                <strong>Sera:</strong> <em>I helped you. And you're saying we talked about this?</em>
-            </div>
-
-            <p>
-                I stepped in. Not because I wanted to, but because the silence on Miro's end of the call was pressing down on me, and someone had to break it.
-            </p>
-
-            <p>
-                <em>Wait,</em> I typed. <em>Let me just check what's going on.</em>
-            </p>
-
-            <p>
-                The stranger's response came fast: <em>See? I told you he won't like it.</em>
-            </p>
-
-            <p>
-                And then Sera, my Sera, said the words that tilted the room: <em>She likes you.</em>
-            </p>
-
-            <p>
-                The stranger — the blank name, the unfamiliar profile picture — started to unravel in real time. <em>No, no, I didn't say that! Why are you doing this? I never told you that!</em> She was fighting, panicking, and Sera just let her drown in it.
-            </p>
-
-            <p>
-                Then my phone buzzed privately. A DM from Sera.
-            </p>
-
-            <div class="message-bubble dark">
-                <strong>Sera (DM):</strong> <em>I'll explain everything. Just wait.</em>
-            </div>
-
-            <p>
-                <em>K,</em> I typed back.
-            </p>
-
-            <p>
-                She didn't reply.
-            </p>
-
-            <p>
-                I returned to the group. The stranger had stopped fighting. Her next message was quiet, defeated, stripped of all the panic from before:
-            </p>
-
-            <!-- Pull Quote 2 -->
-            <div class="pull-quote">
-                She's right. I do love you.
-                <span class="attribution">— A stranger's confession</span>
-            </div>
-
-            <p>
-                I read it twice. Then a third time. <em>Love.</em> That word. Thrown at me by someone I had never seen, never heard, never known existed until five minutes ago.
-            </p>
-
-            <p>
-                <em>How long has this been going on?</em> I asked.
-            </p>
-
-            <p>
-                <em>A month,</em> she said. <em>Sera's been telling me everything about you. We planned this. It was supposed to be a surprise.</em>
-            </p>
-
-            <p>
-                A surprise. A month of my best friend feeding pieces of me to a stranger like breadcrumbs, and I hadn't felt a single tug on the line.
-            </p>
-
-            <p>
-                <em>How can you love me?</em> I typed. <em>You've never seen me. Never met me.</em>
-            </p>
-
-            <p>
-                <em>I just do,</em> she said. <em>I'm just in love, you know?</em>
-            </p>
-
-            <!-- Pull Quote 3 -->
-            <div class="pull-quote">
-                I didn't know. I didn't know anything about love. It was a foreign language, and everyone in that group seemed fluent except me.
-                <span class="attribution">— Kael</span>
-            </div>
-
-        </div>
-
-        <!-- Scene Break -->
-        <div class="scene-break">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4">
-                <circle cx="12" cy="5" r="1.5"/>
-                <circle cx="12" cy="12" r="1.5"/>
-                <circle cx="12" cy="19" r="1.5"/>
-            </svg>
-        </div>
-
-        <div class="content">
-
-            <p class="section-start">
-                But Miro was already scheming. He messaged me separately, buzzing with an idea: we should prank her. Send a fake photo — some handsome stranger from Google — and say it was me. A test. A joke. I didn't think much of it. None of this felt real anyway, so what was one more lie stacked on top?
-            </p>
-
-            <p>
-                She sent her photo first. Not privately, like she'd promised — but in the group, where everyone could see.
-            </p>
-
-            <p>
-                So I sent mine. The fake one. The handsome stranger from a search engine.
-            </p>
-
-            <!-- Message Bubble -->
-            <div class="message-bubble">
-                <strong>Sera (DM):</strong> <em>Bro, when did you get plastic surgery?</em>
-            </div>
-
-            <p>
-                I didn't reply.
-            </p>
-
-            <p>
-                I looked at the girl's photo. She was beautiful. Objectively, undeniably beautiful. But I felt nothing. Just a hollow click of recognition — <em>oh, that's what she looks like</em> — and then emptiness.
-            </p>
-
-            <p>
-                <em>That's not you,</em> I said in the group.
-            </p>
-
-            <p>
-                She panicked again. Texted Miro separately. <em>That IS me! What did you tell him?</em>
-            </p>
-
-            <p>
-                And Miro, the friend I'd trusted for seven years, played along: <em>Ohhh, that's you? I didn't recognize you.</em>
-            </p>
-
-            <!-- Pull Quote 4 - Key Moment -->
-            <div class="pull-quote">
-                Bro, just accept her proposal. She's pretty. Trust me. Do it.<br>
-                <em>Why would I?</em><br>
-                Bro, trust me. Just do it.
-                <span class="attribution">— Miro, pushing Kael off the ledge</span>
-            </div>
-
-            <p>
-                I was tired. Disoriented. Everyone around me seemed to know the script except me. So I let Miro take the pen.
-            </p>
-
-            <p>
-                <em>Fine. How?</em>
-            </p>
-
-            <p>
-                <em>Send me a text saying she's pretty. With emojis.</em>
-            </p>
-
-            <p>
-                I typed it out — hollow words, borrowed enthusiasm, emojis like little masks — and sent it to him. He forwarded it to her. She accepted.
-            </p>
-
-            <p>
-                Just like that, I was in love. My first relationship. A door I never chose to walk through, pushed open by hands that weren't my own.
-            </p>
-
-            <p>
-                The first few days were what I imagined relationships were supposed to be. Talking. Sharing hobbies. Fumbling through conversations I wasn't sure I was allowed to have. I didn't know how any of it worked. There was no manual. No guide. Just me, improvising.
-            </p>
-
-            <p>
-                But then Miro's texts started shifting.
-            </p>
-
-            <!-- Message Bubbles - The Warnings -->
-            <div class="message-bubble">
-                <strong>Miro:</strong> <em>Be careful.</em>
-            </div>
-
-            <p>
-                No context. No explanation.
-            </p>
-
-            <div class="message-bubble">
-                <strong>Miro (days later):</strong> <em>Just... be careful, man.</em>
-            </div>
-
-            <p>
-                And again.
-            </p>
-
-            <!-- Final Pull Quote -->
-            <div class="pull-quote">
-                Each message was a crack in the foundation I hadn't even known was already broken.
-                <span class="attribution">— End of Chapter One</span>
-            </div>
-
-        </div>
-
-        <!-- Navigation -->
-        <nav class="nav-links">
-            <span class="disabled">← Previous</span>
-            <a href="chapter-2.html">Next Chapter →</a>
-        </nav>
-
-        <!-- Chapter Selector -->
-        <div class="chapter-select">
-            <select onchange="if(this.value) window.location.href=this.value;" aria-label="Chapter navigation">
-                <option value="">— Jump to Chapter —</option>
-                <option value="index.html" selected>Chapter 1: The Freakshow</option>
-                <option value="chapter-2.html">Chapter 2: Coming Soon</option>
             </select>
+
+            <!-- Price -->
+            <input
+                id="price"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Price"
+            >
+
+            <!-- Add -->
+            <button
+                class="add-button"
+                onclick="addItem()"
+            >
+                + Add
+            </button>
+
         </div>
 
-        <!-- Author Credit -->
-        <div class="author-credit">
-            Being Cursed as I Live Long
+    </section>
+
+
+    <!-- ================================
+         GROCERY LIST
+    ================================= -->
+
+    <section class="panel">
+
+        <!-- Toolbar -->
+
+        <div class="toolbar">
+
+            <!-- Search -->
+            <input
+                id="search"
+                class="search-box"
+                type="text"
+                placeholder="🔍 Search groceries..."
+                oninput="render()"
+            >
+
+            <!-- Filter -->
+            <select
+                id="filter"
+                class="filter-box"
+                onchange="render()"
+            >
+
+                <option value="all">
+                    All Items
+                </option>
+
+                <option value="pending">
+                    Not Purchased
+                </option>
+
+                <option value="purchased">
+                    Purchased
+                </option>
+
+            </select>
+
+            <!-- Clear Purchased -->
+            <button
+                class="secondary-button"
+                onclick="clearPurchased()"
+            >
+                Clear Purchased
+            </button>
+
+            <!-- Clear All -->
+            <button
+                class="danger-button"
+                onclick="clearAll()"
+            >
+                Clear All
+            </button>
+
         </div>
 
-    </div>
 
-    <!-- Scripts -->
-    <script>
-        // ── Progress Bar ──
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = (scrollTop / scrollHeight) * 100;
-            document.getElementById('progressBar').style.width = scrollPercent + '%';
-        });
+        <!-- Table -->
 
-        // ── Scroll to Top Button ──
-        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        <div class="table-container">
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-        });
+            <table>
 
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+                <thead>
 
-        // ── Keyboard Navigation ──
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                // Navigate to next chapter
-                const nextLink = document.querySelector('.nav-links a[href="chapter-2.html"]');
-                if (nextLink) window.location.href = nextLink.href;
-            }
-        });
+                    <tr>
 
-        // ── Subtle parallax-like effect on pull quotes ──
-        const pullQuotes = document.querySelectorAll('.pull-quote');
-        
-        window.addEventListener('scroll', () => {
-            pullQuotes.forEach(quote => {
-                const rect = quote.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                if (rect.top < windowHeight && rect.bottom > 0) {
-                    const offset = (rect.top - windowHeight) * 0.03;
-                    quote.style.transform = `translateY(${offset}px)`;
-                    quote.style.transition = 'transform 0.1s linear';
+                        <th>
+                            ✓
+                        </th>
+
+                        <th>
+                            Item
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Unit
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="list">
+                    <!-- Items will appear here -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Empty -->
+
+        <div
+            id="empty"
+            class="empty"
+        >
+            No grocery items yet.
+            Add your first item above.
+        </div>
+
+
+        <!-- Summary -->
+
+        <div class="summary">
+
+            <div class="summary-item">
+                Items:
+                <strong id="count">0</strong>
+            </div>
+
+            <div class="total">
+                Total:
+                Rs.
+                <span id="total">
+                    0.00
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+    /* ==========================================
+       LOAD SAVED ITEMS
+    ========================================== */
+
+    let items = JSON.parse(
+        localStorage.getItem("groceryItems") || "[]"
+    );
+
+
+    /* ==========================================
+       SAVE ITEMS
+    ========================================== */
+
+    function saveItems() {
+
+        localStorage.setItem(
+            "groceryItems",
+            JSON.stringify(items)
+        );
+
+    }
+
+
+    /* ==========================================
+       ADD ITEM
+    ========================================== */
+
+    function addItem() {
+
+        const nameInput =
+            document.getElementById("itemName");
+
+        const quantityInput =
+            document.getElementById("quantity");
+
+        const unitInput =
+            document.getElementById("unit");
+
+        const priceInput =
+            document.getElementById("price");
+
+
+        const name =
+            nameInput.value.trim();
+
+        const quantity =
+            Number(quantityInput.value);
+
+        const unit =
+            unitInput.value;
+
+        const price =
+            Number(priceInput.value);
+
+
+        /* Check item name */
+
+        if (!name) {
+
+            alert(
+                "Please enter the item name."
+            );
+
+            nameInput.focus();
+
+            return;
+        }
+
+
+        /* Create item */
+
+        const newItem = {
+
+            id: Date.now(),
+
+            name: name,
+
+            quantity:
+                quantity > 0
+                    ? quantity
+                    : 1,
+
+            unit: unit,
+
+            price:
+                price >= 0
+                    ? price
+                    : 0,
+
+            purchased: false
+
+        };
+
+
+        /* Add to array */
+
+        items.push(newItem);
+
+
+        /* Save */
+
+        saveItems();
+
+
+        /* Clear form */
+
+        nameInput.value = "";
+
+        quantityInput.value = "";
+
+        priceInput.value = "";
+
+
+        /* Refresh */
+
+        render();
+
+
+        /* Focus name */
+
+        nameInput.focus();
+
+    }
+
+
+    /* ==========================================
+       DELETE ITEM
+    ========================================== */
+
+    function deleteItem(id) {
+
+        items = items.filter(
+            item => item.id !== id
+        );
+
+
+        saveItems();
+
+        render();
+
+    }
+
+
+    /* ==========================================
+       PURCHASE TOGGLE
+    ========================================== */
+
+    function togglePurchased(id) {
+
+        const item =
+            items.find(
+                item => item.id === id
+            );
+
+
+        if (item) {
+
+            item.purchased =
+                !item.purchased;
+
+        }
+
+
+        saveItems();
+
+        render();
+
+    }
+
+
+    /* ==========================================
+       CLEAR PURCHASED
+    ========================================== */
+
+    function clearPurchased() {
+
+        items =
+            items.filter(
+                item => !item.purchased
+            );
+
+
+        saveItems();
+
+        render();
+
+    }
+
+
+    /* ==========================================
+       CLEAR ALL
+    ========================================== */
+
+    function clearAll() {
+
+        if (items.length === 0) {
+            return;
+        }
+
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to delete the entire grocery list?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        items = [];
+
+
+        saveItems();
+
+        render();
+
+    }
+
+
+    /* ==========================================
+       RENDER LIST
+    ========================================== */
+
+    function render() {
+
+        const searchInput =
+            document.getElementById("search");
+
+        const filterInput =
+            document.getElementById("filter");
+
+        const list =
+            document.getElementById("list");
+
+        const empty =
+            document.getElementById("empty");
+
+        const count =
+            document.getElementById("count");
+
+        const total =
+            document.getElementById("total");
+
+
+        const search =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+        const filter =
+            filterInput.value;
+
+
+        /* Filter items */
+
+        const visibleItems =
+            items.filter(item => {
+
+                const matchesSearch =
+                    item.name
+                        .toLowerCase()
+                        .includes(search);
+
+
+                let matchesFilter = true;
+
+
+                if (
+                    filter === "purchased"
+                ) {
+
+                    matchesFilter =
+                        item.purchased === true;
+
                 }
+
+
+                if (
+                    filter === "pending"
+                ) {
+
+                    matchesFilter =
+                        item.purchased === false;
+
+                }
+
+
+                return (
+                    matchesSearch &&
+                    matchesFilter
+                );
+
             });
+
+
+        /* Clear table */
+
+        list.innerHTML = "";
+
+
+        /* Display items */
+
+        visibleItems.forEach(item => {
+
+            const row =
+                document.createElement("tr");
+
+
+            if (item.purchased) {
+
+                row.classList.add(
+                    "purchased"
+                );
+
+            }
+
+
+            const itemTotal =
+                item.quantity *
+                item.price;
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <input
+                        class="check"
+                        type="checkbox"
+
+                        ${
+                            item.purchased
+                                ? "checked"
+                                : ""
+                        }
+
+                        onchange="
+                            togglePurchased(
+                                ${item.id}
+                            )
+                        "
+                    >
+
+                </td>
+
+
+                <td>
+                    ${escapeHTML(item.name)}
+                </td>
+
+
+                <td>
+                    ${item.quantity}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(item.unit)}
+                </td>
+
+
+                <td>
+                    Rs.
+                    ${formatMoney(item.price)}
+                </td>
+
+
+                <td>
+                    Rs.
+                    ${formatMoney(itemTotal)}
+                </td>
+
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                            class="
+                                danger-button
+                                delete-button
+                            "
+
+                            onclick="
+                                deleteItem(
+                                    ${item.id}
+                                )
+                            "
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            list.appendChild(row);
+
         });
 
-        console.log('%c📖 Being Cursed as I Live Long %c— Chapter One',
-            'font-size: 1.2em; font-style: italic; color: #8b4513;',
-            'color: #a89880;');
-        console.log('%cThank you for reading. Press → arrow key for next chapter.',
-            'color: #8b7355; font-style: italic;');
-    </script>
+
+        /* Empty message */
+
+        if (
+            visibleItems.length === 0
+        ) {
+
+            empty.style.display =
+                "block";
+
+        } else {
+
+            empty.style.display =
+                "none";
+
+        }
+
+
+        /* Item count */
+
+        count.textContent =
+            items.length;
+
+
+        /* Calculate total */
+
+        const grandTotal =
+            items.reduce(
+                (sum, item) => {
+
+                    return (
+                        sum +
+                        (
+                            item.quantity *
+                            item.price
+                        )
+                    );
+
+                },
+                0
+            );
+
+
+        total.textContent =
+            formatMoney(grandTotal);
+
+    }
+
+
+    /* ==========================================
+       MONEY FORMAT
+    ========================================== */
+
+    function formatMoney(number) {
+
+        return Number(number)
+            .toLocaleString(
+                "en-PK",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+
+    }
+
+
+    /* ==========================================
+       HTML SECURITY
+    ========================================== */
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(
+                /[&<>"']/g,
+                function(character) {
+
+                    const entities = {
+
+                        "&": "&amp;",
+
+                        "<": "&lt;",
+
+                        ">": "&gt;",
+
+                        '"': "&quot;",
+
+                        "'": "&#039;"
+
+                    };
+
+                    return entities[
+                        character
+                    ];
+
+                }
+            );
+
+    }
+
+
+    /* ==========================================
+       ENTER KEY
+    ========================================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter" &&
+                (
+                    document.activeElement.id ===
+                    "itemName" ||
+
+                    document.activeElement.id ===
+                    "quantity" ||
+
+                    document.activeElement.id ===
+                    "price"
+                )
+            ) {
+
+                addItem();
+
+            }
+
+        }
+    );
+
+
+    /* ==========================================
+       INITIAL LOAD
+    ========================================== */
+
+    render();
+
+</script>
 
 </body>
 </html>
