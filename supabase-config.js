@@ -1,0 +1,5 @@
+
+window.niixoSupabase = window.supabase.createClient(
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ranlob2l6ZmtxYnlzcXlndXJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjkxMzksImV4cCI6MjEwNzMwNTEzOX0.c_VogoI4bpDlI_lNY0g59Seo6sBQm8Q-N98DATruMds",
+  "sb_publishable_BdHYady7E7ARl1ggTV3Oiw_omXQcMOc"
+);
